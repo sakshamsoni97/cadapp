@@ -2,6 +2,13 @@
 	\brief Frontend of the application
 
 	Front end and the UI of the application is handled here. UI is designed using GTK+/Qt library.
+	Libraries used:
+		- GLEW: OpenGL Extension Wrangler Library
+		- GLFW
+		- Qt
+		- GTK+
+		- fstream
+		- stdlib
 */
 #include <stdlib.h>
 #include <GL/glew.h>

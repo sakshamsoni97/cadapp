@@ -2,6 +2,10 @@
 	\brief Contains Projection and Object3D class definitions
 
 	This is the interface to the library developed for the CAD application which implements all the required algorithms.
+	Libraries used:
+		- stl::list
+		- GLEW: OpenGL Extension Wrangler Library
+		- GLUT: OpenGL Utility Toolkit
 */
 
 #include <list>
@@ -85,6 +89,18 @@ A 3D object is represented by a list of faces, edges and vertices.
 */
 class Object3D
 {
+protected:
+	// Methods for 3D reconstruction
+	void _wireframe();
+	void _planarGraph();
+	void _hiddenEdge();
+	void _faceLoops();
+	void _bodyLoops();
+
+	// Methods for Orthographic view generation
+	void _overlappingEdges();
+	void _intersectingEdges();
+	void _dashedLines();
 	
 public:
 	list <face> flist;
