@@ -9,7 +9,9 @@
 	.
 */
 
-#include <list>
+#include <map>
+#include <tuple>
+#include <string>
 #include <GL/glew.h>
 #include <GL/glut.h>
 
@@ -64,7 +66,7 @@ A polygon face is represented by a list of edges. The equation of plane of the f
 struct face
 {
 	float A, B, C, D;
-	list <edge> edges; 	/*!< list of edges */
+	map <string, edge> edges; 	/*!< list of edges */
 	/*! function to compute the equation of the plane from the list of edges. */
 	void compParam();
 };
@@ -76,8 +78,8 @@ A projection is given by a list of 2D edges and a list of 2D vertices
 class Projection
 {
 public:
-	list <edge2D> elist;
-	list <vert2D> vlist;
+	map <string, edge2D> elist;
+	map <string, vert2D> vlist;
 
 	/*! function to display the projection in a window. */
 	void display();
@@ -92,30 +94,96 @@ class Object3D
 {
 protected:
 	// Methods for 3D reconstruction
-	/*! */
-	void _wireframe();
-	void _planarGraph();
-	void _hiddenEdge();
-	void _faceLoops();
-	void _bodyLoops();
+	/*!
+	Function that constructs the wireframe of the object i.e the edges outlning the 3D object
+	@param FV denotes the input front orthographic projection
+	@param TV denotes the input top orthographic projection
+	@param SV denoted the input side orthographic projection
+	@param rightside boolean value indicating wether right side view is taken, default value is  true
+	@param righthand boolean value for right/left hand coordinate system to be followed, default value is true
+	@return Tuple containing list of possible edges and vertices
+	*/
+	tuple <map <string,edges>,map <string,vertex>> _wireframe(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
+	/*!
+	Function that constructs Planar Graphs i.e. sets of valid coplanar edges
+	@param p_edges indicates the set of all possible edges constructed in the wireframe Function
+	@param p_vertex indicates the set of vertices possible, as obtained from the wireframe reconstruction algorithm
+	@return List of all possible planar graphs
+	*/
+	list <map <string,edge>> _planarGraph(map <string,edges> p_edges,map <string,vertex> p_vertex);
+	/*!
+	Function that checks for visibilty of edges, as specified in views and eliminates, edges and planar graphs based on this
+	@param  planarGraphs is the list of all possible planar graphs as obtained from the planar graph construction function
+	@return Pruned list of possible planar graphs
+	*/
+	list <map <string,edge>> _hiddenEdge(list <map<string,edge>> planarGraphs);
+	/*!
+	Function that checks and creates possible face loops with valid normal direction, from the set of planar grpahs
+	@param  planarGraphs is the pruned list of planar graphs after checking for hidden edge visibility
+	@return List of all possible face loops
+	*/
+	list <map <string,face>> _faceLoops(list <map<string,edge>> planarGraphs);
+	/*!
+	Function that checks and creates possible body loops, from the set of face loops
+	@param  faceLoops is the set of all possible face loops
+	@return List of all possible body loops
+	*/
+	list<map <string,face>> _bodyLoops(map <string,face> faceLoops);
+	/*!
+	Function that constructs a 3D object by combining body loop objects and also checks object validity
+	*/
+	void _constructObject(list<map <string,face>>);
+
+	//! Protected Static Methods used to generate a 3D Object from its orthographic projections
+	/*!
+	Pathological Edge and Vertex Removal (PEVR) Method
+	@param edges is the set of all edges that have to be evaluated
+	@param vertex is the set of all vertices that have to be evaluated
+	@return Tuple containing the set of vertices and edges after performing PEVR
+	*/
+	static <map <string,edges>,map <string,vertex>> _PEVR(map <string,edges> edges,map <string,vertex> vertex);
+	/*!
+	Redundant Edge Removal (RER) Method
+	@param edges is the set of all edges that have to be evaluated
+	@param vertex is the set of all vertices that have to be evaluated
+	@return Tuple containing the set of vertices and edges after performing RER
+	*/
+	static <map <string,edges>,map <string,vertex>> _RER(map <string,edges> edges,map <string,vertex> vertex);
 
 	// Methods for Orthographic view generation
-	/*! */
-	void _overlappingEdges();
-	void _intersectingEdges();
-	void _dashedLines();
+	/*! 
+	Function to handle overlapping edges while generating Orthographic projection.
+	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside" 
+	*/
+	void _overlappingEdges(char* view);
+	/*! 
+	Function to handle intersecting edges while generating Orthographic projection. 
+	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
+	*/
+	void _intersectingEdges(char* view);
+	/*! 
+	Function to mark the hidden lines as dashed in the Orthographic projection 
+	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside" 
+	*/
+	void _dashedLines(char* view);
+	/*! 
+	Function that generates the projection after processing all the edges for overlap and intersection.
+	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
+	@return The corresponding orthographic view as Projection object 
+	*/
+	Projection _flatten(char* view);
 	
 public:
-	list <face> flist;
-	list <edge> elist;
-	list <vertex> vlist;
+	map <string, face> flist;
+	map <string, edge> elist;
+	map <string, vertex> vlist;
 	//! To compute Orthographic projections
 	/*!
 	Function which computes and returns an Orthographic projection of the object
-	@param view a char* denoting the view of the projecion. It can take values - 'front', 'top', 'side'
+	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	@return Object of Class Projection
 	*/
-	Projection projectToFront(char* view);
+	Projection projectTo2D(char* view);
 
 	//! Initialize the 3D object using 3 Orthographic projections
 	/*!

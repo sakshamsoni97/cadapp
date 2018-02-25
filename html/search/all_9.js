@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['x',['x',['../drawing_8h.html#a0bd59b280fba4bb75179e2a944b9475b',1,'drawing.h']]]
+  ['vert2d',['vert2D',['../structvert2_d.html',1,'']]],
+  ['vertex',['vertex',['../structvertex.html',1,'']]],
+  ['visi',['visi',['../structedge.html#a54ab8c55c0ae9afc90ca387753a9dbee',1,'edge']]]
 ];
