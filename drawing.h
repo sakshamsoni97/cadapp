@@ -6,21 +6,25 @@
 		- stl::list
 		- GLEW: OpenGL Extension Wrangler Library
 		- GLUT: OpenGL Utility Toolkit
+	.
 */
 
 #include <list>
 #include <GL/glew.h>
 #include <GL/glut.h>
 
-using namespace::std
+using namespace::std;
 
-//! structure for a 3D vertex
+//! A 3D vertex
+/*!
+Structure for a point in 3 dimension.
+*/
 struct vertex
 {
 	float x;
 	float y;
 	float z;
-}
+};
 
 //! A 2D vertex
 /*!
@@ -30,7 +34,7 @@ struct vert2D
 {
 	float x;
 	float y;
-}
+};
 
 //! structure for an edge
 /*!
@@ -40,9 +44,8 @@ struct edge
 {
 	vertex v1;
 	vertex v2;
-	//! bool variable denoting the visibility
-	bool visi;
-}
+	bool visi; 	/*!< bool variable denoting the visibility */
+};
 
 //! 2D edge
 /*!
@@ -52,7 +55,7 @@ struct edge2D
 {
 	vert2D v1;
 	vert2D v2;
-}
+};
 
 //! structure for polygon face of a 3D object
 /*!
@@ -60,13 +63,11 @@ A polygon face is represented by a list of edges. The equation of plane of the f
 */
 struct face
 {
-	//! parameters for equation of plane
 	float A, B, C, D;
-	//! list of edges
-	list <edge> edges;
-	//! function to compute the equation of the plane from the list of edges.
+	list <edge> edges; 	/*!< list of edges */
+	/*! function to compute the equation of the plane from the list of edges. */
 	void compParam();
-}
+};
 
 //! Class for representing projection
 /*!
@@ -78,9 +79,9 @@ public:
 	list <edge2D> elist;
 	list <vert2D> vlist;
 
-	//! function to display the projection in a window. 
+	/*! function to display the projection in a window. */
 	void display();
-}
+};
 
 
 //! Class for representing 3D objects
@@ -91,6 +92,7 @@ class Object3D
 {
 protected:
 	// Methods for 3D reconstruction
+	/*! */
 	void _wireframe();
 	void _planarGraph();
 	void _hiddenEdge();
@@ -98,6 +100,7 @@ protected:
 	void _bodyLoops();
 
 	// Methods for Orthographic view generation
+	/*! */
 	void _overlappingEdges();
 	void _intersectingEdges();
 	void _dashedLines();
@@ -143,6 +146,7 @@ public:
 	void shift(float x0, float y0, float z0); 
 
 	//! Method to render image of the object
+	/*! */
 	void display();
-}
+};	
 
