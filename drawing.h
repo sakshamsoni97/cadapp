@@ -73,6 +73,7 @@ class Projection
 public:
 	list <edge2D> elist;
 	list <vert2D> vlist;
+
 	//! function to display the projection in a window. 
 	void display();
 }
@@ -95,8 +96,20 @@ public:
 	@param view a char* denoting the view of the projecion. It can take values - 'front', 'top', 'side'
 	@return Object of Class Projection
 	*/
-	Projection projectToFront(char* view)
+	Projection projectToFront(char* view);
 
+	//! Initialize the 3D object using 3 Orthographic projections
+	/*!
+	This function uses 3 Orthographic projection to reconstruct the 3D object from them and initialize itself
+	@param FV the front Orthographic projection
+	@param TV the top Orthographic projection
+	@param SV the side view Orthographic projection
+	@param rightside boolean value telling which side view is taken, default true
+	@param righthand boolean value for right/left hand coordinate system to be followed, default true
+	*/
+	void create(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
+
+	
 	//! Rotation of the 3D object with respect to the given coordinate axes
 	/*!
 	@param alpha Angular displacement about the x axis
