@@ -8,6 +8,8 @@
 		- GLUT: OpenGL Utility Toolkit
 	.
 */
+#ifndef __DRAWING_H
+#define __DRAWING_H
 
 #include <map>
 #include <tuple>
@@ -221,3 +223,5 @@ public:
 	void display();
 };	
 
+
+#endif
