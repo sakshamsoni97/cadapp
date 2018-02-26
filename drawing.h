@@ -14,6 +14,7 @@
 #include <string>
 #include <GL/glew.h>
 #include <GL/glut.h>
+#include <gtk/gtk.h>
 
 using namespace::std;
 
@@ -83,6 +84,8 @@ public:
 
 	/*! function to display the projection in a window. */
 	void display();
+	/*!Function which helps take projection specification as input */
+	void getProjection();
 };
 
 

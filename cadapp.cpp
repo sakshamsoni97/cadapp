@@ -1,32 +1,16 @@
 /*! \file cadapp.cpp
-	\brief Frontend of the application
+	\brief Main execution starting point
 
-	Front end and the UI of the application is handled here. UI is designed using GTK+/Qt library.
-	Libraries used:
-		- GLEW: OpenGL Extension Wrangler Library
-		- GLFW
-		- Qt
-		- GTK+
-		- fstream
-		- stdlib
+	The program execution starts here. It contains the main() function.
 */
 #include <stdlib.h>
-#include <GL/glew.h>
-#include <GL/glfw3.h>
-#include <GL/glur.h>
+#include <GTK/gtk.h>
 #include <fstream>
 
 using namespace::std;
 
+
 int main(int argc, char **argv)
 {
 	return 0;
-}
-
-void OrthoToIso(){
-
-}
-
-void IsoToOrtho(){
-
 }
