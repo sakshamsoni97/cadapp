@@ -1,0 +1,325 @@
+\hypertarget{class_object3_d}{}\section{Object3D Class Reference}
+\label{class_object3_d}\index{Object3D@{Object3D}}
+
+
+Class for representing 3D objects.  
+
+
+
+
+{\ttfamily \#include $<$drawing.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_projection}{Projection}} \mbox{\hyperlink{class_object3_d_accfd3230b3f25661f2668f708ed53afe}{project\+To2D}} (char $\ast$view)
+\begin{DoxyCompactList}\small\item\em To compute Orthographic projections. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_object3_d_a05fabe70eda7b69715bd1bd2be7d057a}{create}} (\mbox{\hyperlink{class_projection}{Projection}} FV, \mbox{\hyperlink{class_projection}{Projection}} TV, \mbox{\hyperlink{class_projection}{Projection}} SV, bool rightside=true, bool righthand=true)
+\begin{DoxyCompactList}\small\item\em Initialize the 3D object using 3 Orthographic projections. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_object3_d_a41145f9464fe060f1d3b1b3c5cd82a2d}{rotate}} (float alpha, float beta, float gamma)
+\begin{DoxyCompactList}\small\item\em Rotation of the 3D object with respect to the given coordinate axes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_object3_d_a9021a3005a02adbf6160694ec63fe273}{shift}} (float x0, float y0, float z0)
+\begin{DoxyCompactList}\small\item\em shifting of origin of the 3D coordinate axes \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_object3_d_a7fa9ab479c8b74fbf2ed03ba26afe863}\label{class_object3_d_a7fa9ab479c8b74fbf2ed03ba26afe863}} 
+void \mbox{\hyperlink{class_object3_d_a7fa9ab479c8b74fbf2ed03ba26afe863}{display}} ()
+\begin{DoxyCompactList}\small\item\em Method to render image of the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_object3_d_afadd8fcbcdddade128855058aacb72b9}\label{class_object3_d_afadd8fcbcdddade128855058aacb72b9}} 
+map$<$ string, \mbox{\hyperlink{structface}{face}} $>$ {\bfseries flist}
+\item 
+\mbox{\Hypertarget{class_object3_d_a3746f6833c04ee03c7d309f1f27e2267}\label{class_object3_d_a3746f6833c04ee03c7d309f1f27e2267}} 
+map$<$ string, \mbox{\hyperlink{structedge}{edge}} $>$ {\bfseries elist}
+\item 
+\mbox{\Hypertarget{class_object3_d_a3da915f1f23f78d6ae2437473e351c4c}\label{class_object3_d_a3da915f1f23f78d6ae2437473e351c4c}} 
+map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$ {\bfseries vlist}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+tuple$<$ map$<$ string, edges $>$, map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$ $>$ \mbox{\hyperlink{class_object3_d_aab82aa55f1c1a0f30d3f0f00caaecd7e}{\+\_\+wireframe}} (\mbox{\hyperlink{class_projection}{Projection}} FV, \mbox{\hyperlink{class_projection}{Projection}} TV, \mbox{\hyperlink{class_projection}{Projection}} SV, bool rightside=true, bool righthand=true)
+\item 
+list$<$ map$<$ string, \mbox{\hyperlink{structedge}{edge}} $>$ $>$ \mbox{\hyperlink{class_object3_d_a4ba10d710ee36ae12a341adfda9b9631}{\+\_\+planar\+Graph}} (map$<$ string, edges $>$ p\+\_\+edges, map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$ p\+\_\+vertex)
+\item 
+list$<$ map$<$ string, \mbox{\hyperlink{structedge}{edge}} $>$ $>$ \mbox{\hyperlink{class_object3_d_ab9e9d4a2b40223c7f4edaec90e99bf79}{\+\_\+hidden\+Edge}} (list$<$ map$<$ string, \mbox{\hyperlink{structedge}{edge}} $>$$>$ planar\+Graphs)
+\item 
+list$<$ map$<$ string, \mbox{\hyperlink{structface}{face}} $>$ $>$ \mbox{\hyperlink{class_object3_d_ad6a51c52f7e5109270b7097ab2ca6397}{\+\_\+face\+Loops}} (list$<$ map$<$ string, \mbox{\hyperlink{structedge}{edge}} $>$$>$ planar\+Graphs)
+\item 
+list$<$ map$<$ string, \mbox{\hyperlink{structface}{face}} $>$ $>$ \mbox{\hyperlink{class_object3_d_ae5af4d44db97eead74f41baca0e9aa89}{\+\_\+body\+Loops}} (map$<$ string, \mbox{\hyperlink{structface}{face}} $>$ face\+Loops)
+\item 
+void \mbox{\hyperlink{class_object3_d_a53eb59ed67548b9c941aa2607989c680}{\+\_\+construct\+Object}} (list$<$ map$<$ string, \mbox{\hyperlink{structface}{face}} $>$$>$)
+\item 
+static$<$ map$<$ string, edges $>$, map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$ $>$ \mbox{\hyperlink{class_object3_d_acc47b9e290622539909a31f75b491961}{\+\_\+\+P\+E\+VR}} (map$<$ string, edges $>$ edges, map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$ \mbox{\hyperlink{structvertex}{vertex}})
+\begin{DoxyCompactList}\small\item\em Protected Static Methods used to generate a 3D Object from its orthographic projections. \end{DoxyCompactList}\item 
+static$<$ map$<$ string, edges $>$, map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$ $>$ \mbox{\hyperlink{class_object3_d_a5f57ab4541390349bd0b996d2ca5592a}{\+\_\+\+R\+ER}} (map$<$ string, edges $>$ edges, map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$ \mbox{\hyperlink{structvertex}{vertex}})
+\item 
+void \mbox{\hyperlink{class_object3_d_a017b95a379f6aa10983f34a0805d851f}{\+\_\+overlapping\+Edges}} (char $\ast$view)
+\item 
+void \mbox{\hyperlink{class_object3_d_a41783dfe045485d27c8f9027b004a221}{\+\_\+intersecting\+Edges}} (char $\ast$view)
+\item 
+void \mbox{\hyperlink{class_object3_d_a0cca4c6ad91f75fd5ba31a2f97c84fdf}{\+\_\+dashed\+Lines}} (char $\ast$view)
+\item 
+\mbox{\hyperlink{class_projection}{Projection}} \mbox{\hyperlink{class_object3_d_a98ba9cef74b1c75841beb109d5dbe270}{\+\_\+flatten}} (char $\ast$view)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for representing 3D objects. 
+
+A 3D object is represented by a list of faces, edges and vertices. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_object3_d_ae5af4d44db97eead74f41baca0e9aa89}\label{class_object3_d_ae5af4d44db97eead74f41baca0e9aa89}} 
+\index{Object3D@{Object3D}!\+\_\+body\+Loops@{\+\_\+body\+Loops}}
+\index{\+\_\+body\+Loops@{\+\_\+body\+Loops}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+body\+Loops()}{\_bodyLoops()}}
+{\footnotesize\ttfamily list$<$map $<$string,\mbox{\hyperlink{structface}{face}}$>$ $>$ Object3\+D\+::\+\_\+body\+Loops (\begin{DoxyParamCaption}\item[{map$<$ string, \mbox{\hyperlink{structface}{face}} $>$}]{face\+Loops }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function that checks and creates possible body loops, from the set of face loops 
+\begin{DoxyParams}{Parameters}
+{\em face\+Loops} & is the set of all possible face loops \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of all possible body loops 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_object3_d_a53eb59ed67548b9c941aa2607989c680}\label{class_object3_d_a53eb59ed67548b9c941aa2607989c680}} 
+\index{Object3D@{Object3D}!\+\_\+construct\+Object@{\+\_\+construct\+Object}}
+\index{\+\_\+construct\+Object@{\+\_\+construct\+Object}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+construct\+Object()}{\_constructObject()}}
+{\footnotesize\ttfamily void Object3\+D\+::\+\_\+construct\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function that constructs a 3D object by combining body loop objects and also checks object validity \mbox{\Hypertarget{class_object3_d_a0cca4c6ad91f75fd5ba31a2f97c84fdf}\label{class_object3_d_a0cca4c6ad91f75fd5ba31a2f97c84fdf}} 
+\index{Object3D@{Object3D}!\+\_\+dashed\+Lines@{\+\_\+dashed\+Lines}}
+\index{\+\_\+dashed\+Lines@{\+\_\+dashed\+Lines}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+dashed\+Lines()}{\_dashedLines()}}
+{\footnotesize\ttfamily void Object3\+D\+::\+\_\+dashed\+Lines (\begin{DoxyParamCaption}\item[{char $\ast$}]{view }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function to mark the hidden lines as dashed in the Orthographic projection 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_object3_d_ad6a51c52f7e5109270b7097ab2ca6397}\label{class_object3_d_ad6a51c52f7e5109270b7097ab2ca6397}} 
+\index{Object3D@{Object3D}!\+\_\+face\+Loops@{\+\_\+face\+Loops}}
+\index{\+\_\+face\+Loops@{\+\_\+face\+Loops}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+face\+Loops()}{\_faceLoops()}}
+{\footnotesize\ttfamily list$<$map $<$string,\mbox{\hyperlink{structface}{face}}$>$ $>$ Object3\+D\+::\+\_\+face\+Loops (\begin{DoxyParamCaption}\item[{list$<$ map$<$ string, \mbox{\hyperlink{structedge}{edge}} $>$$>$}]{planar\+Graphs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function that checks and creates possible face loops with valid normal direction, from the set of planar grpahs 
+\begin{DoxyParams}{Parameters}
+{\em planar\+Graphs} & is the pruned list of planar graphs after checking for hidden edge visibility \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of all possible face loops 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_object3_d_a98ba9cef74b1c75841beb109d5dbe270}\label{class_object3_d_a98ba9cef74b1c75841beb109d5dbe270}} 
+\index{Object3D@{Object3D}!\+\_\+flatten@{\+\_\+flatten}}
+\index{\+\_\+flatten@{\+\_\+flatten}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+flatten()}{\_flatten()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_projection}{Projection}} Object3\+D\+::\+\_\+flatten (\begin{DoxyParamCaption}\item[{char $\ast$}]{view }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function that generates the projection after processing all the edges for overlap and intersection. 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The corresponding orthographic view as \mbox{\hyperlink{class_projection}{Projection}} object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_object3_d_ab9e9d4a2b40223c7f4edaec90e99bf79}\label{class_object3_d_ab9e9d4a2b40223c7f4edaec90e99bf79}} 
+\index{Object3D@{Object3D}!\+\_\+hidden\+Edge@{\+\_\+hidden\+Edge}}
+\index{\+\_\+hidden\+Edge@{\+\_\+hidden\+Edge}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+hidden\+Edge()}{\_hiddenEdge()}}
+{\footnotesize\ttfamily list$<$map $<$string,\mbox{\hyperlink{structedge}{edge}}$>$ $>$ Object3\+D\+::\+\_\+hidden\+Edge (\begin{DoxyParamCaption}\item[{list$<$ map$<$ string, \mbox{\hyperlink{structedge}{edge}} $>$$>$}]{planar\+Graphs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function that checks for visibilty of edges, as specified in views and eliminates, edges and planar graphs based on this 
+\begin{DoxyParams}{Parameters}
+{\em planar\+Graphs} & is the list of all possible planar graphs as obtained from the planar graph construction function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pruned list of possible planar graphs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_object3_d_a41783dfe045485d27c8f9027b004a221}\label{class_object3_d_a41783dfe045485d27c8f9027b004a221}} 
+\index{Object3D@{Object3D}!\+\_\+intersecting\+Edges@{\+\_\+intersecting\+Edges}}
+\index{\+\_\+intersecting\+Edges@{\+\_\+intersecting\+Edges}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+intersecting\+Edges()}{\_intersectingEdges()}}
+{\footnotesize\ttfamily void Object3\+D\+::\+\_\+intersecting\+Edges (\begin{DoxyParamCaption}\item[{char $\ast$}]{view }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function to handle intersecting edges while generating Orthographic projection. 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_object3_d_a017b95a379f6aa10983f34a0805d851f}\label{class_object3_d_a017b95a379f6aa10983f34a0805d851f}} 
+\index{Object3D@{Object3D}!\+\_\+overlapping\+Edges@{\+\_\+overlapping\+Edges}}
+\index{\+\_\+overlapping\+Edges@{\+\_\+overlapping\+Edges}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+overlapping\+Edges()}{\_overlappingEdges()}}
+{\footnotesize\ttfamily void Object3\+D\+::\+\_\+overlapping\+Edges (\begin{DoxyParamCaption}\item[{char $\ast$}]{view }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function to handle overlapping edges while generating Orthographic projection. 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_object3_d_acc47b9e290622539909a31f75b491961}\label{class_object3_d_acc47b9e290622539909a31f75b491961}} 
+\index{Object3D@{Object3D}!\+\_\+\+P\+E\+VR@{\+\_\+\+P\+E\+VR}}
+\index{\+\_\+\+P\+E\+VR@{\+\_\+\+P\+E\+VR}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+\+P\+E\+V\+R()}{\_PEVR()}}
+{\footnotesize\ttfamily static$<$map $<$string,edges$>$,map $<$string,\mbox{\hyperlink{structvertex}{vertex}}$>$ $>$ Object3\+D\+::\+\_\+\+P\+E\+VR (\begin{DoxyParamCaption}\item[{map$<$ string, edges $>$}]{edges,  }\item[{map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$}]{vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Protected Static Methods used to generate a 3D Object from its orthographic projections. 
+
+Pathological Edge and Vertex Removal (P\+E\+VR) Method 
+\begin{DoxyParams}{Parameters}
+{\em edges} & is the set of all edges that have to be evaluated \\
+\hline
+{\em vertex} & is the set of all vertices that have to be evaluated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple containing the set of vertices and edges after performing P\+E\+VR 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_object3_d_a4ba10d710ee36ae12a341adfda9b9631}\label{class_object3_d_a4ba10d710ee36ae12a341adfda9b9631}} 
+\index{Object3D@{Object3D}!\+\_\+planar\+Graph@{\+\_\+planar\+Graph}}
+\index{\+\_\+planar\+Graph@{\+\_\+planar\+Graph}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+planar\+Graph()}{\_planarGraph()}}
+{\footnotesize\ttfamily list$<$map $<$string,\mbox{\hyperlink{structedge}{edge}}$>$ $>$ Object3\+D\+::\+\_\+planar\+Graph (\begin{DoxyParamCaption}\item[{map$<$ string, edges $>$}]{p\+\_\+edges,  }\item[{map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$}]{p\+\_\+vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function that constructs Planar Graphs i.\+e. sets of valid coplanar edges 
+\begin{DoxyParams}{Parameters}
+{\em p\+\_\+edges} & indicates the set of all possible edges constructed in the wireframe Function \\
+\hline
+{\em p\+\_\+vertex} & indicates the set of vertices possible, as obtained from the wireframe reconstruction algorithm \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of all possible planar graphs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_object3_d_a5f57ab4541390349bd0b996d2ca5592a}\label{class_object3_d_a5f57ab4541390349bd0b996d2ca5592a}} 
+\index{Object3D@{Object3D}!\+\_\+\+R\+ER@{\+\_\+\+R\+ER}}
+\index{\+\_\+\+R\+ER@{\+\_\+\+R\+ER}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+\+R\+E\+R()}{\_RER()}}
+{\footnotesize\ttfamily static$<$map $<$string,edges$>$,map $<$string,\mbox{\hyperlink{structvertex}{vertex}}$>$ $>$ Object3\+D\+::\+\_\+\+R\+ER (\begin{DoxyParamCaption}\item[{map$<$ string, edges $>$}]{edges,  }\item[{map$<$ string, \mbox{\hyperlink{structvertex}{vertex}} $>$}]{vertex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Redundant Edge Removal (R\+ER) Method 
+\begin{DoxyParams}{Parameters}
+{\em edges} & is the set of all edges that have to be evaluated \\
+\hline
+{\em vertex} & is the set of all vertices that have to be evaluated \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple containing the set of vertices and edges after performing R\+ER 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_object3_d_aab82aa55f1c1a0f30d3f0f00caaecd7e}\label{class_object3_d_aab82aa55f1c1a0f30d3f0f00caaecd7e}} 
+\index{Object3D@{Object3D}!\+\_\+wireframe@{\+\_\+wireframe}}
+\index{\+\_\+wireframe@{\+\_\+wireframe}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{\+\_\+wireframe()}{\_wireframe()}}
+{\footnotesize\ttfamily tuple$<$map $<$string,edges$>$,map $<$string,\mbox{\hyperlink{structvertex}{vertex}}$>$ $>$ Object3\+D\+::\+\_\+wireframe (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_projection}{Projection}}}]{FV,  }\item[{\mbox{\hyperlink{class_projection}{Projection}}}]{TV,  }\item[{\mbox{\hyperlink{class_projection}{Projection}}}]{SV,  }\item[{bool}]{rightside = {\ttfamily true},  }\item[{bool}]{righthand = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Function that constructs the wireframe of the object i.\+e the edges outlning the 3D object 
+\begin{DoxyParams}{Parameters}
+{\em FV} & denotes the input front orthographic projection \\
+\hline
+{\em TV} & denotes the input top orthographic projection \\
+\hline
+{\em SV} & denoted the input side orthographic projection \\
+\hline
+{\em rightside} & boolean value indicating wether right side view is taken, default value is true \\
+\hline
+{\em righthand} & boolean value for right/left hand coordinate system to be followed, default value is true \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tuple containing list of possible edges and vertices 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_object3_d_a05fabe70eda7b69715bd1bd2be7d057a}\label{class_object3_d_a05fabe70eda7b69715bd1bd2be7d057a}} 
+\index{Object3D@{Object3D}!create@{create}}
+\index{create@{create}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily void Object3\+D\+::create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_projection}{Projection}}}]{FV,  }\item[{\mbox{\hyperlink{class_projection}{Projection}}}]{TV,  }\item[{\mbox{\hyperlink{class_projection}{Projection}}}]{SV,  }\item[{bool}]{rightside = {\ttfamily true},  }\item[{bool}]{righthand = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Initialize the 3D object using 3 Orthographic projections. 
+
+This function uses 3 Orthographic projection to reconstruct the 3D object from them and initialize itself 
+\begin{DoxyParams}{Parameters}
+{\em FV} & the front Orthographic projection \\
+\hline
+{\em TV} & the top Orthographic projection \\
+\hline
+{\em SV} & the side view Orthographic projection \\
+\hline
+{\em rightside} & boolean value telling which side view is taken, default true \\
+\hline
+{\em righthand} & boolean value for right/left hand coordinate system to be followed, default true \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_object3_d_accfd3230b3f25661f2668f708ed53afe}\label{class_object3_d_accfd3230b3f25661f2668f708ed53afe}} 
+\index{Object3D@{Object3D}!project\+To2D@{project\+To2D}}
+\index{project\+To2D@{project\+To2D}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{project\+To2\+D()}{projectTo2D()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_projection}{Projection}} Object3\+D\+::project\+To2D (\begin{DoxyParamCaption}\item[{char $\ast$}]{view }\end{DoxyParamCaption})}
+
+
+
+To compute Orthographic projections. 
+
+Function which computes and returns an Orthographic projection of the object 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Object of Class \mbox{\hyperlink{class_projection}{Projection}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_object3_d_a41145f9464fe060f1d3b1b3c5cd82a2d}\label{class_object3_d_a41145f9464fe060f1d3b1b3c5cd82a2d}} 
+\index{Object3D@{Object3D}!rotate@{rotate}}
+\index{rotate@{rotate}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily void Object3\+D\+::rotate (\begin{DoxyParamCaption}\item[{float}]{alpha,  }\item[{float}]{beta,  }\item[{float}]{gamma }\end{DoxyParamCaption})}
+
+
+
+Rotation of the 3D object with respect to the given coordinate axes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & Angular displacement about the x axis \\
+\hline
+{\em beta} & Angular displacement about the y axis \\
+\hline
+{\em gamma} & Angular displacement about the z axis \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_object3_d_a9021a3005a02adbf6160694ec63fe273}\label{class_object3_d_a9021a3005a02adbf6160694ec63fe273}} 
+\index{Object3D@{Object3D}!shift@{shift}}
+\index{shift@{shift}!Object3D@{Object3D}}
+\subsubsection{\texorpdfstring{shift()}{shift()}}
+{\footnotesize\ttfamily void Object3\+D\+::shift (\begin{DoxyParamCaption}\item[{float}]{x0,  }\item[{float}]{y0,  }\item[{float}]{z0 }\end{DoxyParamCaption})}
+
+
+
+shifting of origin of the 3D coordinate axes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x0} & Offset in x direction \\
+\hline
+{\em y0} & Offset in y direction \\
+\hline
+{\em z0} & Offset in z direction \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{drawing_8h}{drawing.\+h}}\end{DoxyCompactItemize}
