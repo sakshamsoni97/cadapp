@@ -61,11 +61,6 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">GUI.cpp File Reference</div>  </div>
 </div><!--header-->
@@ -73,80 +68,16 @@ $(function() {
 
 <p>Frontend of the application.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;fstream&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;gtk/gtk.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="drawing_8h_source.html">drawing.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="drawing_8h_source.html">drawing.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_g_u_i_8h_source.html">GUI.h</a>&quot;</code><br />
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___c_a_d_app.html">_CADApp</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___c_a_d_app_window.html">_CADAppWindow</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___c_a_d_app_window_private.html">_CADAppWindowPrivate</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:abd635bab4fb561de8c371491e6a963cb"><td class="memItemLeft" align="right" valign="top"><a id="abd635bab4fb561de8c371491e6a963cb"></a>
-typedef struct <a class="el" href="struct___c_a_d_app_window_private.html">_CADAppWindowPrivate</a>&#160;</td><td class="memItemRight" valign="bottom"><b>CADAppWindowPrivate</b></td></tr>
-<tr class="separator:abd635bab4fb561de8c371491e6a963cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a85cc481cb1b15370a83935119d37f1c9"><td class="memItemLeft" align="right" valign="top"><a id="a85cc481cb1b15370a83935119d37f1c9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>G_DEFINE_TYPE</b> (CADApp, cad_app, GTK_TYPE_APPLICATION)</td></tr>
-<tr class="separator:a85cc481cb1b15370a83935119d37f1c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93a7bd8e67ac695466ca4483f1627c68"><td class="memItemLeft" align="right" valign="top"><a id="a93a7bd8e67ac695466ca4483f1627c68"></a>
-CADApp *&#160;</td><td class="memItemRight" valign="bottom"><b>cad_app_new</b> (void)</td></tr>
-<tr class="separator:a93a7bd8e67ac695466ca4483f1627c68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad6766f3e01645d81e1e23c5e087970d"><td class="memItemLeft" align="right" valign="top"><a id="aad6766f3e01645d81e1e23c5e087970d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>G_DEFINE_TYPE_WITH_PRIVATE</b> (CADAppWindow, cad_app_window, GTK_TYPE_APPLICATION_WINDOW)</td></tr>
-<tr class="separator:aad6766f3e01645d81e1e23c5e087970d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc7e5562219d47426b7f51b7ba35f1ec"><td class="memItemLeft" align="right" valign="top"><a id="adc7e5562219d47426b7f51b7ba35f1ec"></a>
-VADAppWindow *&#160;</td><td class="memItemRight" valign="bottom"><b>cad_app_window_new</b> (CADApp *app)</td></tr>
-<tr class="separator:adc7e5562219d47426b7f51b7ba35f1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6063732f4a7719c2fb8cb7b1b345c1cc"><td class="memItemLeft" align="right" valign="top"><a id="a6063732f4a7719c2fb8cb7b1b345c1cc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>cad_app_window_open</b> (CADAppWindow *win, GFile *file)</td></tr>
-<tr class="separator:a6063732f4a7719c2fb8cb7b1b345c1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a3590b980d279d5d00060988a75ce88ba"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct___c_a_d_app.html">_CADApp</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_g_u_i_8cpp.html#a3590b980d279d5d00060988a75ce88ba">EventHandler</a></td></tr>
-<tr class="memdesc:a3590b980d279d5d00060988a75ce88ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class for the for 2D to 3D conversion output screen UI.  <a href="#a3590b980d279d5d00060988a75ce88ba">More...</a><br /></td></tr>
-<tr class="separator:a3590b980d279d5d00060988a75ce88ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Frontend of the application. </p>
 <p>Front end and the UI of the application is handled here. UI is designed using GTK+ library. Provides an interface between the methods in <a class="el" href="drawing_8h.html" title="Contains Projection and Object3D class definitions. ">drawing.h</a> and the user. Libraries used:</p><ul>
 <li>GTK+</li>
 <li>fstream</li>
 <li>stdlib </li>
 </ul>
-</div><h2 class="groupheader">Variable Documentation</h2>
-<a id="a3590b980d279d5d00060988a75ce88ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3590b980d279d5d00060988a75ce88ba">&#9670;&nbsp;</a></span>EventHandler</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">EventHandler</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Class for the for 2D to 3D conversion output screen UI. </p>
-<p>method to invoke correct behavior depending on event/action invoked by user</p>
-<p>Displays the corresponding 3D object for the orthographic views specified in the input screen</p>
-<p>method to display the UI elements composing the output screen <br />
- method to invoke correct behavior depending on event/action invoked by user </p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

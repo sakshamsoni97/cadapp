@@ -5,24 +5,26 @@
 Header file for G\+UI functions definitions.  
 
 
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$gtk/gtk.\+h$>$}\newline
-\subsection*{Macros}
+\subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{_g_u_i_8h_a1bea01e2fddb7221c3188eda55b02aec}\label{_g_u_i_8h_a1bea01e2fddb7221c3188eda55b02aec}} 
-\#define {\bfseries C\+A\+D\+\_\+\+A\+P\+P\+\_\+\+T\+Y\+PE}~(cad\+\_\+app\+\_\+get\+\_\+type ())
-\item 
-\mbox{\Hypertarget{_g_u_i_8h_a109bf71689d06e48d9f18257705f5b52}\label{_g_u_i_8h_a109bf71689d06e48d9f18257705f5b52}} 
-\#define {\bfseries C\+A\+D\+\_\+\+A\+P\+P\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+T\+Y\+PE}~(example\+\_\+app\+\_\+window\+\_\+get\+\_\+type ())
-\end{DoxyCompactItemize}
+class \mbox{\hyperlink{class_home_screen}{Home\+Screen}}
+\begin{DoxyCompactList}\small\item\em Class for the home screen UI. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classinput_screen3d2d}{input\+Screen3d2d}}
+\begin{DoxyCompactList}\small\item\em Class for the for 3D to 2D conversion input screen UI. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classoutput_screen3d2d}{output\+Screen3d2d}}
+\begin{DoxyCompactList}\small\item\em Class for the for 3D to 2D conversion output screen UI. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{_g_u_i_8h_a93a7bd8e67ac695466ca4483f1627c68}\label{_g_u_i_8h_a93a7bd8e67ac695466ca4483f1627c68}} 
-C\+A\+D\+App $\ast$ {\bfseries cad\+\_\+app\+\_\+new} (void)
-\item 
-\mbox{\Hypertarget{_g_u_i_8h_a2f2931977bc3fcc8bc202b273ea12a95}\label{_g_u_i_8h_a2f2931977bc3fcc8bc202b273ea12a95}} 
-Example\+App\+Window $\ast$ {\bfseries example\+\_\+app\+\_\+window\+\_\+new} (Example\+App $\ast$app)
+class \mbox{\hyperlink{class_home_screen}{Home\+Screen}} \mbox{\hyperlink{_g_u_i_8h_ab01f4f8a7d26c83f444ddffeb7246b34}{Screen\+Painter}} ()
+\begin{DoxyCompactList}\small\item\em Class for the for 2D to 3D conversion input screen UI. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_g_u_i_8h_a311b4fb096aaaee92f6d731e37d89edf}{Event\+Handler}} ()
+\begin{DoxyCompactList}\small\item\em Class for the for 2D to 3D conversion output screen UI. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_g_u_i_8h_a8ff253ea678bb376d8deb7fb4c190249}{Error\+Handler}} ()
 \end{DoxyCompactItemize}
 
 
@@ -31,5 +33,45 @@ Header file for G\+UI functions definitions.
 
 This is the header file for the G\+UI part of the application. Libraries used\+:
 \begin{DoxyItemize}
-\item G\+T\+K+ 
+\item G\+T\+K+ G\+T\+K+ is chosen over other libraries such as Qt to develop the UI as it employs a widget based paradigm for UI development. This helps in conveying maximum information minimistically. It also ensures customizability for the user and increases the ease of interaction for the user. 
 \end{DoxyItemize}
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_g_u_i_8h_a8ff253ea678bb376d8deb7fb4c190249}\label{_g_u_i_8h_a8ff253ea678bb376d8deb7fb4c190249}} 
+\index{G\+U\+I.\+h@{G\+U\+I.\+h}!Error\+Handler@{Error\+Handler}}
+\index{Error\+Handler@{Error\+Handler}!G\+U\+I.\+h@{G\+U\+I.\+h}}
+\subsubsection{\texorpdfstring{Error\+Handler()}{ErrorHandler()}}
+{\footnotesize\ttfamily Error\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+method to improve robustness and handle errors/incorrect calls with/or console output \mbox{\Hypertarget{_g_u_i_8h_a311b4fb096aaaee92f6d731e37d89edf}\label{_g_u_i_8h_a311b4fb096aaaee92f6d731e37d89edf}} 
+\index{G\+U\+I.\+h@{G\+U\+I.\+h}!Event\+Handler@{Event\+Handler}}
+\index{Event\+Handler@{Event\+Handler}!G\+U\+I.\+h@{G\+U\+I.\+h}}
+\subsubsection{\texorpdfstring{Event\+Handler()}{EventHandler()}}
+{\footnotesize\ttfamily Event\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Class for the for 2D to 3D conversion output screen UI. 
+
+method to invoke correct behavior depending on event/action invoked by user
+
+Displays the corresponding 3D object for the orthographic views specified in the input screen
+
+method to display the UI elements composing the output screen ~\newline
+ method to invoke correct behavior depending on event/action invoked by user \mbox{\Hypertarget{_g_u_i_8h_ab01f4f8a7d26c83f444ddffeb7246b34}\label{_g_u_i_8h_ab01f4f8a7d26c83f444ddffeb7246b34}} 
+\index{G\+U\+I.\+h@{G\+U\+I.\+h}!Screen\+Painter@{Screen\+Painter}}
+\index{Screen\+Painter@{Screen\+Painter}!G\+U\+I.\+h@{G\+U\+I.\+h}}
+\subsubsection{\texorpdfstring{Screen\+Painter()}{ScreenPainter()}}
+{\footnotesize\ttfamily Screen\+Painter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Class for the for 2D to 3D conversion input screen UI. 
+
+Helps the user to interact and specify the input specification of orthographic views to convert to a 3D object
+
+method to display the UI elements composing the input screen
+
+method to display the UI elements composing the home screen
+
+method to display the UI elements composing the input screen 
