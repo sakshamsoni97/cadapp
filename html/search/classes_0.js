@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['edge',['edge',['../structedge.html',1,'']]],
-  ['edge2d',['edge2D',['../structedge2_d.html',1,'']]]
+  ['_5fcadapp',['_CADApp',['../struct___c_a_d_app.html',1,'']]],
+  ['_5fcadappwindow',['_CADAppWindow',['../struct___c_a_d_app_window.html',1,'']]],
+  ['_5fcadappwindowprivate',['_CADAppWindowPrivate',['../struct___c_a_d_app_window_private.html',1,'']]]
 ];

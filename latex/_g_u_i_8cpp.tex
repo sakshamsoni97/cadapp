@@ -1,0 +1,56 @@
+\hypertarget{_g_u_i_8cpp}{}\section{G\+U\+I.\+cpp File Reference}
+\label{_g_u_i_8cpp}\index{G\+U\+I.\+cpp@{G\+U\+I.\+cpp}}
+
+
+Frontend of the application.  
+
+
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$gtk/gtk.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}drawing.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}G\+U\+I.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct___c_a_d_app}{\+\_\+\+C\+A\+D\+App}}
+\item 
+struct \mbox{\hyperlink{struct___c_a_d_app_window}{\+\_\+\+C\+A\+D\+App\+Window}}
+\item 
+struct \mbox{\hyperlink{struct___c_a_d_app_window_private}{\+\_\+\+C\+A\+D\+App\+Window\+Private}}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_g_u_i_8cpp_abd635bab4fb561de8c371491e6a963cb}\label{_g_u_i_8cpp_abd635bab4fb561de8c371491e6a963cb}} 
+typedef struct \mbox{\hyperlink{struct___c_a_d_app_window_private}{\+\_\+\+C\+A\+D\+App\+Window\+Private}} {\bfseries C\+A\+D\+App\+Window\+Private}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_g_u_i_8cpp_a85cc481cb1b15370a83935119d37f1c9}\label{_g_u_i_8cpp_a85cc481cb1b15370a83935119d37f1c9}} 
+{\bfseries G\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+T\+Y\+PE} (C\+A\+D\+App, cad\+\_\+app, G\+T\+K\+\_\+\+T\+Y\+P\+E\+\_\+\+A\+P\+P\+L\+I\+C\+A\+T\+I\+ON)
+\item 
+\mbox{\Hypertarget{_g_u_i_8cpp_a93a7bd8e67ac695466ca4483f1627c68}\label{_g_u_i_8cpp_a93a7bd8e67ac695466ca4483f1627c68}} 
+C\+A\+D\+App $\ast$ {\bfseries cad\+\_\+app\+\_\+new} (void)
+\item 
+\mbox{\Hypertarget{_g_u_i_8cpp_aad6766f3e01645d81e1e23c5e087970d}\label{_g_u_i_8cpp_aad6766f3e01645d81e1e23c5e087970d}} 
+{\bfseries G\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+T\+Y\+P\+E\+\_\+\+W\+I\+T\+H\+\_\+\+P\+R\+I\+V\+A\+TE} (C\+A\+D\+App\+Window, cad\+\_\+app\+\_\+window, G\+T\+K\+\_\+\+T\+Y\+P\+E\+\_\+\+A\+P\+P\+L\+I\+C\+A\+T\+I\+O\+N\+\_\+\+W\+I\+N\+D\+OW)
+\item 
+\mbox{\Hypertarget{_g_u_i_8cpp_adc7e5562219d47426b7f51b7ba35f1ec}\label{_g_u_i_8cpp_adc7e5562219d47426b7f51b7ba35f1ec}} 
+V\+A\+D\+App\+Window $\ast$ {\bfseries cad\+\_\+app\+\_\+window\+\_\+new} (C\+A\+D\+App $\ast$app)
+\item 
+\mbox{\Hypertarget{_g_u_i_8cpp_a6063732f4a7719c2fb8cb7b1b345c1cc}\label{_g_u_i_8cpp_a6063732f4a7719c2fb8cb7b1b345c1cc}} 
+void {\bfseries cad\+\_\+app\+\_\+window\+\_\+open} (C\+A\+D\+App\+Window $\ast$win, G\+File $\ast$file)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Frontend of the application. 
+
+Front end and the UI of the application is handled here. UI is designed using G\+T\+K+ library. Provides an interface between the methods in \mbox{\hyperlink{drawing_8h}{drawing.\+h}} and the user. Libraries used\+:
+\begin{DoxyItemize}
+\item G\+T\+K+
+\item fstream
+\item stdlib 
+\end{DoxyItemize}

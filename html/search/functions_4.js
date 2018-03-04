@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rotate',['rotate',['../class_object3_d.html#a41145f9464fe060f1d3b1b3c5cd82a2d',1,'Object3D']]]
+  ['projectto2d',['projectTo2D',['../class_object3_d.html#accfd3230b3f25661f2668f708ed53afe',1,'Object3D']]]
 ];
