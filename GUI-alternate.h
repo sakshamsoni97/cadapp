@@ -4,6 +4,7 @@
 	This is the header file for the GUI part of the application.
 	Libraries used:
 		- GTK+
+      GTK+ is chosen over other libraries such as Qt to develop the UI as it employs a widget based paradigm for UI development. This helps in conveying maximum information minimistically. It also ensures customizability for the user and increases the ease of interaction for the user.
 */
 
 #include <fstream>

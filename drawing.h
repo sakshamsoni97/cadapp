@@ -6,6 +6,8 @@
 		- stl::list
 		- GLEW: OpenGL Extension Wrangler Library
 		- GLUT: OpenGL Utility Toolkit
+
+		OpenGL libraries are used to render orthographic views and the 3D object
 	.
 */
 #ifndef __DRAWING_H
@@ -64,7 +66,7 @@ struct edge2D
 
 //! structure for polygon face of a 3D object
 /*!
-A polygon face is represented by a list of edges. The equation of plane of the face is represented by the A,B,C & D parameters 
+A polygon face is represented by a list of edges. The equation of plane of the face is represented by the A,B,C & D parameters
 */
 struct face
 {
@@ -93,7 +95,7 @@ public:
 
 //! Class for representing 3D objects
 /*!
-A 3D object is represented by a list of faces, edges and vertices. 
+A 3D object is represented by a list of faces, edges and vertices.
 */
 class Object3D
 {
@@ -156,28 +158,28 @@ protected:
 	static <map <string,edges>,map <string,vertex>> _RER(map <string,edges> edges,map <string,vertex> vertex);
 
 	// Methods for Orthographic view generation
-	/*! 
+	/*!
 	Function to handle overlapping edges while generating Orthographic projection.
-	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside" 
+	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	*/
 	void _overlappingEdges(char* view);
-	/*! 
-	Function to handle intersecting edges while generating Orthographic projection. 
+	/*!
+	Function to handle intersecting edges while generating Orthographic projection.
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	*/
 	void _intersectingEdges(char* view);
-	/*! 
-	Function to mark the hidden lines as dashed in the Orthographic projection 
-	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside" 
+	/*!
+	Function to mark the hidden lines as dashed in the Orthographic projection
+	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	*/
 	void _dashedLines(char* view);
-	/*! 
+	/*!
 	Function that generates the projection after processing all the edges for overlap and intersection.
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
-	@return The corresponding orthographic view as Projection object 
+	@return The corresponding orthographic view as Projection object
 	*/
 	Projection _flatten(char* view);
-	
+
 public:
 	map <string, face> flist;
 	map <string, edge> elist;
@@ -201,7 +203,7 @@ public:
 	*/
 	void create(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
 
-	
+
 	//! Rotation of the 3D object with respect to the given coordinate axes
 	/*!
 	@param alpha Angular displacement about the x axis
@@ -209,19 +211,19 @@ public:
 	@param gamma Angular displacement about the z axis
 	*/
 	void rotate(float alpha, float beta, float gamma);
-	
+
 	//! shifting of origin of the 3D coordinate axes
 	/*!
 	@param x0 Offset in x direction
 	@param y0 Offset in y direction
 	@param z0 Offset in z direction
 	*/
-	void shift(float x0, float y0, float z0); 
+	void shift(float x0, float y0, float z0);
 
 	//! Method to render image of the object
 	/*! */
 	void display();
-};	
+};
 
 
 #endif
