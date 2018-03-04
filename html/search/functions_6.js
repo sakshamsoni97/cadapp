@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shift',['shift',['../class_object3_d.html#a9021a3005a02adbf6160694ec63fe273',1,'Object3D']]]
+  ['rotate',['rotate',['../class_object3_d.html#a41145f9464fe060f1d3b1b3c5cd82a2d',1,'Object3D']]]
 ];

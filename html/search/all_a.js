@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['vert2d',['vert2D',['../structvert2_d.html',1,'']]],
-  ['vertex',['vertex',['../structvertex.html',1,'']]],
-  ['visi',['visi',['../structedge.html#a54ab8c55c0ae9afc90ca387753a9dbee',1,'edge']]]
+  ['rotate',['rotate',['../class_object3_d.html#a41145f9464fe060f1d3b1b3c5cd82a2d',1,'Object3D']]]
 ];
