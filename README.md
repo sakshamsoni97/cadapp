@@ -9,9 +9,9 @@ This short application was developed in C++ as an assignment for the course COP2
 
 ## Authors
 
-* **Ishan Tewari** - *Colaborator* - [IshanTewari](https://github.com/IshanTewari)
+* **Ishan Tewari** - *Collaborator* - [IshanTewari](https://github.com/IshanTewari)
 
 
-* **Saksham Soni** - *Colaborator* - [sakshamsoni97](https://github.com/sakshamsoni97)
+* **Saksham Soni** - *Collaborator* - [sakshamsoni97](https://github.com/sakshamsoni97)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
