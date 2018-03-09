@@ -2,19 +2,24 @@
 
 ## Macros
 CC = g++
+FLAGS = -std=c++11 `pkg-config gtk+-3.0 --cflags`
+LIBS = -lGL -lGLU -lglut `pkg-config gtk+-3.0 --libs` -ljsoncpp
 
 
 all: drawing.o GUI.o cadapp.o
-        ${CC} -o Binary drawing.o GUI.o cadapp.o
+        ${CC} $(FLAGS) -o Binary drawing.o GUI.o cadapp.o
  
-main.o: cadapp.cpp
-        ${CC} -c cadapp.cpp -I ./
+#main.o: cadapp.cpp
+#        ${CC} ${FLAGS} -c cadapp.cpp ${LIBS} -I ./
  
-GUI.o: GUI.cpp
-        ${CC} -c GUI.cpp -I ./
+#GUI.o: GUI.cpp
+#         ${CC} ${FLAGS} -c GUI.cpp ${LIBS} -I ./
 
-drawing.o: drawing.cpp
-        ${CC} -c drawing.cpp -I ./
+# drawing.o: drawing.cpp
+#         ${CC} ${FLAGS} -c drawing.cpp ${LIBS} -I ./ 
+
+*.o: *.cpp
+		${CC} ${FLAGS} -c $< ${LIBS} -I ./
  
 clean:
         rm -rf *.o

@@ -6,6 +6,7 @@
 		- stl::list
 		- GLEW: OpenGL Extension Wrangler Library
 		- GLUT: OpenGL Utility Toolkit
+		- JsonCpp: Library to parse JSON objects and save objects as JSON
 
 		OpenGL libraries are used to render orthographic views and the 3D object
 	.
@@ -16,9 +17,11 @@
 #include <map>
 #include <tuple>
 #include <string>
+#include <list>
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include <gtk/gtk.h>
+#include <jsoncpp/json/json.h>
 
 using namespace::std;
 
@@ -110,14 +113,14 @@ protected:
 	@param righthand boolean value for right/left hand coordinate system to be followed, default value is true
 	@return Tuple containing list of possible edges and vertices
 	*/
-	tuple <map <string,edges>,map <string,vertex>> _wireframe(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
+	tuple <map <string,edge>,map <string,vertex>> _wireframe(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
 	/*!
 	Function that constructs Planar Graphs i.e. sets of valid coplanar edges
 	@param p_edges indicates the set of all possible edges constructed in the wireframe Function
 	@param p_vertex indicates the set of vertices possible, as obtained from the wireframe reconstruction algorithm
 	@return List of all possible planar graphs
 	*/
-	list <map <string,edge>> _planarGraph(map <string,edges> p_edges,map <string,vertex> p_vertex);
+	list <map <string,edge>> _planarGraph(map <string,edge> p_edges,map <string,vertex> p_vertex);
 	/*!
 	Function that checks for visibilty of edges, as specified in views and eliminates, edges and planar graphs based on this
 	@param  planarGraphs is the list of all possible planar graphs as obtained from the planar graph construction function
@@ -139,7 +142,7 @@ protected:
 	/*!
 	Function that constructs a 3D object by combining body loop objects and also checks object validity
 	*/
-	void _constructObject(list<map <string,face>>);
+	void _constructObject(list< map<string,face> >);
 
 	//! Protected Static Methods used to generate a 3D Object from its orthographic projections
 	/*!
@@ -148,14 +151,14 @@ protected:
 	@param vertex is the set of all vertices that have to be evaluated
 	@return Tuple containing the set of vertices and edges after performing PEVR
 	*/
-	static <map <string,edges>,map <string,vertex>> _PEVR(map <string,edges> edges,map <string,vertex> vertex);
+	static tuple<map <string,edge>,map <string,vertex>> _PEVR(map <string,edge> edges,map <string,vertex> vertex);
 	/*!
 	Redundant Edge Removal (RER) Method
 	@param edges is the set of all edges that have to be evaluated
 	@param vertex is the set of all vertices that have to be evaluated
 	@return Tuple containing the set of vertices and edges after performing RER
 	*/
-	static <map <string,edges>,map <string,vertex>> _RER(map <string,edges> edges,map <string,vertex> vertex);
+	static tuple<map <string,edge>,map <string,vertex>> _RER(map <string,edge> edges,map <string,vertex> vertex);
 
 	// Methods for Orthographic view generation
 	/*!
