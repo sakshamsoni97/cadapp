@@ -18,12 +18,13 @@
 #include <tuple>
 #include <string>
 #include <list>
-#include <GL/glew.h>
-#include <GL/glut.h>
-#include <gtk/gtk.h>
-#include <jsoncpp/json/json.h>
+#include <vector>
 
 using namespace::std;
+
+void initGL();
+
+vector <float> cross_prod(float [3], float [3]);
 
 //! A 3D vertex
 /*!
@@ -65,6 +66,7 @@ struct edge2D
 {
 	vert2D v1;
 	vert2D v2;
+	bool visi;		/*!< bool variable denoting the visibility */
 };
 
 //! structure for polygon face of a 3D object
