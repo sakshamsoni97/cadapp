@@ -1,6 +1,6 @@
 # CADapp
 
-This short application was developed in C++ as an assignment for the course COP290 under Prof. Subhashis Banerjee during Spring 2017-18. This application provides a method to generate Orthographic projections of a polyhedral object from its 3D specification and to reconstruct a 3D object from its orthographic projections. The application checks for object validity and has a simple GUI to interact and input projection/object specification and generate and render the projection/3D object.
+This short application was developed in C/C++ as an assignment for the course COP290 under Prof. Subhashis Banerjee during Spring 2017-18. This application provides a method to generate Orthographic projections of a polyhedral object from its 3D specification and to reconstruct a 3D object from its orthographic projections. The application checks for object validity and has a simple GUI to interact and input projection/object specification and generate and render the projection/3D object.
 
 ## Libraries Used
 * GLUT: OpenGL Utility Toolkit - To render the drawings
