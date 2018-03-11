@@ -71,6 +71,27 @@ void save_png(char* filename){
 	PNG.close();
 }
 
+vert2D::vert2D(vertex v){
+	x = v.x;
+	y = v.y;
+}
+
+vert2D::vert2D(float _x, float _y){x=_x; y=_y;}
+
+edge2D::edge2D(){ visi = true;}
+
+edge2D::edge2D(vert2D a, vert2D b, bool v = true){v1 = a; v2 = b; visi = v;}
+
+edge2D::edge2D(edge e){
+	v1 = e.v1;
+	v2 = e.v2;
+	visi = e.visi;
+}
+
+edge::edge(vertex a, vertex b, bool v = true){v1 = a; v2 = b; visi = v;}
+
+edge::edge(){ visi = true;}
+
 void  face::compParam(){
 	float x[3], y[3];
 	vector <float> t(3);
@@ -192,7 +213,7 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 	 							{edge e = edge(e2.v2, e1.v2); eit1->second.v2 = e2.v1;}
 	 						else
 	 							{edge e = edge(e2.v1, e1.v2); eit1->second.v2 = e2.v2;}
-							els.insert(pair<string, edge>("virtual", e));
+							els.insert(pair<string, edge>(eit1->first, e));
 						}	
  					}
  				}
@@ -211,7 +232,7 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 	 							{edge e = edge(e1.v2, e2.v2); eit2->second.v2 = e1.v1;}
 	 						else
 	 							{edge e = edge(e1.v1, e2.v2); eit2->second.v2 = e1.v2;}
-							els.insert(pair<string, edge>("virtual", e));
+							els.insert(pair<string, edge>(eit2->first, e));
 						}
  					}
  					if(e2.v1.z>= e1.v1.z){
@@ -267,16 +288,16 @@ void Object3D::_intersectingEdges(map <string, edge> &els, map <string, vertex> 
 				{
 					vi.z = e1.v1.z + rs.first*(e1.v2.z - e1.v1.z);
 					edge e = edge(vi, e1.v2);
-					els.insert(pair<string, edge>("virtual", e));
+					els.insert(pair<string, edge>(eit1->first, e));
 					eit1->second.v2 = vi;
-					vls.insert(pair<string, vertex>("virtual", vi));
+					vls.insert(pair<string, vertex>(eit1->first, vi));
 				}
 				{
 					vi.z = e2.v1.z + rs.second*(e2.v2.z - e2.v1.z);
 					edge e = edge(vi, e2.v2);
-					els.insert(pair<string, edge>("virtual", e));
+					els.insert(pair<string, edge>(eit2->first, e));
 					eit2->second.v2 = vi;
-					vls.insert(pair<string, vertex>("virtual", vi));	
+					vls.insert(pair<string, vertex>(eit2->first, vi));	
 				}
 			}
 			advance(eit2, 1);
@@ -325,4 +346,15 @@ Projection Object3D::projectTo2D(char* view){
 	_intersectingEdges(_elist, _vlist);
 	_dashedLines(_elist, _flist);
 
+	Projection ortho;
+	ortho.name = view;
+	for(const auto& sp : _elist){
+		ortho.elist.insert(pair<string, vertex2D> (sp.first, edge2D(sp.second)));
+	}
+
+	for(const auto& sp : _vlist){
+		ortho.elist.insert(pair<string, vertex2D> (sp.first, vertex2D(sp.second)));
+	}
+
+	return ortho;
 }

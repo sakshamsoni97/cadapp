@@ -47,6 +47,8 @@ struct vert2D
 {
 	float x;
 	float y;
+	vert2D(float _x, float _y);
+	vert2D(vertex v);
 };
 
 //! structure for an edge
@@ -58,9 +60,9 @@ struct edge
 	vertex v1;
 	vertex v2;
 	bool visi; 	/*!< bool variable denoting the visibility */
-	edge(){ visi = true;}
-
-	edge(vertex a, vertex b){v1 = a; v2 = b; visi = true;}
+	
+	edge();
+	edge(vertex a, vertex b, bool v = true);
 };
 
 //! 2D edge
@@ -72,9 +74,10 @@ struct edge2D
 	vert2D v1;
 	vert2D v2;
 	bool visi;		/*!< bool variable denoting the visibility */
-	edge2D(){ visi = true;}
-
-	edge2D(vert2D a, vert2D b){v1 = a; v2 = b; visi = true;}
+	
+	edge2D();
+	edge2D(vert2D a, vert2D b, bool v = true);
+	edge2D(edge e);
 };
 
 //! structure for polygon face of a 3D object
@@ -96,6 +99,7 @@ A projection is given by a list of 2D edges and a list of 2D vertices
 class Projection
 {
 public:
+	string name;
 	map <string, edge2D> elist;
 	map <string, vert2D> vlist;
 
