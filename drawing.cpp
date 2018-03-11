@@ -13,7 +13,7 @@
 #include <gtk/gtk.h>
 #include <jsoncpp/json/json.h>
 #include <pngwriter.h>
-#include <cmath.h>
+#include <math.h>
 #include <limits>
 #include "drawing.h"
 
@@ -71,6 +71,8 @@ void save_png(char* filename){
 	PNG.close();
 }
 
+vertex::vertex(float _x, float _y, float _z){x=_x; y=_y; z = _z;}
+
 vert2D::vert2D(vertex v){
 	x = v.x;
 	y = v.y;
@@ -97,12 +99,12 @@ void  face::compParam(){
 	vector <float> t(3);
 
 	map< string, edge*>::iterator it = face::edges.begin();
-	x[0] = (it->second->v1.x - it->second->v2.x) ; x[1] = (it->second->v1.y - it->second->v2.y) ; x[2]= (it->second->v1.z - it->second->v2.z);
+	x[0] = (it->second.v1.x - it->second.v2.x) ; x[1] = (it->second.v1.y - it->second.v2.y) ; x[2]= (it->second.v1.z - it->second.v2.z);
 
 	bool col = true;
 	while(col && it!=face::edge.end()){
 		advance(it,1);
-		y[0] = (it->second->v1.x - it->second->v2.x) ; y[1] = (it->second->v1.y - it->second->v2.y) ; y[2] = (it->second->v1.z - it->second->v2.z);
+		y[0] = (it->second.v1.x - it->second.v2.x) ; y[1] = (it->second.v1.y - it->second.v2.y) ; y[2] = (it->second.v1.z - it->second.v2.z);
 		t = cross_prod(x, y)
 		if(t[1]==t[2] && t[2]==t[3] && t[3]==0)
 			continue;
@@ -112,9 +114,8 @@ void  face::compParam(){
 		throw std::invalid_argument("problem in face");
 	else{
 		face::A = t[1]; face::B = t[1]; face::C = t[2];
-		face::D = A*it->second->v1.x + B*it->second->v1.y + C*it->second->v1.z;
+		face::D = A*it->second.v1.x + B*it->second.v1.y + C*it->second.v1.z;
 	}
-
 }
 
 void Projection::display(){
@@ -307,8 +308,48 @@ void Object3D::_intersectingEdges(map <string, edge> &els, map <string, vertex> 
 	}
 }
 
-void Object3D::_dashedLines(map <string, edge> &els){
+bool _point_behind_face(vertex v, face fc){
+	fc.compParam();
+	if(fc.C == 0)
+		return false;
+	float z_ = (fc.D - fc.A*v.x -fc.B*v.y)/fc.C;
+	if(z_ <= v.z)
+		return false;
 
+	int count = 0;
+	for(const auto& sp : fc.edges){
+		edge e2 = sp.second
+		if(e2.v1.y==e2.v2.y)
+			continue;
+
+		if(v.y == e2.v1.y && e2.v1.y < e2.v2.y)
+			continue;
+
+		if(v.y == e2.v2.y && e2.v1.y > e2.v2.y)
+			continue;
+
+		float m = (v.y - e2.v1.y)/(e2.v2.y - e2.v1.y);
+		if(m>0.0 && m<1.0)
+			count++;
+	}
+
+	if(count%2==1)
+		return true;
+	return false;		
+}
+
+void Object3D::_dashedLines(map <string, edge> &els, map <string, face> &fls){
+	for(const auto& sp : els){
+		edge e = sp.second;
+		for(const auto& sp1 : fls){
+			if(_point_behind_face(e.v1, sp1.second))
+				sp.second.visi = false
+			else if(_point_behind_face(e.v2, sp1.second))
+				sp.second.visi = false;
+			else
+				sp.second.visi = true;
+		}
+	}
 }
 
 
@@ -319,7 +360,7 @@ Projection Object3D::projectTo2D(char* view){
 	
 	if(view=="top"){
 		for(const auto& sp : _elist){
-			swap(sp.second.v1.y, sp.second.v1.z);
+			swap(sp.second.v1.y, sp.second.v1.z); 
 			sp.second.v1.y*=-1;
 			swap(sp.second.v2.y, sp.second.v2.z);
 			sp.second.v2.y*=-1;
@@ -327,6 +368,14 @@ Projection Object3D::projectTo2D(char* view){
 		for(const auto& sp : _vlist){
 			swap(sp.second.y, sp.second.z);
 			sp.second.y*=-1;
+		}
+		for(const auto& sp : _flist){
+			for(const auto& sp2 : _flist.edges){
+				swap(sp2.second.v1.y, sp2.second.v1.z);
+				sp2.second.v1.y*=-1;
+				swap(sp2.second.v2.y, sp2.second.v2.z);
+				sp2.second.v2.y*=-1;
+			}
 		}
 	}
 
@@ -341,6 +390,14 @@ Projection Object3D::projectTo2D(char* view){
 			swap(sp.second.x, sp.second.z);
 			sp.second.x*=-1;
 		}
+		for(const auto& sp : _flist){
+			for(const auto& sp2 : _flist.edges){
+				swap(sp2.second.v1.x, sp2.second.v1.z);
+				sp2.second.v1.x*=-1;
+				swap(sp2.second.v2.x, sp2.second.v2.z);
+				sp2.second.v2.x*=-1;		
+			}
+		}
 	}
 	_overlappingEdges(_elist, _vlist);
 	_intersectingEdges(_elist, _vlist);
@@ -353,8 +410,75 @@ Projection Object3D::projectTo2D(char* view){
 	}
 
 	for(const auto& sp : _vlist){
-		ortho.elist.insert(pair<string, vertex2D> (sp.first, vertex2D(sp.second)));
+		ortho.vlist.insert(pair<string, vertex2D> (sp.first, vert2D(sp.second)));
 	}
 
 	return ortho;
+}
+
+void rotate_point(vertex &v, float R[3][3]){
+	vertex res;
+	res.x= R[0][0]*v.x + R[0][1]*v.y + R[0][2]*v.z;
+	res.x= R[1][0]*v.x + R[1][1]*v.y + R[1][2]*v.z;
+	res.x= R[2][0]*v.x + R[2][1]*v.y + R[2][2]*v.z; 
+	v = res;
+}
+
+void Object3D::rotate(float alpha, float beta, float gamma){
+	float Rx[3][3] = {{1, 0, 0},{0, cos(alpha), sin(alpha)},{0, -sin(alpha), cos(alpha)}};
+	float Ry[3][3] = {{cos(beta), 0, -sin(beta)},{0, 1, 0},{sin(beta), 0, cos(beta)}};
+	float Rz[3][3] = {{cos(gamma), sin(gamma), 0},{-sin(gamma), cos(gamma), 0}, {0, 0, 1}};
+	
+	for(const auto& sp : vlist){
+		rotate_point(sp.second, Rx);
+		rotate_point(sp.second, Ry);
+		rotate_point(sp.second, Rz);
+	}
+	for(const auto& sp : elist){
+		rotate_point(sp.second.v1, Rx);
+		rotate_point(sp.second.v1, Ry);
+		rotate_point(sp.second.v1, Rz);
+
+		rotate_point(sp.second.v2, Rx);
+		rotate_point(sp.second.v2, Ry);
+		rotate_point(sp.second.v2, Rz);
+	}
+	for(const auto& sp : flist){
+
+		for(const auto& sp2 : sp2.second.elist){
+			rotate_point(sp2.second.v1, Rx);
+			rotate_point(sp2.second.v1, Ry);
+			rotate_point(sp2.second.v1, Rz);
+
+			rotate_point(sp2.second.v2, Rx);
+			rotate_point(sp2.second.v2, Ry);
+			rotate_point(sp2.second.v2, Rz);
+		}
+	}
+
+}
+
+inline void shift_point(vertex &v, vertex v0){
+	v.x-=v0.x;
+	v.y-=v0.y;
+	v.z-=v0.z;
+}
+
+Object3D::shift(float x0, float y0, float z0){
+	vertex v0(x0, y0, z0);
+
+	for(const auto& sp : vlist){
+		shift_point(sp.second, v0);
+	}
+	for(const auto& sp : elist){
+		shift_point(sp.second.v1, v0);
+		shift_point(sp.second.v2, v0);
+	}
+	for(const auto& sp : flist){
+
+		for(const auto& sp2 : sp2.second.edges){
+			shift_point(sp2.second.v1, v0);
+			shift_point(sp2.second.v2, v0);
+		}
+	}
 }

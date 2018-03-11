@@ -37,6 +37,7 @@ struct vertex
 	float x;
 	float y;
 	float z;
+	vertex(float _x, float _y, float _z);
 };
 
 //! A 2D vertex
@@ -190,7 +191,7 @@ protected:
 	Function to mark the hidden lines as dashed in the Orthographic projection
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	*/
-	void _dashedLines(map <string, edge> &els);
+	void _dashedLines(map <string, edge> &els, map <string, face> &fls);
 	/*!
 	Function that generates the projection after processing all the edges for overlap and intersection.
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
@@ -222,7 +223,7 @@ public:
 	void create(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
 
 
-	//! Rotation of the 3D object with respect to the given coordinate axes
+	//! Rotation of the 3D object with respect to the given coordinate axes. All angles are in degrees.
 	/*!
 	@param alpha Angular displacement about the x axis
 	@param beta Angular displacement about the y axis
