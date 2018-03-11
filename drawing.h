@@ -24,6 +24,8 @@ using namespace::std;
 
 void initGL();
 
+void reshape(GLsizei width, GLsizei height);
+
 vector <float> cross_prod(float [3], float [3]);
 
 //! A 3D vertex
@@ -56,6 +58,9 @@ struct edge
 	vertex v1;
 	vertex v2;
 	bool visi; 	/*!< bool variable denoting the visibility */
+	edge(){ visi = true;}
+
+	edge(vertex a, vertex b){v1 = a; v2 = b; visi = true;}
 };
 
 //! 2D edge
@@ -67,6 +72,9 @@ struct edge2D
 	vert2D v1;
 	vert2D v2;
 	bool visi;		/*!< bool variable denoting the visibility */
+	edge2D(){ visi = true;}
+
+	edge2D(vert2D a, vert2D b){v1 = a; v2 = b; visi = true;}
 };
 
 //! structure for polygon face of a 3D object
@@ -105,6 +113,7 @@ A 3D object is represented by a list of faces, edges and vertices.
 class Object3D
 {
 protected:
+	tuple <float, float> _intersect_ratiois(edge e1, edge e2);
 	// Methods for 3D reconstruction
 	/*!
 	Function that constructs the wireframe of the object i.e the edges outlning the 3D object
@@ -167,17 +176,17 @@ protected:
 	Function to handle overlapping edges while generating Orthographic projection.
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	*/
-	void _overlappingEdges(char* view);
+	void _overlappingEdges(map <string, edge> &els, map <string, vertex> &vls);
 	/*!
 	Function to handle intersecting edges while generating Orthographic projection.
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	*/
-	void _intersectingEdges(char* view);
+	void _intersectingEdges(map <string, edge> &els, map <string, vertex> &vls);
 	/*!
 	Function to mark the hidden lines as dashed in the Orthographic projection
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	*/
-	void _dashedLines(char* view);
+	void _dashedLines(map <string, edge> &els);
 	/*!
 	Function that generates the projection after processing all the edges for overlap and intersection.
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"

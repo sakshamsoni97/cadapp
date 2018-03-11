@@ -2,8 +2,8 @@
 
 ## Macros
 CC = g++
-FLAGS = -std=c++11 `pkg-config gtk+-3.0 --cflags`
-LIBS = -lGL -lGLU -lglut `pkg-config gtk+-3.0 --libs` -ljsoncpp
+FLAGS = -std=c++11 `pkg-config gtk+-3.0 --cflags` `freetype-config --cflags`
+LIBS = -lGL -lGLU -lglut `pkg-config gtk+-3.0 --libs` -ljsoncpp -lpng -lpngwriter -lz -lfreetype
 
 
 all: drawing.o GUI.o cadapp.o
