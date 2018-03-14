@@ -4,7 +4,7 @@
 	This file contains the implementation of all the required algorithms for the CAD application.
 */
 #include <map>
-#include <tuple>
+#include <utility>
 #include <string>
 #include <list>
 #include <vector>
@@ -21,6 +21,15 @@ using namespace::std;
 
 void initGL(){
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+}
+
+void initGL3D() {
+   glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+   glClearDepth(1.0f);                   // Set background depth to farthest
+   glEnable(GL_DEPTH_TEST);   // Enable depth testing for z-culling
+   glDepthFunc(GL_LEQUAL);    // Set the type of depth-test
+   glShadeModel(GL_SMOOTH);   // Enable smooth shading
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Nice perspective corrections
 }
 
 void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integer
@@ -43,6 +52,21 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
    }
 }
 
+void reshape3D(GLsizei width, GLsizei height) {  // GLsizei for non-negative integer
+   // Compute aspect ratio of the new window
+   if (height == 0) height = 1;                // To prevent divide by 0
+   GLfloat aspect = (GLfloat)width / (GLfloat)height;
+ 
+   // Set the viewport to cover the new window
+   glViewport(0, 0, width, height);
+ 
+   // Set the aspect ratio of the clipping volume to match the viewport
+   glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
+   glLoadIdentity();             // Reset
+   // Enable perspective projection with fovy, aspect, zNear and zFar
+   gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+}
+
 vector <float> cross_prod(float a[3], float b[3]){
 	vector <float> res = {0.0, 0.0, 0.0};
 	// return cross product of *a* and *b*
@@ -57,55 +81,66 @@ void save_png(char* filename){
 	int width = glutGet(GLUT_SCREEN_WIDTH);
     int height = glutGet( GLUT_SCREEN_HEIGHT);
     int npixels = width*height;
-	GLfloat* OpenGLimage = new GLfloat[npixels];
+	GLubyte* OpenGLimage = new GLubyte[npixels];
 	glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_FLOAT, OpenGLimage);
-	pngwriter PNG(width, height, 1.0, fileName);
+	pngwriter PNG(width, height, 1.0, filename);
 	size_t x = 1;   // start the top and leftmost point of the window
 	size_t y = 1;
-	double R, G, B;
+	unsigned int R, G, B;
 	for(size_t i =0; i<npixels; i+=3){
-		PNG.plot(x, y, pixels[i], pixels[i+1], pixels[i+2]);
+		//R =  *OpenGLimage[i+1]p+OpenGLimage[i+2]; G = *p++; B =  *p++;
+		PNG.plot(x, y, OpenGLimage[i], OpenGLimage[i+1], OpenGLimage[i+2]);
 		x++;
 		if(x>width) {x=1; y++;}
 	}
 	PNG.close();
 }
 
+vertex::vertex(){x=0; y=0; z=0;}
+
 vertex::vertex(float _x, float _y, float _z){x=_x; y=_y; z = _z;}
 
-vert2D::vert2D(vertex v){
+vert2D::vert2D(){x=0; y=0;}
+
+vert2D::vert2D(const vertex &v){
 	x = v.x;
 	y = v.y;
 }
 
 vert2D::vert2D(float _x, float _y){x=_x; y=_y;}
 
+vert2D::vert2D(const vert2D &v){x = v.x; y = v.y; }
+
 edge2D::edge2D(){ visi = true;}
 
-edge2D::edge2D(vert2D a, vert2D b, bool v = true){v1 = a; v2 = b; visi = v;}
+edge2D::edge2D(vert2D a, vert2D b, bool v){v1 = a; v2 = b; visi = v;}
 
-edge2D::edge2D(edge e){
+edge2D::edge2D(const edge e){
 	v1 = e.v1;
 	v2 = e.v2;
 	visi = e.visi;
 }
 
-edge::edge(vertex a, vertex b, bool v = true){v1 = a; v2 = b; visi = v;}
+edge::edge(vertex a, vertex b, bool v){v1 = a; v2 = b; visi = v;}
 
 edge::edge(){ visi = true;}
+
+face::face(){
+	A=B=C=D=0.0;
+}
 
 void  face::compParam(){
 	float x[3], y[3];
 	vector <float> t(3);
 
-	map< string, edge*>::iterator it = face::edges.begin();
+	map< string, edge>::iterator it = face::edges.begin();
 	x[0] = (it->second.v1.x - it->second.v2.x) ; x[1] = (it->second.v1.y - it->second.v2.y) ; x[2]= (it->second.v1.z - it->second.v2.z);
 
 	bool col = true;
-	while(col && it!=face::edge.end()){
+	while(col && it!=face::edges.end()){
 		advance(it,1);
 		y[0] = (it->second.v1.x - it->second.v2.x) ; y[1] = (it->second.v1.y - it->second.v2.y) ; y[2] = (it->second.v1.z - it->second.v2.z);
-		t = cross_prod(x, y)
+		t = cross_prod(x, y);
 		if(t[1]==t[2] && t[2]==t[3] && t[3]==0)
 			continue;
 		col = false;
@@ -121,7 +156,7 @@ void  face::compParam(){
 void Projection::display(){
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	for(const auto& ed : Projection::elist){
+	for(const auto& ed : elist){
 		glBegin(GL_LINES);
 		glLineWidth(2);
 		glEnable(GL_LINE_SMOOTH);
@@ -147,10 +182,34 @@ void Projection::getProjection(){
 
 }
 
+// TODO: complete this
 void Object3D::display(){
 	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
+	glMatrixMode(GL_MODELVIEW);     // To operate on model-view matrix
+ 
+   	// Render a color-cube consisting of 6 quads with different colors
+  	glLoadIdentity();                 // Reset the model-view matrix
+   	glTranslatef(1.5f, 0.0f, -7.0f);  // Move right and into the screen
+ 
+   	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+   	glLineWidth(2);
+   	glEnable(GL_LINE_SMOOTH);
+   	glColor3f(0.0f, 0.0f, 0.0f);	
 
+   	glBegin(GL_LINE_LOOP);
 
+   	for(auto& sp : flist){
+		for(auto& ed : sp.second.edges){
+			glVertex3f(ed.second.v1.x, ed.second.v1.y, ed.second.v1.z);
+			glVertex3f(ed.second.v2.x, ed.second.v2.y, ed.second.v2.z);
+		}
+	}
+   
+   	glEnd();   // Done drawing the pyramid
+   	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+ 
+   	glutSwapBuffers(); 
 	glFlush();
 }
 
@@ -160,25 +219,28 @@ void swap(float &a, float &b){
 	b = t;
 }
 
-tuple <float, float> Object3D::_intersect_ratiois(edge e1, edge e2){
+pair <float, float> Object3D::_intersect_ratiois(edge e1, edge e2){
 	float u, t, num, den;
 	den = (e2.v2.x - e2.v1.x)*(e1.v2.y - e1.v1.y) - (e2.v2.y - e2.v1.y)*(e1.v2.x - e1.v1.x);
 	if(den==0.0)
-		return make_tuple(999.0, 999.0);
+		return make_pair(999.0, 999.0);
 	num = (e2.v2.y - e2.v1.y)*(e1.v1.x - e2.v1.x) - (e2.v2.x - e2.v1.x)*(e1.v1.y - e2.v1.y);  
 	u = num/den;
 	den = (e1.v2.x - e1.v1.x)*(e2.v2.y - e2.v1.y) - (e1.v2.y - e1.v1.y)*(e2.v2.x - e2.v1.x); 
 	if(den==0.0)
-		return make_tuple(99.0, 999.0);
+		return make_pair(99.0, 999.0);
 	num = (e1.v2.y - e1.v1.y)*(e2.v1.x - e1.v1.x) - (e1.v2.x - e1.v1.x)*(e2.v1.y - e1.v1.y);
 	t = num/den;
 
-	return make_tuple(u, t);
+	return make_pair(u, t);
 }
 
 float _point_on_segment(vertex v1, vertex v2, vertex v){
 	if(v1.x == v2.x && v1.y == v2.y)
-		throw "invalid line segment";
+		if(v1.x == v.x && v1.y == v.y)
+			return 0.0f;
+		else
+			return numeric_limits<float>::infinity();
 	float m = v1.x == v2.x? (v.y-v1.y)/(v2.y-v1.y) :(v.x-v1.x)/(v2.x-v1.x);
 	return m;
 }
@@ -188,16 +250,16 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 	map <string, edge>::iterator eit2 = next(eit1,1);
 
 	while(eit1 != els.end()){
-		while(eit2 != _els.end()){
+		while(eit2 != els.end()){
 			edge e1 = eit1->second, e2 = eit2->second;
 			float m1, m2, m_1, m_2;
-			m1 = e1.v1.x == e1.v2.x ? numeric_limits::infinity() : (e1.v1.y - e1.v2.y)/(e1.v1.x - e1.v2.x);
-			m1 = e2.v1.x == e2.v2.x ? numeric_limits::infinity() : (e2.v1.y - e2.v2.y)/(e2.v1.x - e2.v2.x);
+			m1 = e1.v1.x == e1.v2.x ? numeric_limits<float>::infinity() : (e1.v1.y - e1.v2.y)/(e1.v1.x - e1.v2.x);
+			m1 = e2.v1.x == e2.v2.x ? numeric_limits<float>::infinity() : (e2.v1.y - e2.v2.y)/(e2.v1.x - e2.v2.x);
 			if(m1==m2 && ((e1.v1.y - m1*e1.v1.x) == (e2.v1.y - m2*e2.v1.x))){
 				m_1 = _point_on_segment(e1.v1, e1.v2, e2.v1);
 				m_2 = _point_on_segment(e1.v1, e1.v2, e2.v2);
 				
- 				if(m_1=<1.0 && m1>=0.0 && m_2=<1.0 && m2>=0.0){
+ 				if(m_1<=1.0 && m1>=0.0 && m_2<=1.0 && m2>=0.0){
  					if(e2.v1.z<= e1.v1.z)
  						{els.erase(eit2); continue;}
  					if(e2.v1.z> e1.v1.z){
@@ -210,29 +272,31 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
  						}else if(m_2==1.0 && m_1!=0.0){
  							eit1->second.v2 = e2.v1;
  						}else{
+ 							edge e;
 	 						if(m_1<m_2)
-	 							{edge e = edge(e2.v2, e1.v2); eit1->second.v2 = e2.v1;}
+	 							{e = edge(e2.v2, e1.v2); eit1->second.v2 = e2.v1;}
 	 						else
-	 							{edge e = edge(e2.v1, e1.v2); eit1->second.v2 = e2.v2;}
+	 							{e = edge(e2.v1, e1.v2); eit1->second.v2 = e2.v2;}
 							els.insert(pair<string, edge>(eit1->first, e));
 						}	
  					}
  				}
- 				if((m_1>=1.0 && m2=<0.0) || (m_2>=1.0 && m1=<0.0)){
+ 				if((m_1>=1.0 && m2<=0.0) || (m_2>=1.0 && m1<=0.0)){
  					if(e2.v1.z<= e1.v1.z){
  						if(m_1==0.0 && m_2!=1.0){
  							eit2->second.v1 = e1.v2;
  						}else if(m_1==1.0 && m_2!=0.0){
  							eit2->second.v1 = e1.v1;
  						}else if(m_2==0.0 && m_1!=1.0){
- 							eit2->second.v2 = e1.v2;
+ 							eit2->second.v2 	= e1.v2;
  						}else if(m_2==1.0 && m_1!=0.0){
  							eit2->second.v2 = e1.v1;
  						}else{
+ 							edge e;
 	 						if(m_1<m_2)
-	 							{edge e = edge(e1.v2, e2.v2); eit2->second.v2 = e1.v1;}
+	 							{e = edge(e1.v2, e2.v2); eit2->second.v2 = e1.v1;}
 	 						else
-	 							{edge e = edge(e1.v1, e2.v2); eit2->second.v2 = e1.v2;}
+	 							{e = edge(e1.v1, e2.v2); eit2->second.v2 = e1.v2;}
 							els.insert(pair<string, edge>(eit2->first, e));
 						}
  					}
@@ -279,9 +343,9 @@ void Object3D::_intersectingEdges(map <string, edge> &els, map <string, vertex> 
 	map <string, edge>::iterator eit2 = next(eit1,1);
 
 	while(eit1 != els.end()){
-		while(eit2 != _els.end()){
+		while(eit2 != els.end()){
 			edge e1 = eit1->second, e2 = eit2->second;
-			tuple <float, float> rs= _intersect_ratiois(eit1->second, eit2->second);
+			pair <float, float> rs= _intersect_ratiois(eit1->second, eit2->second);
 			if(rs.first>0 && rs.first<1 && rs.second>0 && rs.second<1){
 				vertex vi;
 				vi.x = e1.v1.x + rs.first*(e1.v2.x - e1.v1.x);
@@ -317,8 +381,8 @@ bool _point_behind_face(vertex v, face fc){
 		return false;
 
 	int count = 0;
-	for(const auto& sp : fc.edges){
-		edge e2 = sp.second
+	for(auto& sp : fc.edges){
+		edge e2 = sp.second;
 		if(e2.v1.y==e2.v2.y)
 			continue;
 
@@ -339,11 +403,11 @@ bool _point_behind_face(vertex v, face fc){
 }
 
 void Object3D::_dashedLines(map <string, edge> &els, map <string, face> &fls){
-	for(const auto& sp : els){
+	for(auto& sp : els){
 		edge e = sp.second;
-		for(const auto& sp1 : fls){
+		for(auto& sp1 : fls){
 			if(_point_behind_face(e.v1, sp1.second))
-				sp.second.visi = false
+				sp.second.visi = false;
 			else if(_point_behind_face(e.v2, sp1.second))
 				sp.second.visi = false;
 			else
@@ -359,18 +423,18 @@ Projection Object3D::projectTo2D(char* view){
 	map <string, vertex> _vlist = vlist;
 	
 	if(view=="top"){
-		for(const auto& sp : _elist){
+		for(auto& sp : _elist){
 			swap(sp.second.v1.y, sp.second.v1.z); 
 			sp.second.v1.y*=-1;
 			swap(sp.second.v2.y, sp.second.v2.z);
 			sp.second.v2.y*=-1;
 		} 
-		for(const auto& sp : _vlist){
+		for(auto& sp : _vlist){
 			swap(sp.second.y, sp.second.z);
 			sp.second.y*=-1;
 		}
-		for(const auto& sp : _flist){
-			for(const auto& sp2 : _flist.edges){
+		for(auto& sp : _flist){
+			for(auto& sp2 : sp.second.edges){
 				swap(sp2.second.v1.y, sp2.second.v1.z);
 				sp2.second.v1.y*=-1;
 				swap(sp2.second.v2.y, sp2.second.v2.z);
@@ -380,18 +444,18 @@ Projection Object3D::projectTo2D(char* view){
 	}
 
 	if(view=="side"){
-		for(const auto& sp : _elist){
+		for(auto& sp : _elist){
 			swap(sp.second.v1.x, sp.second.v1.z);
 			sp.second.v1.x*=-1;
 			swap(sp.second.v2.x, sp.second.v2.z);
 			sp.second.v2.x*=-1;
 		}
-		for(const auto& sp : _vlist){
+		for(auto& sp : _vlist){
 			swap(sp.second.x, sp.second.z);
 			sp.second.x*=-1;
 		}
-		for(const auto& sp : _flist){
-			for(const auto& sp2 : _flist.edges){
+		for(auto& sp : _flist){
+			for(auto& sp2 : sp.second.edges){
 				swap(sp2.second.v1.x, sp2.second.v1.z);
 				sp2.second.v1.x*=-1;
 				swap(sp2.second.v2.x, sp2.second.v2.z);
@@ -405,12 +469,14 @@ Projection Object3D::projectTo2D(char* view){
 
 	Projection ortho;
 	ortho.name = view;
-	for(const auto& sp : _elist){
-		ortho.elist.insert(pair<string, vertex2D> (sp.first, edge2D(sp.second)));
+	for(auto& sp : _elist){
+		edge2D e2(sp.second);
+		ortho.elist.insert(pair<string, edge2D> (sp.first, e2));
 	}
 
-	for(const auto& sp : _vlist){
-		ortho.vlist.insert(pair<string, vertex2D> (sp.first, vert2D(sp.second)));
+	for(auto& sp : _vlist){
+		vert2D v2(sp.second);
+		ortho.vlist.insert(pair<string, vert2D> (sp.first, v2));
 	}
 
 	return ortho;
@@ -429,12 +495,12 @@ void Object3D::rotate(float alpha, float beta, float gamma){
 	float Ry[3][3] = {{cos(beta), 0, -sin(beta)},{0, 1, 0},{sin(beta), 0, cos(beta)}};
 	float Rz[3][3] = {{cos(gamma), sin(gamma), 0},{-sin(gamma), cos(gamma), 0}, {0, 0, 1}};
 	
-	for(const auto& sp : vlist){
+	for(auto& sp : vlist){
 		rotate_point(sp.second, Rx);
 		rotate_point(sp.second, Ry);
 		rotate_point(sp.second, Rz);
 	}
-	for(const auto& sp : elist){
+	for(auto& sp : elist){
 		rotate_point(sp.second.v1, Rx);
 		rotate_point(sp.second.v1, Ry);
 		rotate_point(sp.second.v1, Rz);
@@ -443,9 +509,9 @@ void Object3D::rotate(float alpha, float beta, float gamma){
 		rotate_point(sp.second.v2, Ry);
 		rotate_point(sp.second.v2, Rz);
 	}
-	for(const auto& sp : flist){
+	for(auto& sp : flist){
 
-		for(const auto& sp2 : sp2.second.elist){
+		for(auto& sp2 : sp.second.edges){
 			rotate_point(sp2.second.v1, Rx);
 			rotate_point(sp2.second.v1, Ry);
 			rotate_point(sp2.second.v1, Rz);
@@ -464,19 +530,19 @@ inline void shift_point(vertex &v, vertex v0){
 	v.z-=v0.z;
 }
 
-Object3D::shift(float x0, float y0, float z0){
+void Object3D::shift(float x0, float y0, float z0){
 	vertex v0(x0, y0, z0);
 
-	for(const auto& sp : vlist){
+	for(auto& sp : vlist){
 		shift_point(sp.second, v0);
 	}
-	for(const auto& sp : elist){
+	for(auto& sp : elist){
 		shift_point(sp.second.v1, v0);
 		shift_point(sp.second.v2, v0);
 	}
-	for(const auto& sp : flist){
+	for(auto& sp : flist){
 
-		for(const auto& sp2 : sp2.second.edges){
+		for(auto& sp2 : sp.second.edges){
 			shift_point(sp2.second.v1, v0);
 			shift_point(sp2.second.v2, v0);
 		}

@@ -15,7 +15,7 @@
 #define __DRAWING_H
 
 #include <map>
-#include <tuple>
+#include <utility>
 #include <string>
 #include <list>
 #include <vector>
@@ -37,7 +37,9 @@ struct vertex
 	float x;
 	float y;
 	float z;
+	vertex();
 	vertex(float _x, float _y, float _z);
+	vertex(const vertex&) = default;
 };
 
 //! A 2D vertex
@@ -48,21 +50,23 @@ struct vert2D
 {
 	float x;
 	float y;
+	vert2D();
 	vert2D(float _x, float _y);
-	vert2D(vertex v);
+	vert2D(const vertex &v);
+	vert2D(const vert2D &v);
 };
 
 //! structure for an edge
 /*!
-Edge is represented by tuple of vertices. It also stores the information of visibility of an edge when required
+Edge is represented by pair of vertices. It also stores the information of visibility of an edge when required
 */
 struct edge
 {
 	vertex v1;
 	vertex v2;
 	bool visi; 	/*!< bool variable denoting the visibility */
-	
 	edge();
+	edge(const edge&) = default;
 	edge(vertex a, vertex b, bool v = true);
 };
 
@@ -75,10 +79,10 @@ struct edge2D
 	vert2D v1;
 	vert2D v2;
 	bool visi;		/*!< bool variable denoting the visibility */
-	
 	edge2D();
+	edge2D(const edge2D&) = default;
 	edge2D(vert2D a, vert2D b, bool v = true);
-	edge2D(edge e);
+	edge2D(const edge e);
 };
 
 //! structure for polygon face of a 3D object
@@ -90,6 +94,9 @@ struct face
 	float A, B, C, D;
 	map <string, edge> edges; 	/*!< list of edges */
 	/*! function to compute the equation of the plane from the list of edges. */
+	
+	face();
+	face(const face&) = default;
 	void compParam();
 };
 
@@ -118,7 +125,7 @@ A 3D object is represented by a list of faces, edges and vertices.
 class Object3D
 {
 protected:
-	tuple <float, float> _intersect_ratiois(edge e1, edge e2);
+	pair <float, float> _intersect_ratiois(edge e1, edge e2);
 	// Methods for 3D reconstruction
 	/*!
 	Function that constructs the wireframe of the object i.e the edges outlning the 3D object
@@ -127,9 +134,9 @@ protected:
 	@param SV denoted the input side orthographic projection
 	@param rightside boolean value indicating wether right side view is taken, default value is  true
 	@param righthand boolean value for right/left hand coordinate system to be followed, default value is true
-	@return Tuple containing list of possible edges and vertices
+	@return pair containing list of possible edges and vertices
 	*/
-	tuple <map <string,edge>,map <string,vertex>> _wireframe(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
+	pair <map <string,edge>,map <string,vertex>> _wireframe(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
 	/*!
 	Function that constructs Planar Graphs i.e. sets of valid coplanar edges
 	@param p_edges indicates the set of all possible edges constructed in the wireframe Function
@@ -165,16 +172,16 @@ protected:
 	Pathological Edge and Vertex Removal (PEVR) Method
 	@param edges is the set of all edges that have to be evaluated
 	@param vertex is the set of all vertices that have to be evaluated
-	@return Tuple containing the set of vertices and edges after performing PEVR
+	@return pair containing the set of vertices and edges after performing PEVR
 	*/
-	static tuple<map <string,edge>,map <string,vertex>> _PEVR(map <string,edge> edges,map <string,vertex> vertex);
+	static pair<map <string,edge>,map <string,vertex>> _PEVR(map <string,edge> edges,map <string,vertex> vertex);
 	/*!
 	Redundant Edge Removal (RER) Method
 	@param edges is the set of all edges that have to be evaluated
 	@param vertex is the set of all vertices that have to be evaluated
-	@return Tuple containing the set of vertices and edges after performing RER
+	@return pair containing the set of vertices and edges after performing RER
 	*/
-	static tuple<map <string,edge>,map <string,vertex>> _RER(map <string,edge> edges,map <string,vertex> vertex);
+	static pair<map <string,edge>,map <string,vertex>> _RER(map <string,edge> edges,map <string,vertex> vertex);
 
 	// Methods for Orthographic view generation
 	/*!
