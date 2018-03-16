@@ -24,7 +24,7 @@ void initGL(){
 }
 
 void initGL3D() {
-   glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
+   glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
    glClearDepth(1.0f);                   // Set background depth to farthest
    glEnable(GL_DEPTH_TEST);   // Enable depth testing for z-culling
    glDepthFunc(GL_LEQUAL);    // Set the type of depth-test
@@ -153,10 +153,10 @@ void  face::compParam(){
 	}
 }
 
-void Projection::display(Projection &pr){
+void Projection::display(){
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	for(const auto& ed : pr.elist){
+	for(const auto& ed : default_pr.elist){
 		glBegin(GL_LINES);
 		glLineWidth(2);
 		glEnable(GL_LINE_SMOOTH);
@@ -416,7 +416,7 @@ void Object3D::_dashedLines(map <string, edge> &els, map <string, face> &fls){
 }
 
 
-Projection Object3D::projectTo2D(char* view){
+Projection Object3D::projectTo2D(string view){
 	map <string, face> _flist = flist;
 	map <string, edge> _elist = elist;
 	map <string, vertex> _vlist = vlist;

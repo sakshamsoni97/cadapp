@@ -117,7 +117,7 @@ public:
 	map <string, vert2D> vlist;
 
 	/*! function to display the projection in a window. */
-	void display(Projection &pr);
+	static void display();
 	/*!Function which helps take projection specification as input */
 	void getProjection();
 };
@@ -209,7 +209,6 @@ protected:
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	@return The corresponding orthographic view as Projection object
 	*/
-	Projection _flatten(char* view);
 
 public:
 	map <string, face> flist;
@@ -221,7 +220,7 @@ public:
 	@param view a char* denoting the view of the projecion. It can take values - "front", "top", "rside", "lside"
 	@return Object of Class Projection
 	*/
-	Projection projectTo2D(char* view);
+	Projection projectTo2D(string view);
 
 	//! Initialize the 3D object using 3 Orthographic projections
 	/*!
@@ -258,6 +257,6 @@ public:
 };
 
 static Object3D default_ob;
-
+static Projection default_pr;
 
 #endif
