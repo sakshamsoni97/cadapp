@@ -12,7 +12,7 @@
 #include <GL/glut.h>
 #include <gtk/gtk.h>
 #include <jsoncpp/json/json.h>
-#include <pngwriter.h>
+#include "pngwriter.h"
 #include <math.h>
 #include <limits>
 #include "drawing.h"
@@ -76,7 +76,7 @@ vector <float> cross_prod(float a[3], float b[3]){
 
 	return res;
 }
-
+/*
 void save_png(char* filename){
 	int width = glutGet(GLUT_SCREEN_WIDTH);
     int height = glutGet( GLUT_SCREEN_HEIGHT);
@@ -95,7 +95,7 @@ void save_png(char* filename){
 	}
 	PNG.close();
 }
-
+*/
 vertex::vertex(){x=0; y=0; z=0;}
 
 vertex::vertex(float _x, float _y, float _z){x=_x; y=_y; z = _z;}
@@ -153,10 +153,10 @@ void  face::compParam(){
 	}
 }
 
-void Projection::display(){
+void Projection::display(Projection &pr){
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	for(const auto& ed : elist){
+	for(const auto& ed : pr.elist){
 		glBegin(GL_LINES);
 		glLineWidth(2);
 		glEnable(GL_LINE_SMOOTH);
@@ -182,7 +182,6 @@ void Projection::getProjection(){
 
 }
 
-// TODO: complete this
 void Object3D::display(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
@@ -199,7 +198,7 @@ void Object3D::display(){
 
    	glBegin(GL_LINE_LOOP);
 
-   	for(auto& sp : flist){
+   	for(auto& sp : default_ob.flist){
 		for(auto& ed : sp.second.edges){
 			glVertex3f(ed.second.v1.x, ed.second.v1.y, ed.second.v1.z);
 			glVertex3f(ed.second.v2.x, ed.second.v2.y, ed.second.v2.z);

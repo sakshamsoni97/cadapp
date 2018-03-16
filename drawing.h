@@ -19,12 +19,17 @@
 #include <string>
 #include <list>
 #include <vector>
+#include <GL/glut.h>
 
 using namespace::std;
 
 void initGL();
 
 void reshape(GLsizei width, GLsizei height);
+
+void initGL3D();
+
+void reshape3D(GLsizei width, GLsizei height);
 
 vector <float> cross_prod(float [3], float [3]);
 
@@ -112,7 +117,7 @@ public:
 	map <string, vert2D> vlist;
 
 	/*! function to display the projection in a window. */
-	void display();
+	void display(Projection &pr);
 	/*!Function which helps take projection specification as input */
 	void getProjection();
 };
@@ -136,32 +141,32 @@ protected:
 	@param righthand boolean value for right/left hand coordinate system to be followed, default value is true
 	@return pair containing list of possible edges and vertices
 	*/
-	pair <map <string,edge>,map <string,vertex>> _wireframe(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
+	pair < map <string,edge>,map <string,vertex> > _wireframe(Projection FV, Projection TV, Projection SV, bool rightside = true ,bool righthand = true);
 	/*!
 	Function that constructs Planar Graphs i.e. sets of valid coplanar edges
 	@param p_edges indicates the set of all possible edges constructed in the wireframe Function
 	@param p_vertex indicates the set of vertices possible, as obtained from the wireframe reconstruction algorithm
 	@return List of all possible planar graphs
 	*/
-	list <map <string,edge>> _planarGraph(map <string,edge> p_edges,map <string,vertex> p_vertex);
+	list < map <string,edge> > _planarGraph(map <string,edge> p_edges,map <string,vertex> p_vertex);
 	/*!
 	Function that checks for visibilty of edges, as specified in views and eliminates, edges and planar graphs based on this
 	@param  planarGraphs is the list of all possible planar graphs as obtained from the planar graph construction function
 	@return Pruned list of possible planar graphs
 	*/
-	list <map <string,edge>> _hiddenEdge(list <map<string,edge>> planarGraphs);
+	list < map <string,edge> > _hiddenEdge(list <map<string,edge>> planarGraphs);
 	/*!
 	Function that checks and creates possible face loops with valid normal direction, from the set of planar grpahs
 	@param  planarGraphs is the pruned list of planar graphs after checking for hidden edge visibility
 	@return List of all possible face loops
 	*/
-	list <map <string,face>> _faceLoops(list <map<string,edge>> planarGraphs);
+	list < map <string,face> > _faceLoops(list <map<string,edge>> planarGraphs);
 	/*!
 	Function that checks and creates possible body loops, from the set of face loops
 	@param  faceLoops is the set of all possible face loops
 	@return List of all possible body loops
 	*/
-	list<map <string,face>> _bodyLoops(map <string,face> faceLoops);
+	list< map <string,face> > _bodyLoops(map <string,face> faceLoops);
 	/*!
 	Function that constructs a 3D object by combining body loop objects and also checks object validity
 	*/
@@ -174,14 +179,14 @@ protected:
 	@param vertex is the set of all vertices that have to be evaluated
 	@return pair containing the set of vertices and edges after performing PEVR
 	*/
-	static pair<map <string,edge>,map <string,vertex>> _PEVR(map <string,edge> edges,map <string,vertex> vertex);
+	static pair< map <string,edge>,map <string,vertex> > _PEVR(map <string,edge> edges,map <string,vertex> vertex);
 	/*!
 	Redundant Edge Removal (RER) Method
 	@param edges is the set of all edges that have to be evaluated
 	@param vertex is the set of all vertices that have to be evaluated
 	@return pair containing the set of vertices and edges after performing RER
 	*/
-	static pair<map <string,edge>,map <string,vertex>> _RER(map <string,edge> edges,map <string,vertex> vertex);
+	static pair< map <string,edge>,map <string,vertex> > _RER(map <string,edge> edges,map <string,vertex> vertex);
 
 	// Methods for Orthographic view generation
 	/*!
@@ -248,8 +253,11 @@ public:
 
 	//! Method to render image of the object
 	/*! */
-	void display();
+	
+	static void display();
 };
+
+static Object3D default_ob;
 
 
 #endif
