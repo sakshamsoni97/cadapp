@@ -490,8 +490,8 @@ Projection Object3D::projectTo2D(string view){
 void rotate_point(vertex &v, float R[3][3]){
 	vertex res;
 	res.x= R[0][0]*v.x + R[0][1]*v.y + R[0][2]*v.z;
-	res.x= R[1][0]*v.x + R[1][1]*v.y + R[1][2]*v.z;
-	res.x= R[2][0]*v.x + R[2][1]*v.y + R[2][2]*v.z; 
+	res.y= R[1][0]*v.x + R[1][1]*v.y + R[1][2]*v.z;
+	res.z= R[2][0]*v.x + R[2][1]*v.y + R[2][2]*v.z; 
 	v = res;
 }
 
@@ -525,6 +525,12 @@ void Object3D::rotate(float alpha, float beta, float gamma){
 			rotate_point(sp2.second.v2, Ry);
 			rotate_point(sp2.second.v2, Rz);
 		}
+		for(auto& sp2 : sp.second.verts){
+			rotate_point(sp2.second, Rx);
+			rotate_point(sp2.second, Ry);
+			rotate_point(sp2.second, Rz);
+
+		}
 	}
 
 }
@@ -550,6 +556,9 @@ void Object3D::shift(float x0, float y0, float z0){
 		for(auto& sp2 : sp.second.edges){
 			shift_point(sp2.second.v1, v0);
 			shift_point(sp2.second.v2, v0);
+		}
+		for(auto& sp2 : sp.second.verts){
+			shift_point(sp2.second, v0);
 		}
 	}
 }
