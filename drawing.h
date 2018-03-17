@@ -45,6 +45,7 @@ struct vertex
 	vertex();
 	vertex(float _x, float _y, float _z);
 	vertex(const vertex&) = default;
+	bool operator==(const vertex &v);
 };
 
 //! A 2D vertex
@@ -98,6 +99,7 @@ struct face
 {
 	float A, B, C, D;
 	map <string, edge> edges; 	/*!< list of edges */
+	map <string, vertex> verts; /*!< list of vertices */
 	/*! function to compute the equation of the plane from the list of edges. */
 	
 	face();
@@ -256,7 +258,7 @@ public:
 	static void display();
 };
 
-static Object3D default_ob;
-static Projection default_pr;
+extern Object3D default_ob;
+extern Projection default_pr;
 
 #endif

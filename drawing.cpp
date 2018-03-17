@@ -5,6 +5,7 @@
 */
 #include <map>
 #include <utility>
+#include <iostream>
 #include <string>
 #include <list>
 #include <vector>
@@ -18,6 +19,10 @@
 #include "drawing.h"
 
 using namespace::std;
+
+
+Object3D default_ob;
+Projection default_pr;
 
 void initGL(){
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -129,6 +134,10 @@ face::face(){
 	A=B=C=D=0.0;
 }
 
+bool vertex::operator==(const vertex &v){
+	return (v.x==x && v.y==y && v.z==z);
+}
+
 void  face::compParam(){
 	float x[3], y[3];
 	vector <float> t(3);
@@ -183,33 +192,30 @@ void Projection::getProjection(){
 }
 
 void Object3D::display(){
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear color and depth buffers
-	glMatrixMode(GL_MODELVIEW);     // To operate on model-view matrix
- 
-   	// Render a color-cube consisting of 6 quads with different colors
-  	glLoadIdentity();                 // Reset the model-view matrix
-   	glTranslatef(1.5f, 0.0f, -7.0f);  // Move right and into the screen
- 
-   	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-   	glLineWidth(2);
-   	glEnable(GL_LINE_SMOOTH);
-   	glColor3f(0.0f, 0.0f, 0.0f);	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+	glMatrixMode(GL_MODELVIEW);   
+	glLoadIdentity();
+	glTranslatef(0.5f, 0.0f, -5.0f);  
+	glColor3f(0.0f, 0.0f, 0.0f);
 
-   	glBegin(GL_LINE_LOOP);
-
+	vertex *vt;
    	for(auto& sp : default_ob.flist){
-		for(auto& ed : sp.second.edges){
-			glVertex3f(ed.second.v1.x, ed.second.v1.y, ed.second.v1.z);
-			glVertex3f(ed.second.v2.x, ed.second.v2.y, ed.second.v2.z);
+   		glBegin(GL_LINE_LOOP);
+		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+		glLineWidth(2);
+		glEnable(GL_LINE_SMOOTH);
+		glColor3f(0.0f, 0.0f, 0.0f);
+		vt = NULL;
+		for(auto& ed : sp.second.verts){
+			//cout<<ed.first<<endl;
+			glVertex3f((GLfloat) ed.second.x, (GLfloat) ed.second.y, (GLfloat) ed.second.z);
 		}
+		glEnd();
 	}
    
-   	glEnd();   // Done drawing the pyramid
-   	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+   	//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
  
    	glutSwapBuffers(); 
-	glFlush();
 }
 
 void swap(float &a, float &b){
