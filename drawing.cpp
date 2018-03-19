@@ -25,6 +25,10 @@ using namespace::std;
 Object3D default_ob;
 Projection default_pr;
 
+inline float Abs(float f){
+	return f>=0? f : -f;
+}
+
 void initGL(){
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 }
@@ -83,7 +87,7 @@ void reshape3D(GLsizei width, GLsizei height) {  // GLsizei for non-negative int
 }
 
 vector <float> cross_prod(float a[3], float b[3]){
-	vector <float> res; //= {0.0, 0.0, 0.0};
+	vector <float> res = {0.0, 0.0, 0.0};
 	// return cross product of *a* and *b*
 	res[0] = a[1]*b[2] - b[1]*a[2];
 	res[1] = -a[0]*b[2] + b[0]*a[2];
@@ -91,26 +95,7 @@ vector <float> cross_prod(float a[3], float b[3]){
 
 	return res;
 }
-/*
-void save_png(char* filename){
-	int width = glutGet(GLUT_SCREEN_WIDTH);
-    int height = glutGet( GLUT_SCREEN_HEIGHT);
-    int npixels = width*height;
-	GLubyte* OpenGLimage = new GLubyte[npixels];
-	glReadPixels(0.0, 0.0, width, height, GL_RGB, GL_FLOAT, OpenGLimage);
-	pngwriter PNG(width, height, 1.0, filename);
-	size_t x = 1;   // start the top and leftmost point of the window
-	size_t y = 1;
-	unsigned int R, G, B;
-	for(size_t i =0; i<npixels; i+=3){
-		//R =  *OpenGLimage[i+1]p+OpenGLimage[i+2]; G = *p++; B =  *p++;
-		PNG.plot(x, y, OpenGLimage[i], OpenGLimage[i+1], OpenGLimage[i+2]);
-		x++;
-		if(x>width) {x=1; y++;}
-	}
-	PNG.close();
-}
-*/
+
 vertex::vertex(){x=0; y=0; z=0;}
 
 vertex::vertex(float _x, float _y, float _z){x=_x; y=_y; z = _z;}
@@ -230,12 +215,13 @@ void Projection::getProjection(){
 
 void Object3D::display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);   
 	glLoadIdentity();
 	glTranslatef(0.5f, 0.0f, -5.0f);
 	glColor3f(0.0f, 0.0f, 0.0f);
 
 	vertex *vt;
+	vt = NULL;
 
 	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
    	for(auto& sp : default_ob.flist){
@@ -342,6 +328,7 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 			 			eit2 = it;
 			 			continue;
  					}
+ 				}
 
  				if(m_1<=1.0 && m1>=0.0 && m_2<=1.0 && m2>=0.0){
  					if(e2.v1.z<= e1.v1.z)
@@ -393,6 +380,7 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
  						break;
  					}
  				}
+
 
  				if(m_1<1.0 && m_1>0.0 && m_2>1.0){
  					if(e2.v1.z<=e1.v2.z)
@@ -478,7 +466,7 @@ bool _point_behind_face(vertex v, face fc){
 		if(v.y == e2.v2.y && e2.v1.y > e2.v2.y)
 			continue;
 
-		if( abs((v.y - e2.v1.y)*(e2.v2.x - e2.v1.x)-(e2.v2.y - e2.v1.y)*(v.x-e2.v1.x))<0.01 )
+		if( Abs(((v.y - e2.v1.y)*(e2.v2.x - e2.v1.x)-(e2.v2.y - e2.v1.y)*(v.x-e2.v1.x)))<0.01 )
 			return false;
 
 		float m = (v.y - e2.v1.y)/(e2.v2.y - e2.v1.y);
@@ -578,6 +566,7 @@ Projection Object3D::projectTo2D(string view){
 
 	return ortho;
 }
+
 
 void rotate_point(vertex &v, float R[3][3]){
 	vertex res;
