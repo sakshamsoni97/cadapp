@@ -10,10 +10,14 @@
 #include <list>
 #include <vector>
 #include <GL/glew.h>
-#include <GL/glut.h>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
+#include<GL/glut.h>
+#endif
 #include <gtk/gtk.h>
-#include <jsoncpp/json/json.h>
-#include "pngwriter.h"
+//#include <jsoncpp/json/json.h>
+//#include "pngwriter.h"
 #include <math.h>
 #include <limits>
 #include "drawing.h"
@@ -41,10 +45,10 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
    // Compute aspect ratio of the new window
    if (height == 0) height = 1;                // To prevent divide by 0
    GLfloat aspect = (GLfloat)width / (GLfloat)height;
- 
+
    // Set the viewport to cover the new window
    glViewport(0, 0, width, height);
- 
+
    // Set the aspect ratio of the clipping area to match the viewport
    glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
    glLoadIdentity();             // Reset the projection matrix
@@ -61,10 +65,10 @@ void reshape3D(GLsizei width, GLsizei height) {  // GLsizei for non-negative int
    // Compute aspect ratio of the new window
    if (height == 0) height = 1;                // To prevent divide by 0
    GLfloat aspect = (GLfloat)width / (GLfloat)height;
- 
+
    // Set the viewport to cover the new window
    glViewport(0, 0, width, height);
- 
+
    // Set the aspect ratio of the clipping volume to match the viewport
    glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
    glLoadIdentity();             // Reset
@@ -73,7 +77,7 @@ void reshape3D(GLsizei width, GLsizei height) {  // GLsizei for non-negative int
 }
 
 vector <float> cross_prod(float a[3], float b[3]){
-	vector <float> res = {0.0, 0.0, 0.0};
+	vector <float> res; //= {0.0, 0.0, 0.0};
 	// return cross product of *a* and *b*
 	res[0] = a[1]*b[2] - b[1]*a[2];
 	res[1] = -a[0]*b[2] + b[0]*a[2];
@@ -192,10 +196,10 @@ void Projection::getProjection(){
 }
 
 void Object3D::display(){
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
-	glMatrixMode(GL_MODELVIEW);   
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(0.5f, 0.0f, -5.0f);  
+	glTranslatef(0.5f, 0.0f, -5.0f);
 	glColor3f(0.0f, 0.0f, 0.0f);
 
 	vertex *vt;
@@ -212,10 +216,10 @@ void Object3D::display(){
 		}
 		glEnd();
 	}
-   
+
    	//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
- 
-   	glutSwapBuffers(); 
+
+   	glutSwapBuffers();
 }
 
 void swap(float &a, float &b){
@@ -229,9 +233,9 @@ pair <float, float> Object3D::_intersect_ratiois(edge e1, edge e2){
 	den = (e2.v2.x - e2.v1.x)*(e1.v2.y - e1.v1.y) - (e2.v2.y - e2.v1.y)*(e1.v2.x - e1.v1.x);
 	if(den==0.0)
 		return make_pair(999.0, 999.0);
-	num = (e2.v2.y - e2.v1.y)*(e1.v1.x - e2.v1.x) - (e2.v2.x - e2.v1.x)*(e1.v1.y - e2.v1.y);  
+	num = (e2.v2.y - e2.v1.y)*(e1.v1.x - e2.v1.x) - (e2.v2.x - e2.v1.x)*(e1.v1.y - e2.v1.y);
 	u = num/den;
-	den = (e1.v2.x - e1.v1.x)*(e2.v2.y - e2.v1.y) - (e1.v2.y - e1.v1.y)*(e2.v2.x - e2.v1.x); 
+	den = (e1.v2.x - e1.v1.x)*(e2.v2.y - e2.v1.y) - (e1.v2.y - e1.v1.y)*(e2.v2.x - e2.v1.x);
 	if(den==0.0)
 		return make_pair(99.0, 999.0);
 	num = (e1.v2.y - e1.v1.y)*(e2.v1.x - e1.v1.x) - (e1.v2.x - e1.v1.x)*(e2.v1.y - e1.v1.y);
@@ -263,7 +267,7 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 			if(m1==m2 && ((e1.v1.y - m1*e1.v1.x) == (e2.v1.y - m2*e2.v1.x))){
 				m_1 = _point_on_segment(e1.v1, e1.v2, e2.v1);
 				m_2 = _point_on_segment(e1.v1, e1.v2, e2.v2);
-				
+
  				if(m_1<=1.0 && m1>=0.0 && m_2<=1.0 && m2>=0.0){
  					if(e2.v1.z<= e1.v1.z)
  						{els.erase(eit2); continue;}
@@ -283,7 +287,7 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 	 						else
 	 							{e = edge(e2.v1, e1.v2); eit1->second.v2 = e2.v2;}
 							els.insert(pair<string, edge>(eit1->first, e));
-						}	
+						}
  					}
  				}
  				if((m_1>=1.0 && m2<=0.0) || (m_2>=1.0 && m1<=0.0)){
@@ -308,7 +312,7 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
  					if(e2.v1.z>= e1.v1.z){
  						map <string, edge>::iterator it = prev(eit1,1);
  						els.erase(eit1);
- 						eit1 = it; 
+ 						eit1 = it;
  						break;
  					}
  				}
@@ -340,7 +344,7 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 		}
 		advance(eit1, 1);
 		eit2 = next(eit1, 1);
-	}	
+	}
 }
 
 void Object3D::_intersectingEdges(map <string, edge> &els, map <string, vertex> &vls){
@@ -354,7 +358,7 @@ void Object3D::_intersectingEdges(map <string, edge> &els, map <string, vertex> 
 			if(rs.first>0 && rs.first<1 && rs.second>0 && rs.second<1){
 				vertex vi;
 				vi.x = e1.v1.x + rs.first*(e1.v2.x - e1.v1.x);
-				vi.y = e1.v1.y + rs.first*(e1.v2.y - e1.v1.y); 
+				vi.y = e1.v1.y + rs.first*(e1.v2.y - e1.v1.y);
 				{
 					vi.z = e1.v1.z + rs.first*(e1.v2.z - e1.v1.z);
 					edge e = edge(vi, e1.v2);
@@ -367,7 +371,7 @@ void Object3D::_intersectingEdges(map <string, edge> &els, map <string, vertex> 
 					edge e = edge(vi, e2.v2);
 					els.insert(pair<string, edge>(eit2->first, e));
 					eit2->second.v2 = vi;
-					vls.insert(pair<string, vertex>(eit2->first, vi));	
+					vls.insert(pair<string, vertex>(eit2->first, vi));
 				}
 			}
 			advance(eit2, 1);
@@ -404,7 +408,7 @@ bool _point_behind_face(vertex v, face fc){
 
 	if(count%2==1)
 		return true;
-	return false;		
+	return false;
 }
 
 void Object3D::_dashedLines(map <string, edge> &els, map <string, face> &fls){
@@ -426,14 +430,14 @@ Projection Object3D::projectTo2D(string view){
 	map <string, face> _flist = flist;
 	map <string, edge> _elist = elist;
 	map <string, vertex> _vlist = vlist;
-	
+
 	if(view=="top"){
 		for(auto& sp : _elist){
-			swap(sp.second.v1.y, sp.second.v1.z); 
+			swap(sp.second.v1.y, sp.second.v1.z);
 			sp.second.v1.y*=-1;
 			swap(sp.second.v2.y, sp.second.v2.z);
 			sp.second.v2.y*=-1;
-		} 
+		}
 		for(auto& sp : _vlist){
 			swap(sp.second.y, sp.second.z);
 			sp.second.y*=-1;
@@ -464,7 +468,7 @@ Projection Object3D::projectTo2D(string view){
 				swap(sp2.second.v1.x, sp2.second.v1.z);
 				sp2.second.v1.x*=-1;
 				swap(sp2.second.v2.x, sp2.second.v2.z);
-				sp2.second.v2.x*=-1;		
+				sp2.second.v2.x*=-1;
 			}
 		}
 	}
@@ -491,7 +495,7 @@ void rotate_point(vertex &v, float R[3][3]){
 	vertex res;
 	res.x= R[0][0]*v.x + R[0][1]*v.y + R[0][2]*v.z;
 	res.y= R[1][0]*v.x + R[1][1]*v.y + R[1][2]*v.z;
-	res.z= R[2][0]*v.x + R[2][1]*v.y + R[2][2]*v.z; 
+	res.z= R[2][0]*v.x + R[2][1]*v.y + R[2][2]*v.z;
 	v = res;
 }
 
@@ -499,7 +503,7 @@ void Object3D::rotate(float alpha, float beta, float gamma){
 	float Rx[3][3] = {{1, 0, 0},{0, cos(alpha), sin(alpha)},{0, -sin(alpha), cos(alpha)}};
 	float Ry[3][3] = {{cos(beta), 0, -sin(beta)},{0, 1, 0},{sin(beta), 0, cos(beta)}};
 	float Rz[3][3] = {{cos(gamma), sin(gamma), 0},{-sin(gamma), cos(gamma), 0}, {0, 0, 1}};
-	
+
 	for(auto& sp : vlist){
 		rotate_point(sp.second, Rx);
 		rotate_point(sp.second, Ry);
@@ -561,4 +565,101 @@ void Object3D::shift(float x0, float y0, float z0){
 			shift_point(sp2.second, v0);
 		}
 	}
+}
+
+pair < map <string,edge>,map <string,vertex> > Object3D::_wireframe(Projection FV, Projection TV, Projection SV, bool rightside,bool righthand){
+	cout<<"Entered Wireframe"<<endl;
+	map <string,edge2D>::iterator iF = FV.elist.begin();
+	map <string,edge> p_elist;
+  map <string,vertex> p_vlist;
+
+  int i = 0;
+
+  for(auto& itF:FV.vlist){
+		//itT = TV.vlist.begin();
+		//cout<<"itF: "<<itF.second.x<<" "<<itF.second.y<<endl;
+    for(auto& itT:TV.vlist){
+			//cout<<"itF: "<<itF->second.x<<" "<<itF->second.y<<"itT: "<<itT->second.x<<" "<<itT->second.y<<endl;
+			//itS = SV.vlist.begin();
+      for(auto& itS:SV.vlist){
+				//cout<<"itF: "<<itF.second.x<<" "<<itF.second.y<<" itT: "<<itT.second.x<<" "<<itT.second.y<<" itS: "<<itS.second.x<<" "<<itS.second.y<<endl;
+        if(itF.second.x==itT.second.x&&itF.second.y==itS.second.y&&itT.second.y==itS.second.x){
+          string str = "v";
+					//cout<<"itF: "<<itF.second.x<<" "<<itF.second.y<<" itT: "<<itT.second.x<<" "<<itT.second.y<<" itS: "<<itS.second.x<<" "<<itS.second.y<<endl;
+          p_vlist[str.append(to_string(i))] = vertex((itF.second.x + itT.second.x)/2,(itT.second.y + itS.second.x)/2,(itF.second.y + itS.second.y)/2);
+					cout<<str<<" "<<(itF.second.x + itT.second.x)/2<<" "<<(itT.second.y + itS.second.x)/2<<" "<<(itF.second.y + itS.second.y)/2<<endl;
+          i++;
+        }
+      }
+    }
+  }
+  vlist = p_vlist;
+
+  map <string,edge2D>::iterator iteF = FV.elist.begin();
+  map <string,edge2D>::iterator iteT = TV.elist.begin();
+  map <string,edge2D>::iterator iteS = SV.elist.begin();
+  map <string,vertex>::iterator it1 = p_vlist.begin();
+  map <string,vertex>::iterator it2;
+
+  i=0;
+
+  while(it1!=p_vlist.end()){
+    //cout<<it1->second.x<<" "<<it1->second.y<<" "<<it1->second.z<<endl;
+    it2 = ++it1;
+    --it1;
+    while(it2!=p_vlist.end()){
+      int flag=0;
+			for(auto& itF:FV.elist){
+				if((it1->second.x==itF.second.v1.x && it2->second.x==itF.second.v2.x && it1->second.z==itF.second.v1.y && it2->second.z==itF.second.v2.y)||(it2->second.x==itF.second.v1.x && it1->second.x==itF.second.v2.x && it2->second.z==itF.second.v1.y && it1->second.z==itF.second.v2.y)){
+          flag++;
+					break;
+        }
+			}
+			for(auto& itT:TV.elist){
+				if((it1->second.x==itT.second.v1.x && it2->second.x==itT.second.v2.x && it1->second.y==itT.second.v1.y && it2->second.y==itT.second.v2.y)||(it2->second.x==itT.second.v1.x && it1->second.x==itT.second.v2.x && it2->second.y==itT.second.v1.y && it1->second.y==itT.second.v2.y)){
+					flag++;
+					break;
+				}
+			}
+			for(auto& itS:SV.elist){
+				if((it1->second.y==itS.second.v1.x && it2->second.y==itS.second.v2.x && it1->second.z==itS.second.v1.y && it2->second.z==itS.second.v2.y)||(it2->second.y==itS.second.v1.x && it1->second.y==itS.second.v2.x && it2->second.z==itS.second.v1.y && it1->second.z==itS.second.v2.y)){
+					flag++;
+					break;
+				}
+			}
+			int cnt=0;
+			if(it1->second.x==it2->second.x)
+				cnt++;
+			if(it1->second.y==it2->second.y)
+				cnt++;
+			if(it1->second.z==it2->second.z)
+				cnt++;
+
+				//cout<<"Edge Being Considered: "<<": ("<<it1->second.x<<","<<it1->second.y<<","<<it1->second.z<<") <---> ("<<it2->second.x<<","<<it2->second.y<<","<<it2->second.z<<") Flag: "<<flag<<" Count: "<<cnt<<endl;
+
+			if((flag==2&&cnt==2)||flag==3) {
+				string str = "e";
+				p_elist[str.append(to_string(i))] = edge(it1->second,it2->second);
+				cout<<str<<": ("<<it1->second.x<<","<<it1->second.y<<","<<it1->second.z<<") <---> ("<<it2->second.x<<","<<it2->second.y<<","<<it2->second.z<<")"<<endl;
+				i++;
+			}
+      ++it2;
+    }
+    ++it1;
+  }
+
+  elist = p_elist;
+
+  return make_pair(p_elist,p_vlist);
+}
+
+void Object3D::create(Projection FV, Projection TV, Projection SV, bool rightside,bool righthand){
+	//cout<<"Entered Create"<<endl;
+	//cout<<TV.elist["10_1011"].v2.x<<endl;
+	/*map <string,edge2D>::iterator iteF = FV.elist.begin();
+	while(iteF!=FV.elist.end()){
+		cout<<iteF->second.v2.x<<endl;
+		++iteF;
+	}*/
+  _wireframe(FV,TV,SV,rightside,righthand);
 }

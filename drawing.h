@@ -19,7 +19,11 @@
 #include <string>
 #include <list>
 #include <vector>
+#ifdef __APPLE__
+#include <GLUT/glut.h>
+#else
 #include <GL/glut.h>
+#endif
 
 using namespace::std;
 
@@ -101,7 +105,7 @@ struct face
 	map <string, edge> edges; 	/*!< list of edges */
 	map <string, vertex> verts; /*!< list of vertices */
 	/*! function to compute the equation of the plane from the list of edges. */
-	
+
 	face();
 	face(const face&) = default;
 	void compParam();
@@ -156,13 +160,13 @@ protected:
 	@param  planarGraphs is the list of all possible planar graphs as obtained from the planar graph construction function
 	@return Pruned list of possible planar graphs
 	*/
-	list < map <string,edge> > _hiddenEdge(list <map<string,edge>> planarGraphs);
+	list < map <string,edge> > _hiddenEdge(list <map<string,edge> > planarGraphs);
 	/*!
 	Function that checks and creates possible face loops with valid normal direction, from the set of planar grpahs
 	@param  planarGraphs is the pruned list of planar graphs after checking for hidden edge visibility
 	@return List of all possible face loops
 	*/
-	list < map <string,face> > _faceLoops(list <map<string,edge>> planarGraphs);
+	list < map <string,face> > _faceLoops(list <map<string,edge> > planarGraphs);
 	/*!
 	Function that checks and creates possible body loops, from the set of face loops
 	@param  faceLoops is the set of all possible face loops
@@ -254,7 +258,7 @@ public:
 
 	//! Method to render image of the object
 	/*! */
-	
+
 	static void display();
 };
 
