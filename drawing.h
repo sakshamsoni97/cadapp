@@ -46,6 +46,9 @@ struct vertex
 	vertex(float _x, float _y, float _z);
 	vertex(const vertex&) = default;
 	bool operator==(const vertex &v);
+	vertex operator+(const vertex &v);
+	vertex operator-(const vertex &v);
+	vertex operator*(const float &f); 
 };
 
 //! A 2D vertex

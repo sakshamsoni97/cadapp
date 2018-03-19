@@ -20,7 +20,6 @@
 
 using namespace::std;
 
-
 Object3D default_ob;
 Projection default_pr;
 
@@ -29,7 +28,7 @@ void initGL(){
 }
 
 void initGL3D() {
-   glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
+   glClearColor(1.0f, 1.0f, 1.0f, 1.0f); 
    glClearDepth(1.0f);                   // Set background depth to farthest
    glEnable(GL_DEPTH_TEST);   // Enable depth testing for z-culling
    glDepthFunc(GL_LEQUAL);    // Set the type of depth-test
@@ -69,7 +68,16 @@ void reshape3D(GLsizei width, GLsizei height) {  // GLsizei for non-negative int
    glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
    glLoadIdentity();             // Reset
    // Enable perspective projection with fovy, aspect, zNear and zFar
-   gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+   //gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+
+   // Set up orthographic projection view [NEW]
+   if (width >= height) {
+     // aspect >= 1, set the height from -1 to 1, with larger width
+      glOrtho(-3.0 * aspect, 3.0 * aspect, -3.0, 3.0, 0.1, 100);
+   } else {
+      // aspect < 1, set the width to -1 to 1, with larger height
+     glOrtho(-3.0, 3.0, -3.0 / aspect, 3.0 / aspect, 0.1, 100);
+   }
 }
 
 vector <float> cross_prod(float a[3], float b[3]){
@@ -138,6 +146,30 @@ bool vertex::operator==(const vertex &v){
 	return (v.x==x && v.y==y && v.z==z);
 }
 
+vertex vertex::operator+(const vertex &v){
+	vertex res;
+	res.x = x+v.x;
+	res.y = y+v.y;
+	res.z = z+v.z;
+	return res;
+}
+
+vertex vertex::operator-(const vertex &v){
+	vertex res;
+	res.x = x+v.x;
+	res.y = y+v.y;
+	res.z = z+v.z;
+	return res;
+}
+
+vertex vertex::operator*(const float &f){
+	vertex res;
+	res.x = x*f;
+	res.y = y*f;
+	res.z = z*f;
+	return res;
+}
+
 void  face::compParam(){
 	float x[3], y[3];
 	vector <float> t(3);
@@ -164,25 +196,28 @@ void  face::compParam(){
 
 void Projection::display(){
 	glClear(GL_COLOR_BUFFER_BIT);
-
+	glBegin(GL_LINES);
+	glLineWidth(5);
+	glEnable(GL_LINE_SMOOTH);
 	for(const auto& ed : default_pr.elist){
-		glBegin(GL_LINES);
-		glLineWidth(2);
-		glEnable(GL_LINE_SMOOTH);
 		if(!ed.second.visi){
 			glEnable(GL_LINE_STIPPLE);
-			glLineStipple(2, 0x00FF);
-			glColor3f(0.2f, 0.2f, 0.2f);
+			glLineWidth(2);
+			glLineStipple(1, 0x00FF);
+			glColor3f(0.0f, 0.0f, 0.8f);
 		}
-		else
+		else{
 			glColor3f(0.0f, 0.0f, 0.0f);
-		glVertex2f(ed.second.v1.x, ed.second.v1.y);
-		glVertex2f(ed.second.v2.x, ed.second.v2.y);
+			glLineWidth(5);
+		}
+		glVertex2f((GLfloat) ed.second.v1.x, (GLfloat) ed.second.v1.y);
+		glVertex2f((GLfloat) ed.second.v2.x, (GLfloat) ed.second.v2.y);
 		if(!ed.second.visi)
 			glDisable(GL_LINE_STIPPLE);
-		glDisable(GL_LINE_SMOOTH);
-		glEnd();
+		
 	}
+	glDisable(GL_LINE_SMOOTH);
+	glEnd();
 
 	glFlush();
 }
@@ -199,10 +234,11 @@ void Object3D::display(){
 	glColor3f(0.0f, 0.0f, 0.0f);
 
 	vertex *vt;
+
+	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
    	for(auto& sp : default_ob.flist){
    		glBegin(GL_LINE_LOOP);
-		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-		glLineWidth(2);
+		glLineWidth(3);
 		glEnable(GL_LINE_SMOOTH);
 		glColor3f(0.0f, 0.0f, 0.0f);
 		vt = NULL;
@@ -213,7 +249,17 @@ void Object3D::display(){
 		glEnd();
 	}
    
-   	//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+   	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+   	for(auto& sp : default_ob.flist){
+   		glBegin(GL_POLYGON);
+		glColor4f(0.2f, 0.2f, 0.4f, 0.4f);
+		vt = NULL;
+		for(auto& ed : sp.second.verts){
+			//cout<<ed.first<<endl;
+			glVertex3f((GLfloat) ed.second.x, (GLfloat) ed.second.y, (GLfloat) ed.second.z);
+		}
+		glEnd();
+	}
  
    	glutSwapBuffers(); 
 }
@@ -248,25 +294,53 @@ float _point_on_segment(vertex v1, vertex v2, vertex v){
 			return numeric_limits<float>::infinity();
 	float m = v1.x == v2.x? (v.y-v1.y)/(v2.y-v1.y) :(v.x-v1.x)/(v2.x-v1.x);
 	return m;
-}
+}  
 
 void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &vls){
 	map <string, edge>::iterator eit1 = els.begin();
-	map <string, edge>::iterator eit2 = next(eit1,1);
+	map <string, edge>::iterator eit2 = els.begin();
 
+	while(eit2!=els.end()){
+		if(eit2->second.v1.x == eit2->second.v2.x && eit2->second.v1.y == eit2->second.v2.y){
+			map <string, edge>::iterator it = next(eit2,1);
+ 			els.erase(eit2);
+ 			eit2 = it;
+ 			continue;
+		}
+		advance(eit2, 1);
+	}
+
+	eit2 = next(eit1, 1);
+
+	bool f;
 	while(eit1 != els.end()){
+		float m1, m2, m_1, m_2;
+		edge e1 = eit1->second;
+		m1 = e1.v1.x == e1.v2.x ? 1000000.0f : (e1.v1.y - e1.v2.y)/(e1.v1.x - e1.v2.x);
+		//cout<<eit1->first<<" "<<m1<<endl;
+		f =true;
 		while(eit2 != els.end()){
-			edge e1 = eit1->second, e2 = eit2->second;
-			float m1, m2, m_1, m_2;
-			m1 = e1.v1.x == e1.v2.x ? numeric_limits<float>::infinity() : (e1.v1.y - e1.v2.y)/(e1.v1.x - e1.v2.x);
-			m1 = e2.v1.x == e2.v2.x ? numeric_limits<float>::infinity() : (e2.v1.y - e2.v2.y)/(e2.v1.x - e2.v2.x);
-			if(m1==m2 && ((e1.v1.y - m1*e1.v1.x) == (e2.v1.y - m2*e2.v1.x))){
+			edge e2 = eit2->second;
+			m2 = e2.v1.x == e2.v2.x ? 1000000.0f : (e2.v1.y - e2.v2.y)/(e2.v1.x - e2.v2.x);
+			if(m1==m2){
+				if(m1 == 1000000.0f){
+					if(e1.v1.x != e2.v1.x)
+					{advance(eit2, 1); continue;}
+				}
+				else if((e1.v1.y - m1*e1.v1.x) != (e2.v1.y - m2*e2.v1.x))
+					{advance(eit2, 1); continue;}
+
 				m_1 = _point_on_segment(e1.v1, e1.v2, e2.v1);
 				m_2 = _point_on_segment(e1.v1, e1.v2, e2.v2);
 				
- 				if(m_1<=1.0 && m1>=0.0 && m_2<=1.0 && m2>=0.0){
- 					if(e2.v1.z<= e1.v1.z)
- 						{els.erase(eit2); continue;}
+ 				if((m_1<=1.0 || m_1>=0.0) && (m_2<=1.0 || m_2>=0.0)){
+ 					if(e2.v1.z<= e1.v1.z){
+ 						map <string, edge>::iterator it = next(eit2,1);
+			 			//cout<<"2"<<" "<<eit2->first<<" "<<m2<<endl; 
+			 			els.erase(eit2);
+			 			eit2 = it;
+			 			continue;
+ 					}
  					if(e2.v1.z> e1.v1.z){
  						if(m_1==0.0 && m_2!=1.0){
  							eit1->second.v1 = e2.v2;
@@ -286,7 +360,7 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 						}	
  					}
  				}
- 				if((m_1>=1.0 && m2<=0.0) || (m_2>=1.0 && m1<=0.0)){
+ 				if((m_1>=1.0 && m_2<=0.0) || (m_2>=1.0 && m_1<=0.0)){
  					if(e2.v1.z<= e1.v1.z){
  						if(m_1==0.0 && m_2!=1.0){
  							eit2->second.v1 = e1.v2;
@@ -306,29 +380,31 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 						}
  					}
  					if(e2.v1.z>= e1.v1.z){
- 						map <string, edge>::iterator it = prev(eit1,1);
+ 						map <string, edge>::iterator it = next(eit1,1);
+ 						//cout<<"3"<<eit2->first<<endl; 
  						els.erase(eit1);
  						eit1 = it; 
+ 						f = false;
  						break;
  					}
  				}
 
- 				if(m_1<1.0 && m1>0.0 && m_2>1.0){
+ 				if(m_1<1.0 && m_1>0.0 && m_2>1.0){
  					if(e2.v1.z<=e1.v2.z)
  						eit2->second.v1 = e1.v2;
  					else
  						eit1->second.v2 = e2.v1;
- 				}else if(m_1<1.0 && m1>0.0 && m_2<0.0){
+ 				}else if(m_1<1.0 && m_1>0.0 && m_2<0.0){
  					if(e2.v1.z<=e1.v1.z)
  						eit2->second.v1 = e1.v1;
  					else
  						eit1->second.v1 = e2.v1;
- 				}else if(m_2<1.0 && m2>0.0 && m_1<0.0){
+ 				}else if(m_2<1.0 && m_2>0.0 && m_1<0.0){
  					if(e2.v2.z<=e1.v1.z)
  						eit2->second.v2 = e1.v1;
  					else
  						eit1->second.v1 = e2.v2;
- 				}else if(m_2<1.0 && m2>0.0 && m_1>1.0){
+ 				}else if(m_2<1.0 && m_2>0.0 && m_1>1.0){
  					if(e2.v2.z<=e1.v2.z)
  						eit2->second.v2 = e1.v2;
  					else
@@ -338,9 +414,11 @@ void Object3D::_overlappingEdges(map <string, edge> &els, map <string, vertex> &
 			}
 			advance(eit2, 1);
 		}
-		advance(eit1, 1);
+		if(f)
+			advance(eit1, 1);
 		eit2 = next(eit1, 1);
-	}	
+	}
+	//cout<<endl;
 }
 
 void Object3D::_intersectingEdges(map <string, edge> &els, map <string, vertex> &vls){
@@ -355,20 +433,18 @@ void Object3D::_intersectingEdges(map <string, edge> &els, map <string, vertex> 
 				vertex vi;
 				vi.x = e1.v1.x + rs.first*(e1.v2.x - e1.v1.x);
 				vi.y = e1.v1.y + rs.first*(e1.v2.y - e1.v1.y); 
-				{
-					vi.z = e1.v1.z + rs.first*(e1.v2.z - e1.v1.z);
-					edge e = edge(vi, e1.v2);
-					els.insert(pair<string, edge>(eit1->first, e));
-					eit1->second.v2 = vi;
-					vls.insert(pair<string, vertex>(eit1->first, vi));
-				}
-				{
-					vi.z = e2.v1.z + rs.second*(e2.v2.z - e2.v1.z);
-					edge e = edge(vi, e2.v2);
-					els.insert(pair<string, edge>(eit2->first, e));
-					eit2->second.v2 = vi;
-					vls.insert(pair<string, vertex>(eit2->first, vi));	
-				}
+					
+				vi.z = e1.v1.z + rs.first*(e1.v2.z - e1.v1.z);
+				edge e = edge(vi, e1.v2);
+				els.insert(pair<string, edge>(eit1->first+"_1", e));
+				eit1->second.v2 = vi;
+				vls.insert(pair<string, vertex>(eit1->first+"p", vi));
+	
+				vi.z = e2.v1.z + rs.second*(e2.v2.z - e2.v1.z);
+				e = edge(vi, e2.v2);
+				els.insert(pair<string, edge>(eit2->first+"_1", e));
+				eit2->second.v2 = vi;
+				vls.insert(pair<string, vertex>(eit2->first+"p", vi));	
 			}
 			advance(eit2, 1);
 		}
@@ -382,12 +458,13 @@ bool _point_behind_face(vertex v, face fc){
 	if(fc.C == 0)
 		return false;
 	float z_ = (fc.D - fc.A*v.x -fc.B*v.y)/fc.C;
-	if(z_ <= v.z)
+	if(z_ < v.z - 0.01)
 		return false;
 
 	int count = 0;
 	for(auto& sp : fc.edges){
 		edge e2 = sp.second;
+		
 		if(e2.v1.y==e2.v2.y)
 			continue;
 
@@ -397,26 +474,31 @@ bool _point_behind_face(vertex v, face fc){
 		if(v.y == e2.v2.y && e2.v1.y > e2.v2.y)
 			continue;
 
+		if( abs((v.y - e2.v1.y)*(e2.v2.x - e2.v1.x)-(e2.v2.y - e2.v1.y)*(v.x-e2.v1.x))<0.01 )
+			return false;
+
 		float m = (v.y - e2.v1.y)/(e2.v2.y - e2.v1.y);
+		
+		if( (m*(e2.v2.x - e2.v1.x)+e2.v1.x) < v.x )
+			continue;
+
 		if(m>0.0 && m<1.0)
 			count++;
 	}
 
 	if(count%2==1)
-		return true;
+		{return true;}
 	return false;		
 }
 
 void Object3D::_dashedLines(map <string, edge> &els, map <string, face> &fls){
 	for(auto& sp : els){
 		edge e = sp.second;
+		sp.second.visi = true;
 		for(auto& sp1 : fls){
-			if(_point_behind_face(e.v1, sp1.second))
-				sp.second.visi = false;
-			else if(_point_behind_face(e.v2, sp1.second))
-				sp.second.visi = false;
-			else
-				sp.second.visi = true;
+			vertex mid = e.v1*0.5 + e.v2*0.5; 
+			if(_point_behind_face(mid, sp1.second))
+				{sp.second.visi = false; break;}
 		}
 	}
 }
@@ -445,10 +527,12 @@ Projection Object3D::projectTo2D(string view){
 				swap(sp2.second.v2.y, sp2.second.v2.z);
 				sp2.second.v2.y*=-1;
 			}
+			for(auto& sp2 : sp.second.verts){
+				swap(sp2.second.y, sp2.second.z);
+				sp2.second.y*=-1;
+			}
 		}
-	}
-
-	if(view=="side"){
+	}else if(view=="side"){
 		for(auto& sp : _elist){
 			swap(sp.second.v1.x, sp.second.v1.z);
 			sp.second.v1.x*=-1;
@@ -465,6 +549,10 @@ Projection Object3D::projectTo2D(string view){
 				sp2.second.v1.x*=-1;
 				swap(sp2.second.v2.x, sp2.second.v2.z);
 				sp2.second.v2.x*=-1;		
+			}
+			for(auto& sp2 : sp.second.verts){
+				swap(sp2.second.x, sp2.second.z);
+				sp2.second.x*=-1;		
 			}
 		}
 	}
