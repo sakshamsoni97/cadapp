@@ -3,31 +3,26 @@
 ## Macros
 CC = g++
 CC2 = gcc
-FLAGS = -std=c++11 `pkg-config gtk+-3.0 --cflags` `freetype-config --cflags`
+FLAGS = -std=c++11
 CFLAGS = `pkg-config gtk+-3.0 --cflags` `freetype-config --cflags`
-LIBS = -lGL -lGLU -lglut `pkg-config gtk+-3.0 --libs` -lm -ljsoncpp -lpng -lpngwriter -lz -lfreetype
-CLIBS = 
+LIBS = -lGL -lGLU -lglut -lm 
+CLIBS = `pkg-config gtk+-3.0 --libs` -lz -lfreetype
+DEPS = drawing.h
 
 
 all: drawing.o GUI.o
-	${CC} $(FLAGS) -o Binary drawing.o GUI.o
- 
-#main.o: cadapp.cpp
-#        ${CC} ${FLAGS} -c cadapp.cpp ${LIBS} -I ./
- 
-#GUI.o: GUI.cpp
-#         ${CC} ${FLAGS} -c GUI.cpp ${LIBS} -I ./
+	${CC} $(FLAGS) -o Binary drawing.o GUI.o $(LIBS) -I ./
 
-# drawing.o: drawing.cpp
-#         ${CC} ${FLAGS} -c drawing.cpp ${LIBS} -I ./ 
-
-*.o: *.cpp
+%.o: %.cpp $(DEPS)
 	${CC} ${FLAGS} -c $< ${LIBS} -I ./
 
 *.o: *.c
 	${CC2} ${CFLAGS} -c $< ${CLIBS} -I ./
  
+.PHONY: clean
+
 clean:
 	rm -rf *.o
 	rm -rf *.out
 	rm -rf Binary
+

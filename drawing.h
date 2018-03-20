@@ -263,6 +263,8 @@ public:
 	/*! */
 
 	static void display();
+
+	static void display_wireframe();
 };
 
 extern Object3D default_ob;

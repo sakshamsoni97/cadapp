@@ -15,7 +15,6 @@
 #else
 #include <GL/glut.h>
 #endif
-#include <gtk/gtk.h>
 #include <math.h>
 #include <limits>
 #include "drawing.h"
@@ -246,6 +245,30 @@ void Object3D::display(){
 			//cout<<ed.first<<endl;
 			glVertex3f((GLfloat) ed.second.x, (GLfloat) ed.second.y, (GLfloat) ed.second.z);
 		}
+		glEnd();
+	}
+
+   	glutSwapBuffers();
+}
+
+void Object3D::display_wireframe(){
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);   
+	glLoadIdentity();
+	glTranslatef(0.5f, 0.0f, -5.0f);
+	glColor3f(0.0f, 0.0f, 0.0f);
+
+	vertex *vt;
+	vt = NULL;
+
+	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+   	for(auto& sp : default_ob.elist){
+   		glBegin(GL_LINES);
+		glLineWidth(3);
+		glEnable(GL_LINE_SMOOTH);
+		glColor3f(0.0f, 0.0f, 0.0f);
+		glVertex3f((GLfloat) sp.second.v1.x, (GLfloat) sp.second.v1.y, (GLfloat) sp.second.v1.z);
+		glVertex3f((GLfloat) sp.second.v2.x, (GLfloat) sp.second.v2.y, (GLfloat) sp.second.v2.z);
 		glEnd();
 	}
 
