@@ -268,6 +268,9 @@ public:
 };
 
 extern Object3D default_ob;
-extern Projection default_pr;
+extern Projection default_fv;
+extern Projection default_tv;
+extern Projection default_sv;
+
 
 #endif

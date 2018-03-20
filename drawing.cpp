@@ -22,7 +22,9 @@
 using namespace::std;
 
 Object3D default_ob;
-Projection default_pr;
+Projection default_fv;
+Projection default_tv;
+Projection default_sv;
 
 inline float Abs(float f){
 	return f>=0? f : -f;
@@ -54,10 +56,10 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
    glLoadIdentity();             // Reset the projection matrix
    if (width >= height) {
      // aspect >= 1, set the height from -1 to 1, with larger width
-      gluOrtho2D(-1.0 * aspect, 1.0 * aspect, -1.0, 1.0);
+      gluOrtho2D(-4.0 * aspect, 2.0 * aspect, -2.0, 5.0);
    } else {
       // aspect < 1, set the width to -1 to 1, with larger height
-     gluOrtho2D(-1.0, 1.0, -1.0 / aspect, 1.0 / aspect);
+     gluOrtho2D(-4.0, 2.0, -2.0 / aspect, 5.0 / aspect);
    }
 }
 
@@ -168,24 +170,25 @@ void  face::compParam(){
 		advance(it,1);
 		y[0] = (it->second.v1.x - it->second.v2.x) ; y[1] = (it->second.v1.y - it->second.v2.y) ; y[2] = (it->second.v1.z - it->second.v2.z);
 		t = cross_prod(x, y);
-		if(t[1]==t[2] && t[2]==t[3] && t[3]==0)
+		if(t[0]==t[1] && t[1]==t[2] && t[2]==0)
 			continue;
 		col = false;
 		}
 	if(col)
 		throw std::invalid_argument("problem in face");
 	else{
-		face::A = t[1]; face::B = t[1]; face::C = t[2];
+		face::A = t[0]; face::B = t[1]; face::C = t[2];
 		face::D = A*it->second.v1.x + B*it->second.v1.y + C*it->second.v1.z;
 	}
 }
 
 void Projection::display(){
 	glClear(GL_COLOR_BUFFER_BIT);
+	// Front
 	glBegin(GL_LINES);
 	glLineWidth(5);
 	glEnable(GL_LINE_SMOOTH);
-	for(const auto& ed : default_pr.elist){
+	for(const auto& ed : default_fv.elist){
 		if(!ed.second.visi){
 			glEnable(GL_LINE_STIPPLE);
 			glLineWidth(2);
@@ -198,6 +201,54 @@ void Projection::display(){
 		}
 		glVertex2f((GLfloat) ed.second.v1.x, (GLfloat) ed.second.v1.y);
 		glVertex2f((GLfloat) ed.second.v2.x, (GLfloat) ed.second.v2.y);
+		if(!ed.second.visi)
+			glDisable(GL_LINE_STIPPLE);
+		
+	}
+	glDisable(GL_LINE_SMOOTH);
+	glEnd();
+	// Top
+	float xo=0.0f, yo=3.0f;
+	glBegin(GL_LINES);
+	glLineWidth(5);
+	glEnable(GL_LINE_SMOOTH);
+	for(const auto& ed : default_tv.elist){
+		if(!ed.second.visi){
+			glEnable(GL_LINE_STIPPLE);
+			glLineWidth(2);
+			glLineStipple(1, 0x00FF);
+			glColor3f(0.0f, 0.0f, 0.8f);
+		}
+		else{
+			glColor3f(0.0f, 0.0f, 0.0f);
+			glLineWidth(5);
+		}
+		glVertex2f((GLfloat) (xo+ ed.second.v1.x), (GLfloat) (yo+ed.second.v1.y));
+		glVertex2f((GLfloat) (xo+ed.second.v2.x), (GLfloat) (yo+ed.second.v2.y));
+		if(!ed.second.visi)
+			glDisable(GL_LINE_STIPPLE);
+		
+	}
+	glDisable(GL_LINE_SMOOTH);
+	glEnd();
+	//  Side
+	xo=-3.0f, yo=0.0f;
+	glBegin(GL_LINES);
+	glLineWidth(5);
+	glEnable(GL_LINE_SMOOTH);
+	for(const auto& ed : default_sv.elist){
+		if(!ed.second.visi){
+			glEnable(GL_LINE_STIPPLE);
+			glLineWidth(2);
+			glLineStipple(1, 0x00FF);
+			glColor3f(0.0f, 0.0f, 0.8f);
+		}
+		else{
+			glColor3f(0.0f, 0.0f, 0.0f);
+			glLineWidth(5);
+		}
+		glVertex2f((GLfloat) (xo+ ed.second.v1.x), (GLfloat) (yo+ed.second.v1.y));
+		glVertex2f((GLfloat) (xo+ed.second.v2.x), (GLfloat) (yo+ed.second.v2.y));
 		if(!ed.second.visi)
 			glDisable(GL_LINE_STIPPLE);
 		
@@ -275,7 +326,7 @@ void Object3D::display_wireframe(){
    	glutSwapBuffers();
 }
 
-void swap(float &a, float &b){
+inline void swap(float &a, float &b){
 	float t = a;
 	a = b;
 	b = t;

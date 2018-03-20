@@ -1,7 +1,25 @@
 #include <iostream>
+#include <functional>
 #include "drawing.h"
 
 using namespace::std;
+
+int window_1, window_2;
+bool refresh = false;
+
+static void TimeEvent(int te)
+{ 
+   if(!refresh)
+   	return;
+   glutSetWindow( window_1 );
+   glutPostRedisplay();  // Update screen with new rotation data
+ 
+   glutSetWindow( window_2 );
+   glutPostRedisplay();  // Update screen with new rotation data
+ 
+   glutTimerFunc( 100, TimeEvent, 1);  // Reset our timmer.
+}
+
 
 int main(int argc, char** argv){
 	Object3D ob;
@@ -106,20 +124,30 @@ int main(int argc, char** argv){
 	ob.rotate(-45.0f, -45.0f, 0.0f);
 
 	Projection fview= ob.projectTo2D("front");
-	//cout<<fview.elist.size()<<endl;
-	//cout<<fview.vlist.size()<<endl;
-
+	Projection tview= ob.projectTo2D("top");
+	Projection sview= ob.projectTo2D("side");
 
 	glutInit(&argc, argv);            // Initialize GLUT
 	//glutInitDisplayMode(GLUT_DOUBLE); // Enable double buffered mode
 	glutInitWindowSize(640, 480);   // Set the window's initial width & height
 	glutInitWindowPosition(50, 50); // Position the window's initial top-left corner
-	glutCreateWindow("test run");          // Create window with the given title
-	
-	default_pr = fview;
-	glutDisplayFunc(fview.display);       // Register callback handler for window re-paint event
+	glutTimerFunc( 10, TimeEvent, 1);
+
+	window_1 = glutCreateWindow("Orthographics");          // Create window with the given title
+	default_fv = fview;
+	default_tv = tview;
+	default_sv = sview;
+	glutDisplayFunc(tview.display);       // Register callback handler for window re-paint event
 	glutReshapeFunc(reshape);       // Register callback handler for window re-size event
 	initGL();                       // Our own OpenGL initialization
+	
+	glutInitWindowPosition(700, 50);
+	window_2 = glutCreateWindow("3D - Isometeric");          // Create window with the given title
+	default_ob = ob;
+	glutDisplayFunc(ob.display);       // Register callback handler for window re-paint event
+	glutReshapeFunc(reshape3D);       // Register callback handler for window re-size event
+	initGL3D(); 
+
 	glutMainLoop();
 
 	return 0;
