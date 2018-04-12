@@ -1,0 +1,93 @@
+\hypertarget{cinterface_8h}{}\section{src/cinterface.h File Reference}
+\label{cinterface_8h}\index{src/cinterface.\+h@{src/cinterface.\+h}}
+
+
+Provides wrapper functions to interface between G\+UI (written using G\+T\+K+ in C) with the backend (written in C++)  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{cinterface_8h_aedaf9a3b18c9348843bdf250c26a9030}{\+\_\+2d3d\+Draw\+Wrapper} (char $\ast$\hyperlink{_g_u_i_8c_ab94a53e2dc3b479d8bbf079cb431c930}{filepath}, int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em 2D to 3D conversion wrapper function \end{DoxyCompactList}\item 
+int \hyperlink{cinterface_8h_ad09ed8ddb9bf34218119c13408798959}{\+\_\+3d2d\+Draw\+Wrapper} (char $\ast$\hyperlink{_g_u_i_8c_ab94a53e2dc3b479d8bbf079cb431c930}{filepath}, int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em 3D to 2D conversion wrapper function \end{DoxyCompactList}\item 
+void \hyperlink{cinterface_8h_ac20f3bfa7514b8590bea5b4e26939c33}{\+\_\+rotate\+Wrapper} (float alpha, float beta, float gamma, int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Rotation wrapper function. \end{DoxyCompactList}\item 
+int \hyperlink{cinterface_8h_ae2b5f911872d4c7cc106a4c94cbea41f}{\+\_\+\+Save\+Wrapper} (char $\ast$\hyperlink{_g_u_i_8c_a84dc2beb6d58b777f2ed61ad4c9dc3a0}{savepath})
+\begin{DoxyCompactList}\small\item\em Rotation wrapper function. \end{DoxyCompactList}\item 
+void \hyperlink{cinterface_8h_a071aa88e49bcffbb48009598ff4c1d2b}{display\+\_\+main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Objection/\+Projection display function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provides wrapper functions to interface between G\+UI (written using G\+T\+K+ in C) with the backend (written in C++) 
+
+
+
+\subsection{Function Documentation}
+\index{cinterface.\+h@{cinterface.\+h}!\+\_\+2d3d\+Draw\+Wrapper@{\+\_\+2d3d\+Draw\+Wrapper}}
+\index{\+\_\+2d3d\+Draw\+Wrapper@{\+\_\+2d3d\+Draw\+Wrapper}!cinterface.\+h@{cinterface.\+h}}
+\subsubsection[{\texorpdfstring{\+\_\+2d3d\+Draw\+Wrapper(char $\ast$filepath, int argc, char $\ast$$\ast$argv)}{_2d3dDrawWrapper(char *filepath, int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int \+\_\+2d3d\+Draw\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filepath, }
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8h_aedaf9a3b18c9348843bdf250c26a9030}{}\label{cinterface_8h_aedaf9a3b18c9348843bdf250c26a9030}
+
+
+2D to 3D conversion wrapper function 
+
+Wrapper Function invoked when 3D object has to be reconstructed from its projections and displayed \index{cinterface.\+h@{cinterface.\+h}!\+\_\+3d2d\+Draw\+Wrapper@{\+\_\+3d2d\+Draw\+Wrapper}}
+\index{\+\_\+3d2d\+Draw\+Wrapper@{\+\_\+3d2d\+Draw\+Wrapper}!cinterface.\+h@{cinterface.\+h}}
+\subsubsection[{\texorpdfstring{\+\_\+3d2d\+Draw\+Wrapper(char $\ast$filepath, int argc, char $\ast$$\ast$argv)}{_3d2dDrawWrapper(char *filepath, int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int \+\_\+3d2d\+Draw\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filepath, }
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8h_ad09ed8ddb9bf34218119c13408798959}{}\label{cinterface_8h_ad09ed8ddb9bf34218119c13408798959}
+
+
+3D to 2D conversion wrapper function 
+
+Wrapper Function invoked when 2D projections have to be made for an object and displayed \index{cinterface.\+h@{cinterface.\+h}!\+\_\+rotate\+Wrapper@{\+\_\+rotate\+Wrapper}}
+\index{\+\_\+rotate\+Wrapper@{\+\_\+rotate\+Wrapper}!cinterface.\+h@{cinterface.\+h}}
+\subsubsection[{\texorpdfstring{\+\_\+rotate\+Wrapper(float alpha, float beta, float gamma, int argc, char $\ast$$\ast$argv)}{_rotateWrapper(float alpha, float beta, float gamma, int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}void \+\_\+rotate\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{float}]{alpha, }
+\item[{float}]{beta, }
+\item[{float}]{gamma, }
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8h_ac20f3bfa7514b8590bea5b4e26939c33}{}\label{cinterface_8h_ac20f3bfa7514b8590bea5b4e26939c33}
+
+
+Rotation wrapper function. 
+
+Wrapper Function invoked when the object is rotated \index{cinterface.\+h@{cinterface.\+h}!\+\_\+\+Save\+Wrapper@{\+\_\+\+Save\+Wrapper}}
+\index{\+\_\+\+Save\+Wrapper@{\+\_\+\+Save\+Wrapper}!cinterface.\+h@{cinterface.\+h}}
+\subsubsection[{\texorpdfstring{\+\_\+\+Save\+Wrapper(char $\ast$savepath)}{_SaveWrapper(char *savepath)}}]{\setlength{\rightskip}{0pt plus 5cm}int \+\_\+\+Save\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{savepath}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8h_ae2b5f911872d4c7cc106a4c94cbea41f}{}\label{cinterface_8h_ae2b5f911872d4c7cc106a4c94cbea41f}
+
+
+Rotation wrapper function. 
+
+Wrapper Function invoked when the object/projection have to be stored \index{cinterface.\+h@{cinterface.\+h}!display\+\_\+main@{display\+\_\+main}}
+\index{display\+\_\+main@{display\+\_\+main}!cinterface.\+h@{cinterface.\+h}}
+\subsubsection[{\texorpdfstring{display\+\_\+main(int argc, char $\ast$$\ast$argv)}{display_main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}void display\+\_\+main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8h_a071aa88e49bcffbb48009598ff4c1d2b}{}\label{cinterface_8h_a071aa88e49bcffbb48009598ff4c1d2b}
+
+
+Objection/\+Projection display function. 
+
+Function invoked when object and its projection shave to be displayed 

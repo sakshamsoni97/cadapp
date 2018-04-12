@@ -1,0 +1,176 @@
+\hypertarget{_g_u_i_8c}{}\section{src/\+G\+UI.c File Reference}
+\label{_g_u_i_8c}\index{src/\+G\+U\+I.\+c@{src/\+G\+U\+I.\+c}}
+
+
+Implements to UI fro the application.  
+
+
+{\ttfamily \#include $<$gtk/gtk.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}cinterface.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$stdlib.\+h$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{_g_u_i_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\item 
+void \hyperlink{_g_u_i_8c_a2f6844fd772b1a496c4fea6ea0426971}{on\+\_\+btn\+\_\+2d3d\+\_\+clicked} ()
+\item 
+void \hyperlink{_g_u_i_8c_ae0e9cd45efb40ad5be2770492040b1c6}{on\+\_\+btn\+\_\+3d2d\+\_\+clicked} ()
+\item 
+void \hyperlink{_g_u_i_8c_a9fa83f07ece884e4936fe626e97eb195}{on\+\_\+btn\+\_\+rotate\+\_\+clicked} ()
+\item 
+void \hyperlink{_g_u_i_8c_a36ffe6981759f84e4e9eab58fec9d993}{on\+\_\+btn\+\_\+file\+Picker\+\_\+file\+\_\+set} ()
+\item 
+void \hyperlink{_g_u_i_8c_af022fdac3724ae58174c6a96c9c6875f}{on\+\_\+window\+\_\+main\+\_\+destroy} ()
+\item 
+void \hyperlink{_g_u_i_8c_aa36b55858ab7e49d91ebcda0423f9219}{on\+\_\+btn\+\_\+save\+\_\+clicked} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Gtk\+Widget $\ast$ \hyperlink{_g_u_i_8c_aab593d0e50d67f44b5179112dbcc0a65}{g\+\_\+lbl\+\_\+title}
+\item 
+Gtk\+Button $\ast$ \hyperlink{_g_u_i_8c_a3bbbd08cb71f5cd03af68d2268ecce30}{g\+\_\+btn\+\_\+2d3d}
+\item 
+Gtk\+Button $\ast$ \hyperlink{_g_u_i_8c_aa36bc490f16d175d26c391eea3a2406f}{g\+\_\+btn\+\_\+3d2d}
+\item 
+Gtk\+Button $\ast$ \hyperlink{_g_u_i_8c_a38b182072cd57cb965aa5a7f5a907361}{g\+\_\+btn\+\_\+rotate}
+\item 
+Gtk\+Button $\ast$ \hyperlink{_g_u_i_8c_a99f4dac82cbd728e61ed75e92f882827}{g\+\_\+btn\+\_\+save}
+\item 
+Gtk\+Entry $\ast$ \hyperlink{_g_u_i_8c_a0f6a20660dc67e49bb88d56043ef93cb}{g\+\_\+txt\+\_\+file\+Path}
+\item 
+Gtk\+Entry $\ast$ \hyperlink{_g_u_i_8c_a47eaf139e6b5469d9e7cdd310761bb12}{g\+\_\+txt\+\_\+x\+Axis}
+\item 
+Gtk\+Entry $\ast$ \hyperlink{_g_u_i_8c_a3d89d5fdc8cc5436366cb2c71c387a32}{g\+\_\+txt\+\_\+y\+Axis}
+\item 
+Gtk\+Entry $\ast$ \hyperlink{_g_u_i_8c_ad5d2b2934ba6619b858b15a5caab6847}{g\+\_\+txt\+\_\+z\+Axis}
+\item 
+Gtk\+Entry $\ast$ \hyperlink{_g_u_i_8c_a29cdacdb14b003a0229e188fe6d958d7}{g\+\_\+txt\+\_\+save\+Path}
+\item 
+Gtk\+File\+Chooser\+Button $\ast$ \hyperlink{_g_u_i_8c_a47999820b6e7890dd0e2cd2bab043767}{g\+\_\+btn\+\_\+file\+Picker}
+\item 
+Gtk\+Statusbar $\ast$ \hyperlink{_g_u_i_8c_a7e2f5ae5a2b941385399c22b2d73f919}{g\+\_\+bar\+\_\+status}
+\item 
+long int \hyperlink{_g_u_i_8c_ad67a6f3d9342bb7c4d507faf64edefdd}{p\+ID} = 0
+\item 
+char $\ast$ \hyperlink{_g_u_i_8c_ab94a53e2dc3b479d8bbf079cb431c930}{filepath} = N\+U\+LL
+\item 
+char $\ast$ \hyperlink{_g_u_i_8c_a84dc2beb6d58b777f2ed61ad4c9dc3a0}{savepath} = N\+U\+LL
+\item 
+int \hyperlink{_g_u_i_8c_a30b5726116ac85ea64777e5d6e333894}{arc} = 0
+\item 
+char $\ast$$\ast$ \hyperlink{_g_u_i_8c_a907f3b6c8c5dacb1b7c288f44d6d8778}{arv} =N\+U\+LL
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements to UI fro the application. 
+
+Constructs the graphical UI of the applications, handles errors and calls the correct callback depending on the user interaction 
+
+\subsection{Function Documentation}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!main@{main}}
+\index{main@{main}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{main(int argc, char $\ast$$\ast$argv)}{main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{_g_u_i_8c_a3c04138a5bfe5d72780bb7e82a18e627}{}\label{_g_u_i_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!on\+\_\+btn\+\_\+2d3d\+\_\+clicked@{on\+\_\+btn\+\_\+2d3d\+\_\+clicked}}
+\index{on\+\_\+btn\+\_\+2d3d\+\_\+clicked@{on\+\_\+btn\+\_\+2d3d\+\_\+clicked}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{on\+\_\+btn\+\_\+2d3d\+\_\+clicked()}{on_btn_2d3d_clicked()}}]{\setlength{\rightskip}{0pt plus 5cm}void on\+\_\+btn\+\_\+2d3d\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{_g_u_i_8c_a2f6844fd772b1a496c4fea6ea0426971}{}\label{_g_u_i_8c_a2f6844fd772b1a496c4fea6ea0426971}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!on\+\_\+btn\+\_\+3d2d\+\_\+clicked@{on\+\_\+btn\+\_\+3d2d\+\_\+clicked}}
+\index{on\+\_\+btn\+\_\+3d2d\+\_\+clicked@{on\+\_\+btn\+\_\+3d2d\+\_\+clicked}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{on\+\_\+btn\+\_\+3d2d\+\_\+clicked()}{on_btn_3d2d_clicked()}}]{\setlength{\rightskip}{0pt plus 5cm}void on\+\_\+btn\+\_\+3d2d\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{_g_u_i_8c_ae0e9cd45efb40ad5be2770492040b1c6}{}\label{_g_u_i_8c_ae0e9cd45efb40ad5be2770492040b1c6}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!on\+\_\+btn\+\_\+file\+Picker\+\_\+file\+\_\+set@{on\+\_\+btn\+\_\+file\+Picker\+\_\+file\+\_\+set}}
+\index{on\+\_\+btn\+\_\+file\+Picker\+\_\+file\+\_\+set@{on\+\_\+btn\+\_\+file\+Picker\+\_\+file\+\_\+set}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{on\+\_\+btn\+\_\+file\+Picker\+\_\+file\+\_\+set()}{on_btn_filePicker_file_set()}}]{\setlength{\rightskip}{0pt plus 5cm}void on\+\_\+btn\+\_\+file\+Picker\+\_\+file\+\_\+set (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{_g_u_i_8c_a36ffe6981759f84e4e9eab58fec9d993}{}\label{_g_u_i_8c_a36ffe6981759f84e4e9eab58fec9d993}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!on\+\_\+btn\+\_\+rotate\+\_\+clicked@{on\+\_\+btn\+\_\+rotate\+\_\+clicked}}
+\index{on\+\_\+btn\+\_\+rotate\+\_\+clicked@{on\+\_\+btn\+\_\+rotate\+\_\+clicked}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{on\+\_\+btn\+\_\+rotate\+\_\+clicked()}{on_btn_rotate_clicked()}}]{\setlength{\rightskip}{0pt plus 5cm}void on\+\_\+btn\+\_\+rotate\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{_g_u_i_8c_a9fa83f07ece884e4936fe626e97eb195}{}\label{_g_u_i_8c_a9fa83f07ece884e4936fe626e97eb195}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!on\+\_\+btn\+\_\+save\+\_\+clicked@{on\+\_\+btn\+\_\+save\+\_\+clicked}}
+\index{on\+\_\+btn\+\_\+save\+\_\+clicked@{on\+\_\+btn\+\_\+save\+\_\+clicked}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{on\+\_\+btn\+\_\+save\+\_\+clicked()}{on_btn_save_clicked()}}]{\setlength{\rightskip}{0pt plus 5cm}void on\+\_\+btn\+\_\+save\+\_\+clicked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{_g_u_i_8c_aa36b55858ab7e49d91ebcda0423f9219}{}\label{_g_u_i_8c_aa36b55858ab7e49d91ebcda0423f9219}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!on\+\_\+window\+\_\+main\+\_\+destroy@{on\+\_\+window\+\_\+main\+\_\+destroy}}
+\index{on\+\_\+window\+\_\+main\+\_\+destroy@{on\+\_\+window\+\_\+main\+\_\+destroy}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{on\+\_\+window\+\_\+main\+\_\+destroy()}{on_window_main_destroy()}}]{\setlength{\rightskip}{0pt plus 5cm}void on\+\_\+window\+\_\+main\+\_\+destroy (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{_g_u_i_8c_af022fdac3724ae58174c6a96c9c6875f}{}\label{_g_u_i_8c_af022fdac3724ae58174c6a96c9c6875f}
+
+
+\subsection{Variable Documentation}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!arc@{arc}}
+\index{arc@{arc}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{arc}{arc}}]{\setlength{\rightskip}{0pt plus 5cm}int arc = 0}\hypertarget{_g_u_i_8c_a30b5726116ac85ea64777e5d6e333894}{}\label{_g_u_i_8c_a30b5726116ac85ea64777e5d6e333894}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!arv@{arv}}
+\index{arv@{arv}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{arv}{arv}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$$\ast$ arv =N\+U\+LL}\hypertarget{_g_u_i_8c_a907f3b6c8c5dacb1b7c288f44d6d8778}{}\label{_g_u_i_8c_a907f3b6c8c5dacb1b7c288f44d6d8778}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!filepath@{filepath}}
+\index{filepath@{filepath}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{filepath}{filepath}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ filepath = N\+U\+LL}\hypertarget{_g_u_i_8c_ab94a53e2dc3b479d8bbf079cb431c930}{}\label{_g_u_i_8c_ab94a53e2dc3b479d8bbf079cb431c930}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+bar\+\_\+status@{g\+\_\+bar\+\_\+status}}
+\index{g\+\_\+bar\+\_\+status@{g\+\_\+bar\+\_\+status}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+bar\+\_\+status}{g_bar_status}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Statusbar$\ast$ g\+\_\+bar\+\_\+status}\hypertarget{_g_u_i_8c_a7e2f5ae5a2b941385399c22b2d73f919}{}\label{_g_u_i_8c_a7e2f5ae5a2b941385399c22b2d73f919}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+btn\+\_\+2d3d@{g\+\_\+btn\+\_\+2d3d}}
+\index{g\+\_\+btn\+\_\+2d3d@{g\+\_\+btn\+\_\+2d3d}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+btn\+\_\+2d3d}{g_btn_2d3d}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Button$\ast$ g\+\_\+btn\+\_\+2d3d}\hypertarget{_g_u_i_8c_a3bbbd08cb71f5cd03af68d2268ecce30}{}\label{_g_u_i_8c_a3bbbd08cb71f5cd03af68d2268ecce30}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+btn\+\_\+3d2d@{g\+\_\+btn\+\_\+3d2d}}
+\index{g\+\_\+btn\+\_\+3d2d@{g\+\_\+btn\+\_\+3d2d}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+btn\+\_\+3d2d}{g_btn_3d2d}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Button$\ast$ g\+\_\+btn\+\_\+3d2d}\hypertarget{_g_u_i_8c_aa36bc490f16d175d26c391eea3a2406f}{}\label{_g_u_i_8c_aa36bc490f16d175d26c391eea3a2406f}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+btn\+\_\+file\+Picker@{g\+\_\+btn\+\_\+file\+Picker}}
+\index{g\+\_\+btn\+\_\+file\+Picker@{g\+\_\+btn\+\_\+file\+Picker}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+btn\+\_\+file\+Picker}{g_btn_filePicker}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+File\+Chooser\+Button$\ast$ g\+\_\+btn\+\_\+file\+Picker}\hypertarget{_g_u_i_8c_a47999820b6e7890dd0e2cd2bab043767}{}\label{_g_u_i_8c_a47999820b6e7890dd0e2cd2bab043767}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+btn\+\_\+rotate@{g\+\_\+btn\+\_\+rotate}}
+\index{g\+\_\+btn\+\_\+rotate@{g\+\_\+btn\+\_\+rotate}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+btn\+\_\+rotate}{g_btn_rotate}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Button$\ast$ g\+\_\+btn\+\_\+rotate}\hypertarget{_g_u_i_8c_a38b182072cd57cb965aa5a7f5a907361}{}\label{_g_u_i_8c_a38b182072cd57cb965aa5a7f5a907361}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+btn\+\_\+save@{g\+\_\+btn\+\_\+save}}
+\index{g\+\_\+btn\+\_\+save@{g\+\_\+btn\+\_\+save}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+btn\+\_\+save}{g_btn_save}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Button$\ast$ g\+\_\+btn\+\_\+save}\hypertarget{_g_u_i_8c_a99f4dac82cbd728e61ed75e92f882827}{}\label{_g_u_i_8c_a99f4dac82cbd728e61ed75e92f882827}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+lbl\+\_\+title@{g\+\_\+lbl\+\_\+title}}
+\index{g\+\_\+lbl\+\_\+title@{g\+\_\+lbl\+\_\+title}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+lbl\+\_\+title}{g_lbl_title}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Widget$\ast$ g\+\_\+lbl\+\_\+title}\hypertarget{_g_u_i_8c_aab593d0e50d67f44b5179112dbcc0a65}{}\label{_g_u_i_8c_aab593d0e50d67f44b5179112dbcc0a65}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+txt\+\_\+file\+Path@{g\+\_\+txt\+\_\+file\+Path}}
+\index{g\+\_\+txt\+\_\+file\+Path@{g\+\_\+txt\+\_\+file\+Path}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+txt\+\_\+file\+Path}{g_txt_filePath}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Entry$\ast$ g\+\_\+txt\+\_\+file\+Path}\hypertarget{_g_u_i_8c_a0f6a20660dc67e49bb88d56043ef93cb}{}\label{_g_u_i_8c_a0f6a20660dc67e49bb88d56043ef93cb}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+txt\+\_\+save\+Path@{g\+\_\+txt\+\_\+save\+Path}}
+\index{g\+\_\+txt\+\_\+save\+Path@{g\+\_\+txt\+\_\+save\+Path}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+txt\+\_\+save\+Path}{g_txt_savePath}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Entry$\ast$ g\+\_\+txt\+\_\+save\+Path}\hypertarget{_g_u_i_8c_a29cdacdb14b003a0229e188fe6d958d7}{}\label{_g_u_i_8c_a29cdacdb14b003a0229e188fe6d958d7}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+txt\+\_\+x\+Axis@{g\+\_\+txt\+\_\+x\+Axis}}
+\index{g\+\_\+txt\+\_\+x\+Axis@{g\+\_\+txt\+\_\+x\+Axis}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+txt\+\_\+x\+Axis}{g_txt_xAxis}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Entry$\ast$ g\+\_\+txt\+\_\+x\+Axis}\hypertarget{_g_u_i_8c_a47eaf139e6b5469d9e7cdd310761bb12}{}\label{_g_u_i_8c_a47eaf139e6b5469d9e7cdd310761bb12}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+txt\+\_\+y\+Axis@{g\+\_\+txt\+\_\+y\+Axis}}
+\index{g\+\_\+txt\+\_\+y\+Axis@{g\+\_\+txt\+\_\+y\+Axis}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+txt\+\_\+y\+Axis}{g_txt_yAxis}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Entry$\ast$ g\+\_\+txt\+\_\+y\+Axis}\hypertarget{_g_u_i_8c_a3d89d5fdc8cc5436366cb2c71c387a32}{}\label{_g_u_i_8c_a3d89d5fdc8cc5436366cb2c71c387a32}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!g\+\_\+txt\+\_\+z\+Axis@{g\+\_\+txt\+\_\+z\+Axis}}
+\index{g\+\_\+txt\+\_\+z\+Axis@{g\+\_\+txt\+\_\+z\+Axis}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{g\+\_\+txt\+\_\+z\+Axis}{g_txt_zAxis}}]{\setlength{\rightskip}{0pt plus 5cm}Gtk\+Entry$\ast$ g\+\_\+txt\+\_\+z\+Axis}\hypertarget{_g_u_i_8c_ad5d2b2934ba6619b858b15a5caab6847}{}\label{_g_u_i_8c_ad5d2b2934ba6619b858b15a5caab6847}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!p\+ID@{p\+ID}}
+\index{p\+ID@{p\+ID}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{p\+ID}{pID}}]{\setlength{\rightskip}{0pt plus 5cm}long int p\+ID = 0}\hypertarget{_g_u_i_8c_ad67a6f3d9342bb7c4d507faf64edefdd}{}\label{_g_u_i_8c_ad67a6f3d9342bb7c4d507faf64edefdd}
+\index{G\+U\+I.\+c@{G\+U\+I.\+c}!savepath@{savepath}}
+\index{savepath@{savepath}!G\+U\+I.\+c@{G\+U\+I.\+c}}
+\subsubsection[{\texorpdfstring{savepath}{savepath}}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ savepath = N\+U\+LL}\hypertarget{_g_u_i_8c_a84dc2beb6d58b777f2ed61ad4c9dc3a0}{}\label{_g_u_i_8c_a84dc2beb6d58b777f2ed61ad4c9dc3a0}

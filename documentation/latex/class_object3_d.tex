@@ -1,0 +1,289 @@
+\hypertarget{class_object3_d}{}\section{Object3D Class Reference}
+\label{class_object3_d}\index{Object3D@{Object3D}}
+
+
+Class for representing 3D objects.  
+
+
+
+
+{\ttfamily \#include $<$drawing.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_object3_d_ae3a1b17fb43ab59f5cf7b0ee21b9120b}{Object3D} ()
+\item 
+\hyperlink{class_projection}{Projection} \hyperlink{class_object3_d_a1bbc165233d95da2e78a60e6aeaaa146}{project\+To2D} (string view)
+\begin{DoxyCompactList}\small\item\em To compute Orthographic projections. \end{DoxyCompactList}\item 
+void \hyperlink{class_object3_d_a05fabe70eda7b69715bd1bd2be7d057a}{create} (\hyperlink{class_projection}{Projection} FV, \hyperlink{class_projection}{Projection} TV, \hyperlink{class_projection}{Projection} SV, bool rightside=true, bool righthand=true)
+\begin{DoxyCompactList}\small\item\em Initialize the 3D object using 3 Orthographic projections. \end{DoxyCompactList}\item 
+void \hyperlink{class_object3_d_a41145f9464fe060f1d3b1b3c5cd82a2d}{rotate} (float alpha, float beta, float gamma)
+\begin{DoxyCompactList}\small\item\em Rotation of the 3D object with respect to the given coordinate axes. All angles are in degrees. \end{DoxyCompactList}\item 
+void \hyperlink{class_object3_d_a9021a3005a02adbf6160694ec63fe273}{shift} (float x0, float y0, float z0)
+\begin{DoxyCompactList}\small\item\em shifting of origin of the 3D coordinate axes \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Archive $>$ }\\void \hyperlink{class_object3_d_ad8d27fdb690f67771e6863a42eca7ae4}{serialize} (Archive \&ar)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_object3_d_a7fa9ab479c8b74fbf2ed03ba26afe863}{display} ()
+\begin{DoxyCompactList}\small\item\em Method to render image of the object. \end{DoxyCompactList}\item 
+static void \hyperlink{class_object3_d_a179a3718c32b40ecde0a05c73b481e5f}{display\+\_\+wireframe} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ string, \hyperlink{structface}{face} $>$ \hyperlink{class_object3_d_afadd8fcbcdddade128855058aacb72b9}{flist}
+\item 
+map$<$ string, \hyperlink{structedge}{edge} $>$ \hyperlink{class_object3_d_a3746f6833c04ee03c7d309f1f27e2267}{elist}
+\item 
+map$<$ string, \hyperlink{structvertex}{vertex} $>$ \hyperlink{class_object3_d_a3da915f1f23f78d6ae2437473e351c4c}{vlist}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+pair$<$ float, float $>$ \hyperlink{class_object3_d_a26ee0bf3973ca3484695c18073852555}{\+\_\+intersect\+\_\+ratiois} (\hyperlink{structedge}{edge} e1, \hyperlink{structedge}{edge} e2)
+\item 
+pair$<$ map$<$ string, \hyperlink{structedge}{edge} $>$, map$<$ string, \hyperlink{structvertex}{vertex} $>$ $>$ \hyperlink{class_object3_d_a135b356564834f1e89a26d90662ab8c9}{\+\_\+wireframe} (\hyperlink{class_projection}{Projection} FV, \hyperlink{class_projection}{Projection} TV, \hyperlink{class_projection}{Projection} SV, bool rightside=true, bool righthand=true)
+\item 
+void \hyperlink{class_object3_d_a7cddb00a564df80dee5014f77861e97a}{\+\_\+overlapping\+Edges} (map$<$ string, \hyperlink{structedge}{edge} $>$ \&els, map$<$ string, \hyperlink{structvertex}{vertex} $>$ \&vls)
+\item 
+void \hyperlink{class_object3_d_a3c44e7f530def96b37ebe7bab98a1971}{\+\_\+intersecting\+Edges} (map$<$ string, \hyperlink{structedge}{edge} $>$ \&els, map$<$ string, \hyperlink{structvertex}{vertex} $>$ \&vls)
+\item 
+void \hyperlink{class_object3_d_a92e044150c8101a4ffd041fb874522da}{\+\_\+dashed\+Lines} (map$<$ string, \hyperlink{structedge}{edge} $>$ \&els, map$<$ string, \hyperlink{structface}{face} $>$ \&fls)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for representing 3D objects. 
+
+A 3D object is represented by a list of faces, edges and vertices. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Object3D@{Object3D}!Object3D@{Object3D}}
+\index{Object3D@{Object3D}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{Object3\+D()}{Object3D()}}]{\setlength{\rightskip}{0pt plus 5cm}Object3\+D\+::\+Object3D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_object3_d_ae3a1b17fb43ab59f5cf7b0ee21b9120b}{}\label{class_object3_d_ae3a1b17fb43ab59f5cf7b0ee21b9120b}
+
+
+\subsection{Member Function Documentation}
+\index{Object3D@{Object3D}!\+\_\+dashed\+Lines@{\+\_\+dashed\+Lines}}
+\index{\+\_\+dashed\+Lines@{\+\_\+dashed\+Lines}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{\+\_\+dashed\+Lines(map$<$ string, edge $>$ \&els, map$<$ string, face $>$ \&fls)}{_dashedLines(map< string, edge > &els, map< string, face > &fls)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object3\+D\+::\+\_\+dashed\+Lines (
+\begin{DoxyParamCaption}
+\item[{map$<$ string, {\bf edge} $>$ \&}]{els, }
+\item[{map$<$ string, {\bf face} $>$ \&}]{fls}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_object3_d_a92e044150c8101a4ffd041fb874522da}{}\label{class_object3_d_a92e044150c8101a4ffd041fb874522da}
+Function to mark the hidden lines as dashed in the Orthographic projection 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\index{Object3D@{Object3D}!\+\_\+intersect\+\_\+ratiois@{\+\_\+intersect\+\_\+ratiois}}
+\index{\+\_\+intersect\+\_\+ratiois@{\+\_\+intersect\+\_\+ratiois}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{\+\_\+intersect\+\_\+ratiois(edge e1, edge e2)}{_intersect_ratiois(edge e1, edge e2)}}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$ float, float $>$ Object3\+D\+::\+\_\+intersect\+\_\+ratiois (
+\begin{DoxyParamCaption}
+\item[{{\bf edge}}]{e1, }
+\item[{{\bf edge}}]{e2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_object3_d_a26ee0bf3973ca3484695c18073852555}{}\label{class_object3_d_a26ee0bf3973ca3484695c18073852555}
+\index{Object3D@{Object3D}!\+\_\+intersecting\+Edges@{\+\_\+intersecting\+Edges}}
+\index{\+\_\+intersecting\+Edges@{\+\_\+intersecting\+Edges}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{\+\_\+intersecting\+Edges(map$<$ string, edge $>$ \&els, map$<$ string, vertex $>$ \&vls)}{_intersectingEdges(map< string, edge > &els, map< string, vertex > &vls)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object3\+D\+::\+\_\+intersecting\+Edges (
+\begin{DoxyParamCaption}
+\item[{map$<$ string, {\bf edge} $>$ \&}]{els, }
+\item[{map$<$ string, {\bf vertex} $>$ \&}]{vls}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_object3_d_a3c44e7f530def96b37ebe7bab98a1971}{}\label{class_object3_d_a3c44e7f530def96b37ebe7bab98a1971}
+Function to handle intersecting edges while generating Orthographic projection. 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\index{Object3D@{Object3D}!\+\_\+overlapping\+Edges@{\+\_\+overlapping\+Edges}}
+\index{\+\_\+overlapping\+Edges@{\+\_\+overlapping\+Edges}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{\+\_\+overlapping\+Edges(map$<$ string, edge $>$ \&els, map$<$ string, vertex $>$ \&vls)}{_overlappingEdges(map< string, edge > &els, map< string, vertex > &vls)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object3\+D\+::\+\_\+overlapping\+Edges (
+\begin{DoxyParamCaption}
+\item[{map$<$ string, {\bf edge} $>$ \&}]{els, }
+\item[{map$<$ string, {\bf vertex} $>$ \&}]{vls}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_object3_d_a7cddb00a564df80dee5014f77861e97a}{}\label{class_object3_d_a7cddb00a564df80dee5014f77861e97a}
+Methods for Orthographic view generation /$\ast$! Function to handle overlapping edges while generating Orthographic projection. 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\index{Object3D@{Object3D}!\+\_\+wireframe@{\+\_\+wireframe}}
+\index{\+\_\+wireframe@{\+\_\+wireframe}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{\+\_\+wireframe(\+Projection F\+V, Projection T\+V, Projection S\+V, bool rightside=true, bool righthand=true)}{_wireframe(Projection FV, Projection TV, Projection SV, bool rightside=true, bool righthand=true)}}]{\setlength{\rightskip}{0pt plus 5cm}pair$<$ map$<$ string, {\bf edge} $>$, map$<$ string, {\bf vertex} $>$ $>$ Object3\+D\+::\+\_\+wireframe (
+\begin{DoxyParamCaption}
+\item[{{\bf Projection}}]{FV, }
+\item[{{\bf Projection}}]{TV, }
+\item[{{\bf Projection}}]{SV, }
+\item[{bool}]{rightside = {\ttfamily true}, }
+\item[{bool}]{righthand = {\ttfamily true}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_object3_d_a135b356564834f1e89a26d90662ab8c9}{}\label{class_object3_d_a135b356564834f1e89a26d90662ab8c9}
+Function that constructs the wireframe of the object i.\+e the edges outlning the 3D object 
+\begin{DoxyParams}{Parameters}
+{\em FV} & denotes the input front orthographic projection \\
+\hline
+{\em TV} & denotes the input top orthographic projection \\
+\hline
+{\em SV} & denoted the input side orthographic projection \\
+\hline
+{\em rightside} & boolean value indicating wether right side view is taken, default value is true \\
+\hline
+{\em righthand} & boolean value for right/left hand coordinate system to be followed, default value is true \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pair containing list of possible edges and vertices 
+\end{DoxyReturn}
+\index{Object3D@{Object3D}!create@{create}}
+\index{create@{create}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{create(\+Projection F\+V, Projection T\+V, Projection S\+V, bool rightside=true, bool righthand=true)}{create(Projection FV, Projection TV, Projection SV, bool rightside=true, bool righthand=true)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object3\+D\+::create (
+\begin{DoxyParamCaption}
+\item[{{\bf Projection}}]{FV, }
+\item[{{\bf Projection}}]{TV, }
+\item[{{\bf Projection}}]{SV, }
+\item[{bool}]{rightside = {\ttfamily true}, }
+\item[{bool}]{righthand = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_object3_d_a05fabe70eda7b69715bd1bd2be7d057a}{}\label{class_object3_d_a05fabe70eda7b69715bd1bd2be7d057a}
+
+
+Initialize the 3D object using 3 Orthographic projections. 
+
+This function uses 3 Orthographic projection to reconstruct the 3D object from them and initialize itself 
+\begin{DoxyParams}{Parameters}
+{\em FV} & the front Orthographic projection \\
+\hline
+{\em TV} & the top Orthographic projection \\
+\hline
+{\em SV} & the side view Orthographic projection \\
+\hline
+{\em rightside} & boolean value telling which side view is taken, default true \\
+\hline
+{\em righthand} & boolean value for right/left hand coordinate system to be followed, default true \\
+\hline
+\end{DoxyParams}
+\index{Object3D@{Object3D}!display@{display}}
+\index{display@{display}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{display()}{display()}}]{\setlength{\rightskip}{0pt plus 5cm}void Object3\+D\+::display (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_object3_d_a7fa9ab479c8b74fbf2ed03ba26afe863}{}\label{class_object3_d_a7fa9ab479c8b74fbf2ed03ba26afe863}
+
+
+Method to render image of the object. 
+
+\index{Object3D@{Object3D}!display\+\_\+wireframe@{display\+\_\+wireframe}}
+\index{display\+\_\+wireframe@{display\+\_\+wireframe}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{display\+\_\+wireframe()}{display_wireframe()}}]{\setlength{\rightskip}{0pt plus 5cm}void Object3\+D\+::display\+\_\+wireframe (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_object3_d_a179a3718c32b40ecde0a05c73b481e5f}{}\label{class_object3_d_a179a3718c32b40ecde0a05c73b481e5f}
+\index{Object3D@{Object3D}!project\+To2D@{project\+To2D}}
+\index{project\+To2D@{project\+To2D}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{project\+To2\+D(string view)}{projectTo2D(string view)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Projection} Object3\+D\+::project\+To2D (
+\begin{DoxyParamCaption}
+\item[{string}]{view}
+\end{DoxyParamCaption}
+)}\hypertarget{class_object3_d_a1bbc165233d95da2e78a60e6aeaaa146}{}\label{class_object3_d_a1bbc165233d95da2e78a60e6aeaaa146}
+
+
+To compute Orthographic projections. 
+
+Function which computes and returns an Orthographic projection of the object 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Object of Class \hyperlink{class_projection}{Projection} 
+\end{DoxyReturn}
+\index{Object3D@{Object3D}!rotate@{rotate}}
+\index{rotate@{rotate}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{rotate(float alpha, float beta, float gamma)}{rotate(float alpha, float beta, float gamma)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object3\+D\+::rotate (
+\begin{DoxyParamCaption}
+\item[{float}]{alpha, }
+\item[{float}]{beta, }
+\item[{float}]{gamma}
+\end{DoxyParamCaption}
+)}\hypertarget{class_object3_d_a41145f9464fe060f1d3b1b3c5cd82a2d}{}\label{class_object3_d_a41145f9464fe060f1d3b1b3c5cd82a2d}
+
+
+Rotation of the 3D object with respect to the given coordinate axes. All angles are in degrees. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & Angular displacement about the x axis \\
+\hline
+{\em beta} & Angular displacement about the y axis \\
+\hline
+{\em gamma} & Angular displacement about the z axis \\
+\hline
+\end{DoxyParams}
+\index{Object3D@{Object3D}!serialize@{serialize}}
+\index{serialize@{serialize}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{serialize(\+Archive \&ar)}{serialize(Archive &ar)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Archive $>$ void Object3\+D\+::serialize (
+\begin{DoxyParamCaption}
+\item[{Archive \&}]{ar}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{class_object3_d_ad8d27fdb690f67771e6863a42eca7ae4}{}\label{class_object3_d_ad8d27fdb690f67771e6863a42eca7ae4}
+\index{Object3D@{Object3D}!shift@{shift}}
+\index{shift@{shift}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{shift(float x0, float y0, float z0)}{shift(float x0, float y0, float z0)}}]{\setlength{\rightskip}{0pt plus 5cm}void Object3\+D\+::shift (
+\begin{DoxyParamCaption}
+\item[{float}]{x0, }
+\item[{float}]{y0, }
+\item[{float}]{z0}
+\end{DoxyParamCaption}
+)}\hypertarget{class_object3_d_a9021a3005a02adbf6160694ec63fe273}{}\label{class_object3_d_a9021a3005a02adbf6160694ec63fe273}
+
+
+shifting of origin of the 3D coordinate axes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x0} & Offset in x direction \\
+\hline
+{\em y0} & Offset in y direction \\
+\hline
+{\em z0} & Offset in z direction \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{Object3D@{Object3D}!elist@{elist}}
+\index{elist@{elist}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{elist}{elist}}]{\setlength{\rightskip}{0pt plus 5cm}map$<$string, {\bf edge}$>$ Object3\+D\+::elist}\hypertarget{class_object3_d_a3746f6833c04ee03c7d309f1f27e2267}{}\label{class_object3_d_a3746f6833c04ee03c7d309f1f27e2267}
+\index{Object3D@{Object3D}!flist@{flist}}
+\index{flist@{flist}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{flist}{flist}}]{\setlength{\rightskip}{0pt plus 5cm}map$<$string, {\bf face}$>$ Object3\+D\+::flist}\hypertarget{class_object3_d_afadd8fcbcdddade128855058aacb72b9}{}\label{class_object3_d_afadd8fcbcdddade128855058aacb72b9}
+Function that generates the projection after processing all the edges for overlap and intersection. 
+\begin{DoxyParams}{Parameters}
+{\em view} & a char$\ast$ denoting the view of the projecion. It can take values -\/ \char`\"{}front\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}rside\char`\"{}, \char`\"{}lside\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The corresponding orthographic view as \hyperlink{class_projection}{Projection} object 
+\end{DoxyReturn}
+\index{Object3D@{Object3D}!vlist@{vlist}}
+\index{vlist@{vlist}!Object3D@{Object3D}}
+\subsubsection[{\texorpdfstring{vlist}{vlist}}]{\setlength{\rightskip}{0pt plus 5cm}map$<$string, {\bf vertex}$>$ Object3\+D\+::vlist}\hypertarget{class_object3_d_a3da915f1f23f78d6ae2437473e351c4c}{}\label{class_object3_d_a3da915f1f23f78d6ae2437473e351c4c}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{drawing_8h}{drawing.\+h}\item 
+src/\hyperlink{drawing_8cpp}{drawing.\+cpp}\end{DoxyCompactItemize}

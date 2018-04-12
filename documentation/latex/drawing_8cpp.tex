@@ -1,0 +1,172 @@
+\hypertarget{drawing_8cpp}{}\section{src/drawing.cpp File Reference}
+\label{drawing_8cpp}\index{src/drawing.\+cpp@{src/drawing.\+cpp}}
+
+
+Implementation of the algorithms.  
+
+
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$list$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$G\+L/glew.\+h$>$}\\*
+{\ttfamily \#include $<$G\+L/freeglut.\+h$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include $<$limits$>$}\\*
+{\ttfamily \#include \char`\"{}drawing.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/unordered\+\_\+map.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/map.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/utility.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/string.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/list.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/vector.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/memory.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/archives/binary.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/access.\+hpp\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{drawing_8cpp_afeb6b4d8a9b6fb8958bcb97cf6d4eaec}{Abs} (float f)
+\item 
+void \hyperlink{drawing_8cpp_a12791d9e49a2fd3306290a226864aba4}{init\+GL} ()
+\item 
+void \hyperlink{drawing_8cpp_a13d38c32988d6ee5952c08701ef01fc4}{init\+G\+L3D} ()
+\item 
+void \hyperlink{drawing_8cpp_a0447aef09d3c4464e6f8d81340f3a4b0}{reshape} (G\+Lsizei width, G\+Lsizei height)
+\item 
+void \hyperlink{drawing_8cpp_a87e09a53b3ab90aa13d0ada7a078fc90}{reshape3D} (G\+Lsizei width, G\+Lsizei height)
+\item 
+vector$<$ float $>$ \hyperlink{drawing_8cpp_afadc4fb2de3f56508733334159d822d4}{cross\+\_\+prod} (float a\mbox{[}3\mbox{]}, float b\mbox{[}3\mbox{]})
+\item 
+void \hyperlink{drawing_8cpp_ac597a9b93cc72bfbbfd7ca0af7fb0cb3}{swap} (float \&a, float \&b)
+\item 
+float \hyperlink{drawing_8cpp_a0cf98bf3a9378da20f18ba06e7094890}{\+\_\+point\+\_\+on\+\_\+segment} (\hyperlink{structvertex}{vertex} v1, \hyperlink{structvertex}{vertex} v2, \hyperlink{structvertex}{vertex} v)
+\item 
+bool \hyperlink{drawing_8cpp_a14921b0e78a1d8554bcaf3696ba64f99}{\+\_\+point\+\_\+behind\+\_\+face} (\hyperlink{structvertex}{vertex} v, \hyperlink{structface}{face} fc)
+\item 
+void \hyperlink{drawing_8cpp_a2328b03fc36b075d6baf3a1f12f6c06d}{rotate\+\_\+point} (\hyperlink{structvertex}{vertex} \&v, float R\mbox{[}3\mbox{]}\mbox{[}3\mbox{]})
+\item 
+void \hyperlink{drawing_8cpp_aa99aea444d17d7a3c49de239355a1542}{shift\+\_\+point} (\hyperlink{structvertex}{vertex} \&v, \hyperlink{structvertex}{vertex} v0)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_object3_d}{Object3D} \hyperlink{drawing_8cpp_a51d9da49a40d6959907d2968ad6fa593}{default\+\_\+ob}
+\item 
+\hyperlink{class_projection}{Projection} \hyperlink{drawing_8cpp_ac30eda94a6d744f8438557c7141475d8}{default\+\_\+fv}
+\item 
+\hyperlink{class_projection}{Projection} \hyperlink{drawing_8cpp_a6a1fb92eb0b382afc0f7b3faf8d4f93b}{default\+\_\+tv}
+\item 
+\hyperlink{class_projection}{Projection} \hyperlink{drawing_8cpp_a96d5b0c28f9791be1849adba40314697}{default\+\_\+sv}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of the algorithms. 
+
+This file contains the implementation of all the required algorithms for the C\+AD application. 
+
+\subsection{Function Documentation}
+\index{drawing.\+cpp@{drawing.\+cpp}!\+\_\+point\+\_\+behind\+\_\+face@{\+\_\+point\+\_\+behind\+\_\+face}}
+\index{\+\_\+point\+\_\+behind\+\_\+face@{\+\_\+point\+\_\+behind\+\_\+face}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{\+\_\+point\+\_\+behind\+\_\+face(vertex v, face fc)}{_point_behind_face(vertex v, face fc)}}]{\setlength{\rightskip}{0pt plus 5cm}bool \+\_\+point\+\_\+behind\+\_\+face (
+\begin{DoxyParamCaption}
+\item[{{\bf vertex}}]{v, }
+\item[{{\bf face}}]{fc}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8cpp_a14921b0e78a1d8554bcaf3696ba64f99}{}\label{drawing_8cpp_a14921b0e78a1d8554bcaf3696ba64f99}
+\index{drawing.\+cpp@{drawing.\+cpp}!\+\_\+point\+\_\+on\+\_\+segment@{\+\_\+point\+\_\+on\+\_\+segment}}
+\index{\+\_\+point\+\_\+on\+\_\+segment@{\+\_\+point\+\_\+on\+\_\+segment}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{\+\_\+point\+\_\+on\+\_\+segment(vertex v1, vertex v2, vertex v)}{_point_on_segment(vertex v1, vertex v2, vertex v)}}]{\setlength{\rightskip}{0pt plus 5cm}float \+\_\+point\+\_\+on\+\_\+segment (
+\begin{DoxyParamCaption}
+\item[{{\bf vertex}}]{v1, }
+\item[{{\bf vertex}}]{v2, }
+\item[{{\bf vertex}}]{v}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8cpp_a0cf98bf3a9378da20f18ba06e7094890}{}\label{drawing_8cpp_a0cf98bf3a9378da20f18ba06e7094890}
+\index{drawing.\+cpp@{drawing.\+cpp}!Abs@{Abs}}
+\index{Abs@{Abs}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{Abs(float f)}{Abs(float f)}}]{\setlength{\rightskip}{0pt plus 5cm}float Abs (
+\begin{DoxyParamCaption}
+\item[{float}]{f}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{drawing_8cpp_afeb6b4d8a9b6fb8958bcb97cf6d4eaec}{}\label{drawing_8cpp_afeb6b4d8a9b6fb8958bcb97cf6d4eaec}
+\index{drawing.\+cpp@{drawing.\+cpp}!cross\+\_\+prod@{cross\+\_\+prod}}
+\index{cross\+\_\+prod@{cross\+\_\+prod}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{cross\+\_\+prod(float a[3], float b[3])}{cross_prod(float a[3], float b[3])}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$float$>$ cross\+\_\+prod (
+\begin{DoxyParamCaption}
+\item[{float}]{a\mbox{[}3\mbox{]}, }
+\item[{float}]{b\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8cpp_afadc4fb2de3f56508733334159d822d4}{}\label{drawing_8cpp_afadc4fb2de3f56508733334159d822d4}
+\index{drawing.\+cpp@{drawing.\+cpp}!init\+GL@{init\+GL}}
+\index{init\+GL@{init\+GL}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{init\+G\+L()}{initGL()}}]{\setlength{\rightskip}{0pt plus 5cm}void init\+GL (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8cpp_a12791d9e49a2fd3306290a226864aba4}{}\label{drawing_8cpp_a12791d9e49a2fd3306290a226864aba4}
+\index{drawing.\+cpp@{drawing.\+cpp}!init\+G\+L3D@{init\+G\+L3D}}
+\index{init\+G\+L3D@{init\+G\+L3D}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{init\+G\+L3\+D()}{initGL3D()}}]{\setlength{\rightskip}{0pt plus 5cm}void init\+G\+L3D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8cpp_a13d38c32988d6ee5952c08701ef01fc4}{}\label{drawing_8cpp_a13d38c32988d6ee5952c08701ef01fc4}
+\index{drawing.\+cpp@{drawing.\+cpp}!reshape@{reshape}}
+\index{reshape@{reshape}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{reshape(\+G\+Lsizei width, G\+Lsizei height)}{reshape(GLsizei width, GLsizei height)}}]{\setlength{\rightskip}{0pt plus 5cm}void reshape (
+\begin{DoxyParamCaption}
+\item[{G\+Lsizei}]{width, }
+\item[{G\+Lsizei}]{height}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8cpp_a0447aef09d3c4464e6f8d81340f3a4b0}{}\label{drawing_8cpp_a0447aef09d3c4464e6f8d81340f3a4b0}
+\index{drawing.\+cpp@{drawing.\+cpp}!reshape3D@{reshape3D}}
+\index{reshape3D@{reshape3D}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{reshape3\+D(\+G\+Lsizei width, G\+Lsizei height)}{reshape3D(GLsizei width, GLsizei height)}}]{\setlength{\rightskip}{0pt plus 5cm}void reshape3D (
+\begin{DoxyParamCaption}
+\item[{G\+Lsizei}]{width, }
+\item[{G\+Lsizei}]{height}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8cpp_a87e09a53b3ab90aa13d0ada7a078fc90}{}\label{drawing_8cpp_a87e09a53b3ab90aa13d0ada7a078fc90}
+\index{drawing.\+cpp@{drawing.\+cpp}!rotate\+\_\+point@{rotate\+\_\+point}}
+\index{rotate\+\_\+point@{rotate\+\_\+point}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{rotate\+\_\+point(vertex \&v, float R[3][3])}{rotate_point(vertex &v, float R[3][3])}}]{\setlength{\rightskip}{0pt plus 5cm}void rotate\+\_\+point (
+\begin{DoxyParamCaption}
+\item[{{\bf vertex} \&}]{v, }
+\item[{float}]{R\mbox{[}3\mbox{]}\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8cpp_a2328b03fc36b075d6baf3a1f12f6c06d}{}\label{drawing_8cpp_a2328b03fc36b075d6baf3a1f12f6c06d}
+\index{drawing.\+cpp@{drawing.\+cpp}!shift\+\_\+point@{shift\+\_\+point}}
+\index{shift\+\_\+point@{shift\+\_\+point}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{shift\+\_\+point(vertex \&v, vertex v0)}{shift_point(vertex &v, vertex v0)}}]{\setlength{\rightskip}{0pt plus 5cm}void shift\+\_\+point (
+\begin{DoxyParamCaption}
+\item[{{\bf vertex} \&}]{v, }
+\item[{{\bf vertex}}]{v0}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{drawing_8cpp_aa99aea444d17d7a3c49de239355a1542}{}\label{drawing_8cpp_aa99aea444d17d7a3c49de239355a1542}
+\index{drawing.\+cpp@{drawing.\+cpp}!swap@{swap}}
+\index{swap@{swap}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{swap(float \&a, float \&b)}{swap(float &a, float &b)}}]{\setlength{\rightskip}{0pt plus 5cm}void swap (
+\begin{DoxyParamCaption}
+\item[{float \&}]{a, }
+\item[{float \&}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{drawing_8cpp_ac597a9b93cc72bfbbfd7ca0af7fb0cb3}{}\label{drawing_8cpp_ac597a9b93cc72bfbbfd7ca0af7fb0cb3}
+
+
+\subsection{Variable Documentation}
+\index{drawing.\+cpp@{drawing.\+cpp}!default\+\_\+fv@{default\+\_\+fv}}
+\index{default\+\_\+fv@{default\+\_\+fv}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{default\+\_\+fv}{default_fv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Projection} default\+\_\+fv}\hypertarget{drawing_8cpp_ac30eda94a6d744f8438557c7141475d8}{}\label{drawing_8cpp_ac30eda94a6d744f8438557c7141475d8}
+\index{drawing.\+cpp@{drawing.\+cpp}!default\+\_\+ob@{default\+\_\+ob}}
+\index{default\+\_\+ob@{default\+\_\+ob}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{default\+\_\+ob}{default_ob}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object3D} default\+\_\+ob}\hypertarget{drawing_8cpp_a51d9da49a40d6959907d2968ad6fa593}{}\label{drawing_8cpp_a51d9da49a40d6959907d2968ad6fa593}
+\index{drawing.\+cpp@{drawing.\+cpp}!default\+\_\+sv@{default\+\_\+sv}}
+\index{default\+\_\+sv@{default\+\_\+sv}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{default\+\_\+sv}{default_sv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Projection} default\+\_\+sv}\hypertarget{drawing_8cpp_a96d5b0c28f9791be1849adba40314697}{}\label{drawing_8cpp_a96d5b0c28f9791be1849adba40314697}
+\index{drawing.\+cpp@{drawing.\+cpp}!default\+\_\+tv@{default\+\_\+tv}}
+\index{default\+\_\+tv@{default\+\_\+tv}!drawing.\+cpp@{drawing.\+cpp}}
+\subsubsection[{\texorpdfstring{default\+\_\+tv}{default_tv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Projection} default\+\_\+tv}\hypertarget{drawing_8cpp_a6a1fb92eb0b382afc0f7b3faf8d4f93b}{}\label{drawing_8cpp_a6a1fb92eb0b382afc0f7b3faf8d4f93b}

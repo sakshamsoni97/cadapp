@@ -1,0 +1,90 @@
+\hypertarget{structedge}{}\section{edge Struct Reference}
+\label{structedge}\index{edge@{edge}}
+
+
+structure for an edge  
+
+
+
+
+{\ttfamily \#include $<$drawing.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structedge_ac8047a0d7c1e08a4063be409c6fd0a88}{edge} ()
+\item 
+\hyperlink{structedge_a1139f4b252b4954aed96da719f453295}{edge} (const \hyperlink{structedge}{edge} \&)=default
+\item 
+\hyperlink{structedge_ac18f49be19de3cc4913162108f48b8c4}{edge} (\hyperlink{structvertex}{vertex} a, \hyperlink{structvertex}{vertex} b, bool v=true)
+\item 
+{\footnotesize template$<$class Archive $>$ }\\void \hyperlink{structedge_a40a1767d3faf4d9702983449d4b8073f}{serialize} (Archive \&ar)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structvertex}{vertex} \hyperlink{structedge_a0209c03c9479528b2e060d4d0e58b461}{v1}
+\item 
+\hyperlink{structvertex}{vertex} \hyperlink{structedge_a5b849de3794f7e5126fc8f03199d568c}{v2}
+\item 
+bool \hyperlink{structedge_a54ab8c55c0ae9afc90ca387753a9dbee}{visi}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+structure for an edge 
+
+Edge is represented by pair of vertices. It also stores the information of visibility of an edge when required 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{edge@{edge}!edge@{edge}}
+\index{edge@{edge}!edge@{edge}}
+\subsubsection[{\texorpdfstring{edge()}{edge()}}]{\setlength{\rightskip}{0pt plus 5cm}edge\+::edge (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structedge_ac8047a0d7c1e08a4063be409c6fd0a88}{}\label{structedge_ac8047a0d7c1e08a4063be409c6fd0a88}
+\index{edge@{edge}!edge@{edge}}
+\index{edge@{edge}!edge@{edge}}
+\subsubsection[{\texorpdfstring{edge(const edge \&)=default}{edge(const edge &)=default}}]{\setlength{\rightskip}{0pt plus 5cm}edge\+::edge (
+\begin{DoxyParamCaption}
+\item[{const {\bf edge} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{structedge_a1139f4b252b4954aed96da719f453295}{}\label{structedge_a1139f4b252b4954aed96da719f453295}
+\index{edge@{edge}!edge@{edge}}
+\index{edge@{edge}!edge@{edge}}
+\subsubsection[{\texorpdfstring{edge(vertex a, vertex b, bool v=true)}{edge(vertex a, vertex b, bool v=true)}}]{\setlength{\rightskip}{0pt plus 5cm}edge\+::edge (
+\begin{DoxyParamCaption}
+\item[{{\bf vertex}}]{a, }
+\item[{{\bf vertex}}]{b, }
+\item[{bool}]{v = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}\hypertarget{structedge_ac18f49be19de3cc4913162108f48b8c4}{}\label{structedge_ac18f49be19de3cc4913162108f48b8c4}
+
+
+\subsection{Member Function Documentation}
+\index{edge@{edge}!serialize@{serialize}}
+\index{serialize@{serialize}!edge@{edge}}
+\subsubsection[{\texorpdfstring{serialize(\+Archive \&ar)}{serialize(Archive &ar)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Archive $>$ void edge\+::serialize (
+\begin{DoxyParamCaption}
+\item[{Archive \&}]{ar}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structedge_a40a1767d3faf4d9702983449d4b8073f}{}\label{structedge_a40a1767d3faf4d9702983449d4b8073f}
+
+
+\subsection{Member Data Documentation}
+\index{edge@{edge}!v1@{v1}}
+\index{v1@{v1}!edge@{edge}}
+\subsubsection[{\texorpdfstring{v1}{v1}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vertex} edge\+::v1}\hypertarget{structedge_a0209c03c9479528b2e060d4d0e58b461}{}\label{structedge_a0209c03c9479528b2e060d4d0e58b461}
+\index{edge@{edge}!v2@{v2}}
+\index{v2@{v2}!edge@{edge}}
+\subsubsection[{\texorpdfstring{v2}{v2}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vertex} edge\+::v2}\hypertarget{structedge_a5b849de3794f7e5126fc8f03199d568c}{}\label{structedge_a5b849de3794f7e5126fc8f03199d568c}
+\index{edge@{edge}!visi@{visi}}
+\index{visi@{visi}!edge@{edge}}
+\subsubsection[{\texorpdfstring{visi}{visi}}]{\setlength{\rightskip}{0pt plus 5cm}bool edge\+::visi}\hypertarget{structedge_a54ab8c55c0ae9afc90ca387753a9dbee}{}\label{structedge_a54ab8c55c0ae9afc90ca387753a9dbee}
+bool variable denoting the visibility 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{drawing_8h}{drawing.\+h}\item 
+src/\hyperlink{drawing_8cpp}{drawing.\+cpp}\end{DoxyCompactItemize}

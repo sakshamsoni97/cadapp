@@ -6,6 +6,25 @@ This short application was developed in C/C++ as an assignment for the course CO
 * GLUT: OpenGL Utility Toolkit - To render the drawings
 * GTK+ - To create the GUI
 * stl: Standard Template Library - For *map* and *tuple* data structures
+* cereal: A C++11 library to serialize/deserialize objects and store them in binary files
+
+## Compilation Instructions
+Change the directory to *src* using the command shown below
+
+```
+cd src
+```
+Make the program using the *make* command
+
+```
+make
+```
+Run using the *CADAPP* binary generated
+
+```
+./CADAPP
+```
+## Prerequisites
 
 ## Authors
 

@@ -1,0 +1,127 @@
+\hypertarget{cinterface_8cpp}{}\section{src/cinterface.cpp File Reference}
+\label{cinterface_8cpp}\index{src/cinterface.\+cpp@{src/cinterface.\+cpp}}
+
+
+Implemenation of all wrapper functions.  
+
+
+{\ttfamily \#include \char`\"{}drawing.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}cinterface.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$regex$>$}\\*
+{\ttfamily \#include $<$math.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/unordered\+\_\+map.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/map.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/utility.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/string.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/list.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/vector.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/memory.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/archives/binary.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/access.\+hpp\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{cinterface_8cpp_aedaf9a3b18c9348843bdf250c26a9030}{\+\_\+2d3d\+Draw\+Wrapper} (char $\ast$\hyperlink{_g_u_i_8c_ab94a53e2dc3b479d8bbf079cb431c930}{filepath}, int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em 2D to 3D conversion wrapper function \end{DoxyCompactList}\item 
+int \hyperlink{cinterface_8cpp_ad09ed8ddb9bf34218119c13408798959}{\+\_\+3d2d\+Draw\+Wrapper} (char $\ast$\hyperlink{_g_u_i_8c_ab94a53e2dc3b479d8bbf079cb431c930}{filepath}, int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em 3D to 2D conversion wrapper function \end{DoxyCompactList}\item 
+void \hyperlink{cinterface_8cpp_ac20f3bfa7514b8590bea5b4e26939c33}{\+\_\+rotate\+Wrapper} (float alpha, float beta, float gamma, int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Rotation wrapper function. \end{DoxyCompactList}\item 
+int \hyperlink{cinterface_8cpp_ae2b5f911872d4c7cc106a4c94cbea41f}{\+\_\+\+Save\+Wrapper} (char $\ast$\hyperlink{_g_u_i_8c_a84dc2beb6d58b777f2ed61ad4c9dc3a0}{savepath})
+\begin{DoxyCompactList}\small\item\em Rotation wrapper function. \end{DoxyCompactList}\item 
+void \hyperlink{cinterface_8cpp_a071aa88e49bcffbb48009598ff4c1d2b}{display\+\_\+main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Objection/\+Projection display function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{cinterface_8cpp_add8a0198ec3af5bfa6112fc7ab6aa267}{window\+\_\+1}
+\item 
+int \hyperlink{cinterface_8cpp_ae4183874c4ff829de4356402b4677503}{window\+\_\+2}
+\item 
+bool \hyperlink{cinterface_8cpp_a9d5f2c02550187bd49971c3e3217d660}{refresh} = false
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implemenation of all wrapper functions. 
+
+This file contains the implementation of all the required wrapper funcitions required to interface between UI in C and the Backend in C++ 
+
+\subsection{Function Documentation}
+\index{cinterface.\+cpp@{cinterface.\+cpp}!\+\_\+2d3d\+Draw\+Wrapper@{\+\_\+2d3d\+Draw\+Wrapper}}
+\index{\+\_\+2d3d\+Draw\+Wrapper@{\+\_\+2d3d\+Draw\+Wrapper}!cinterface.\+cpp@{cinterface.\+cpp}}
+\subsubsection[{\texorpdfstring{\+\_\+2d3d\+Draw\+Wrapper(char $\ast$filepath, int argc, char $\ast$$\ast$argv)}{_2d3dDrawWrapper(char *filepath, int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int \+\_\+2d3d\+Draw\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filepath, }
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8cpp_aedaf9a3b18c9348843bdf250c26a9030}{}\label{cinterface_8cpp_aedaf9a3b18c9348843bdf250c26a9030}
+
+
+2D to 3D conversion wrapper function 
+
+Wrapper Function invoked when 3D object has to be reconstructed from its projections and displayed \index{cinterface.\+cpp@{cinterface.\+cpp}!\+\_\+3d2d\+Draw\+Wrapper@{\+\_\+3d2d\+Draw\+Wrapper}}
+\index{\+\_\+3d2d\+Draw\+Wrapper@{\+\_\+3d2d\+Draw\+Wrapper}!cinterface.\+cpp@{cinterface.\+cpp}}
+\subsubsection[{\texorpdfstring{\+\_\+3d2d\+Draw\+Wrapper(char $\ast$filepath, int argc, char $\ast$$\ast$argv)}{_3d2dDrawWrapper(char *filepath, int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}int \+\_\+3d2d\+Draw\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filepath, }
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8cpp_ad09ed8ddb9bf34218119c13408798959}{}\label{cinterface_8cpp_ad09ed8ddb9bf34218119c13408798959}
+
+
+3D to 2D conversion wrapper function 
+
+Wrapper Function invoked when 2D projections have to be made for an object and displayed \index{cinterface.\+cpp@{cinterface.\+cpp}!\+\_\+rotate\+Wrapper@{\+\_\+rotate\+Wrapper}}
+\index{\+\_\+rotate\+Wrapper@{\+\_\+rotate\+Wrapper}!cinterface.\+cpp@{cinterface.\+cpp}}
+\subsubsection[{\texorpdfstring{\+\_\+rotate\+Wrapper(float alpha, float beta, float gamma, int argc, char $\ast$$\ast$argv)}{_rotateWrapper(float alpha, float beta, float gamma, int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}void \+\_\+rotate\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{float}]{alpha, }
+\item[{float}]{beta, }
+\item[{float}]{gamma, }
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8cpp_ac20f3bfa7514b8590bea5b4e26939c33}{}\label{cinterface_8cpp_ac20f3bfa7514b8590bea5b4e26939c33}
+
+
+Rotation wrapper function. 
+
+Wrapper Function invoked when the object is rotated \index{cinterface.\+cpp@{cinterface.\+cpp}!\+\_\+\+Save\+Wrapper@{\+\_\+\+Save\+Wrapper}}
+\index{\+\_\+\+Save\+Wrapper@{\+\_\+\+Save\+Wrapper}!cinterface.\+cpp@{cinterface.\+cpp}}
+\subsubsection[{\texorpdfstring{\+\_\+\+Save\+Wrapper(char $\ast$savepath)}{_SaveWrapper(char *savepath)}}]{\setlength{\rightskip}{0pt plus 5cm}int \+\_\+\+Save\+Wrapper (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{savepath}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8cpp_ae2b5f911872d4c7cc106a4c94cbea41f}{}\label{cinterface_8cpp_ae2b5f911872d4c7cc106a4c94cbea41f}
+
+
+Rotation wrapper function. 
+
+Wrapper Function invoked when the object/projection have to be stored \index{cinterface.\+cpp@{cinterface.\+cpp}!display\+\_\+main@{display\+\_\+main}}
+\index{display\+\_\+main@{display\+\_\+main}!cinterface.\+cpp@{cinterface.\+cpp}}
+\subsubsection[{\texorpdfstring{display\+\_\+main(int argc, char $\ast$$\ast$argv)}{display_main(int argc, char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}void display\+\_\+main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{cinterface_8cpp_a071aa88e49bcffbb48009598ff4c1d2b}{}\label{cinterface_8cpp_a071aa88e49bcffbb48009598ff4c1d2b}
+
+
+Objection/\+Projection display function. 
+
+Function invoked when object and its projection shave to be displayed 
+
+\subsection{Variable Documentation}
+\index{cinterface.\+cpp@{cinterface.\+cpp}!refresh@{refresh}}
+\index{refresh@{refresh}!cinterface.\+cpp@{cinterface.\+cpp}}
+\subsubsection[{\texorpdfstring{refresh}{refresh}}]{\setlength{\rightskip}{0pt plus 5cm}bool refresh = false}\hypertarget{cinterface_8cpp_a9d5f2c02550187bd49971c3e3217d660}{}\label{cinterface_8cpp_a9d5f2c02550187bd49971c3e3217d660}
+\index{cinterface.\+cpp@{cinterface.\+cpp}!window\+\_\+1@{window\+\_\+1}}
+\index{window\+\_\+1@{window\+\_\+1}!cinterface.\+cpp@{cinterface.\+cpp}}
+\subsubsection[{\texorpdfstring{window\+\_\+1}{window_1}}]{\setlength{\rightskip}{0pt plus 5cm}int window\+\_\+1}\hypertarget{cinterface_8cpp_add8a0198ec3af5bfa6112fc7ab6aa267}{}\label{cinterface_8cpp_add8a0198ec3af5bfa6112fc7ab6aa267}
+\index{cinterface.\+cpp@{cinterface.\+cpp}!window\+\_\+2@{window\+\_\+2}}
+\index{window\+\_\+2@{window\+\_\+2}!cinterface.\+cpp@{cinterface.\+cpp}}
+\subsubsection[{\texorpdfstring{window\+\_\+2}{window_2}}]{\setlength{\rightskip}{0pt plus 5cm}int window\+\_\+2}\hypertarget{cinterface_8cpp_ae4183874c4ff829de4356402b4677503}{}\label{cinterface_8cpp_ae4183874c4ff829de4356402b4677503}

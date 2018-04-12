@@ -1,0 +1,132 @@
+\hypertarget{drawing_8h}{}\section{src/drawing.h File Reference}
+\label{drawing_8h}\index{src/drawing.\+h@{src/drawing.\+h}}
+
+
+Contains \hyperlink{class_projection}{Projection} and \hyperlink{class_object3_d}{Object3D} class definitions.  
+
+
+{\ttfamily \#include $<$map$>$}\\*
+{\ttfamily \#include $<$utility$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$list$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$G\+L/freeglut.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/unordered\+\_\+map.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/map.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/utility.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/string.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/list.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/vector.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/types/memory.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/archives/binary.\+hpp\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../lib/cereal/access.\+hpp\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structvertex}{vertex}
+\begin{DoxyCompactList}\small\item\em A 3D vertex. \end{DoxyCompactList}\item 
+struct \hyperlink{structvert2_d}{vert2D}
+\begin{DoxyCompactList}\small\item\em A 2D vertex. \end{DoxyCompactList}\item 
+struct \hyperlink{structedge}{edge}
+\begin{DoxyCompactList}\small\item\em structure for an edge \end{DoxyCompactList}\item 
+struct \hyperlink{structedge2_d}{edge2D}
+\begin{DoxyCompactList}\small\item\em 2D edge \end{DoxyCompactList}\item 
+struct \hyperlink{structface}{face}
+\begin{DoxyCompactList}\small\item\em structure for polygon face of a 3D object \end{DoxyCompactList}\item 
+class \hyperlink{class_projection}{Projection}
+\begin{DoxyCompactList}\small\item\em Class for representing projection. \end{DoxyCompactList}\item 
+class \hyperlink{class_object3_d}{Object3D}
+\begin{DoxyCompactList}\small\item\em Class for representing 3D objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{drawing_8h_a12791d9e49a2fd3306290a226864aba4}{init\+GL} ()
+\item 
+void \hyperlink{drawing_8h_a0447aef09d3c4464e6f8d81340f3a4b0}{reshape} (G\+Lsizei width, G\+Lsizei height)
+\item 
+void \hyperlink{drawing_8h_a13d38c32988d6ee5952c08701ef01fc4}{init\+G\+L3D} ()
+\item 
+void \hyperlink{drawing_8h_a87e09a53b3ab90aa13d0ada7a078fc90}{reshape3D} (G\+Lsizei width, G\+Lsizei height)
+\item 
+vector$<$ float $>$ \hyperlink{drawing_8h_aa9e84c48d28be44d689ff71987a71443}{cross\+\_\+prod} (float\mbox{[}3\mbox{]}, float\mbox{[}3\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_object3_d}{Object3D} \hyperlink{drawing_8h_a51d9da49a40d6959907d2968ad6fa593}{default\+\_\+ob}
+\item 
+\hyperlink{class_projection}{Projection} \hyperlink{drawing_8h_ac30eda94a6d744f8438557c7141475d8}{default\+\_\+fv}
+\item 
+\hyperlink{class_projection}{Projection} \hyperlink{drawing_8h_a6a1fb92eb0b382afc0f7b3faf8d4f93b}{default\+\_\+tv}
+\item 
+\hyperlink{class_projection}{Projection} \hyperlink{drawing_8h_a96d5b0c28f9791be1849adba40314697}{default\+\_\+sv}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains \hyperlink{class_projection}{Projection} and \hyperlink{class_object3_d}{Object3D} class definitions. 
+
+This is the interface to the library developed for the C\+AD application which implements all the required algorithms. Libraries used\+:
+\begin{DoxyItemize}
+\item stl\+::list
+\item G\+L\+EW\+: Open\+GL Extension Wrangler Library
+\item G\+L\+UT\+: Open\+GL Utility Toolkit
+\item Cereal\+: Library to serialize objects and store them in binary format
+\end{DoxyItemize}
+
+Open\+GL libraries are used to render orthographic views and the 3D object
+
+\subsection{Function Documentation}
+\index{drawing.\+h@{drawing.\+h}!cross\+\_\+prod@{cross\+\_\+prod}}
+\index{cross\+\_\+prod@{cross\+\_\+prod}!drawing.\+h@{drawing.\+h}}
+\subsubsection[{\texorpdfstring{cross\+\_\+prod(float[3], float[3])}{cross_prod(float[3], float[3])}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$float$>$ cross\+\_\+prod (
+\begin{DoxyParamCaption}
+\item[{float}]{\mbox{[}3\mbox{]}, }
+\item[{float}]{\mbox{[}3\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8h_aa9e84c48d28be44d689ff71987a71443}{}\label{drawing_8h_aa9e84c48d28be44d689ff71987a71443}
+\index{drawing.\+h@{drawing.\+h}!init\+GL@{init\+GL}}
+\index{init\+GL@{init\+GL}!drawing.\+h@{drawing.\+h}}
+\subsubsection[{\texorpdfstring{init\+G\+L()}{initGL()}}]{\setlength{\rightskip}{0pt plus 5cm}void init\+GL (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8h_a12791d9e49a2fd3306290a226864aba4}{}\label{drawing_8h_a12791d9e49a2fd3306290a226864aba4}
+\index{drawing.\+h@{drawing.\+h}!init\+G\+L3D@{init\+G\+L3D}}
+\index{init\+G\+L3D@{init\+G\+L3D}!drawing.\+h@{drawing.\+h}}
+\subsubsection[{\texorpdfstring{init\+G\+L3\+D()}{initGL3D()}}]{\setlength{\rightskip}{0pt plus 5cm}void init\+G\+L3D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8h_a13d38c32988d6ee5952c08701ef01fc4}{}\label{drawing_8h_a13d38c32988d6ee5952c08701ef01fc4}
+\index{drawing.\+h@{drawing.\+h}!reshape@{reshape}}
+\index{reshape@{reshape}!drawing.\+h@{drawing.\+h}}
+\subsubsection[{\texorpdfstring{reshape(\+G\+Lsizei width, G\+Lsizei height)}{reshape(GLsizei width, GLsizei height)}}]{\setlength{\rightskip}{0pt plus 5cm}void reshape (
+\begin{DoxyParamCaption}
+\item[{G\+Lsizei}]{width, }
+\item[{G\+Lsizei}]{height}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8h_a0447aef09d3c4464e6f8d81340f3a4b0}{}\label{drawing_8h_a0447aef09d3c4464e6f8d81340f3a4b0}
+\index{drawing.\+h@{drawing.\+h}!reshape3D@{reshape3D}}
+\index{reshape3D@{reshape3D}!drawing.\+h@{drawing.\+h}}
+\subsubsection[{\texorpdfstring{reshape3\+D(\+G\+Lsizei width, G\+Lsizei height)}{reshape3D(GLsizei width, GLsizei height)}}]{\setlength{\rightskip}{0pt plus 5cm}void reshape3D (
+\begin{DoxyParamCaption}
+\item[{G\+Lsizei}]{width, }
+\item[{G\+Lsizei}]{height}
+\end{DoxyParamCaption}
+)}\hypertarget{drawing_8h_a87e09a53b3ab90aa13d0ada7a078fc90}{}\label{drawing_8h_a87e09a53b3ab90aa13d0ada7a078fc90}
+
+
+\subsection{Variable Documentation}
+\index{drawing.\+h@{drawing.\+h}!default\+\_\+fv@{default\+\_\+fv}}
+\index{default\+\_\+fv@{default\+\_\+fv}!drawing.\+h@{drawing.\+h}}
+\subsubsection[{\texorpdfstring{default\+\_\+fv}{default_fv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Projection} default\+\_\+fv}\hypertarget{drawing_8h_ac30eda94a6d744f8438557c7141475d8}{}\label{drawing_8h_ac30eda94a6d744f8438557c7141475d8}
+\index{drawing.\+h@{drawing.\+h}!default\+\_\+ob@{default\+\_\+ob}}
+\index{default\+\_\+ob@{default\+\_\+ob}!drawing.\+h@{drawing.\+h}}
+\subsubsection[{\texorpdfstring{default\+\_\+ob}{default_ob}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object3D} default\+\_\+ob}\hypertarget{drawing_8h_a51d9da49a40d6959907d2968ad6fa593}{}\label{drawing_8h_a51d9da49a40d6959907d2968ad6fa593}
+\index{drawing.\+h@{drawing.\+h}!default\+\_\+sv@{default\+\_\+sv}}
+\index{default\+\_\+sv@{default\+\_\+sv}!drawing.\+h@{drawing.\+h}}
+\subsubsection[{\texorpdfstring{default\+\_\+sv}{default_sv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Projection} default\+\_\+sv}\hypertarget{drawing_8h_a96d5b0c28f9791be1849adba40314697}{}\label{drawing_8h_a96d5b0c28f9791be1849adba40314697}
+\index{drawing.\+h@{drawing.\+h}!default\+\_\+tv@{default\+\_\+tv}}
+\index{default\+\_\+tv@{default\+\_\+tv}!drawing.\+h@{drawing.\+h}}
+\subsubsection[{\texorpdfstring{default\+\_\+tv}{default_tv}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Projection} default\+\_\+tv}\hypertarget{drawing_8h_a6a1fb92eb0b382afc0f7b3faf8d4f93b}{}\label{drawing_8h_a6a1fb92eb0b382afc0f7b3faf8d4f93b}

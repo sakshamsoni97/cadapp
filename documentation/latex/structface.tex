@@ -1,0 +1,103 @@
+\hypertarget{structface}{}\section{face Struct Reference}
+\label{structface}\index{face@{face}}
+
+
+structure for polygon face of a 3D object  
+
+
+
+
+{\ttfamily \#include $<$drawing.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structface_aedd4a569b889e3100409db561c33b259}{face} ()
+\item 
+\hyperlink{structface_aa1dc835c3d2336032538ef2576edfcc4}{face} (const \hyperlink{structface}{face} \&)=default
+\item 
+void \hyperlink{structface_a9824194eb850dd3b7495b959075e2e01}{comp\+Param} ()
+\item 
+{\footnotesize template$<$class Archive $>$ }\\void \hyperlink{structface_a3ffb6e9cb1b3b04be1abd66ecace8c79}{serialize} (Archive \&ar)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{structface_a1091483a325e1f823c3723b9dad942eb}{A}
+\item 
+float \hyperlink{structface_a70317a6c8d81b4ee406025aadf7f9487}{B}
+\item 
+float \hyperlink{structface_af381ff59cc598f4e6d31a008dee13284}{C}
+\item 
+float \hyperlink{structface_afaa376f0d0dabf12a9832165bd5f00ab}{D}
+\item 
+map$<$ string, \hyperlink{structedge}{edge} $>$ \hyperlink{structface_ac8a0c9860a641b73d3bbcdf18e18df14}{edges}
+\item 
+map$<$ string, \hyperlink{structvertex}{vertex} $>$ \hyperlink{structface_a44e0350b6d4ce9dc74b611944e40fbbf}{verts}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+structure for polygon face of a 3D object 
+
+A polygon face is represented by a list of edges. The equation of plane of the face is represented by the A,B,C \& D parameters 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{face@{face}!face@{face}}
+\index{face@{face}!face@{face}}
+\subsubsection[{\texorpdfstring{face()}{face()}}]{\setlength{\rightskip}{0pt plus 5cm}face\+::face (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structface_aedd4a569b889e3100409db561c33b259}{}\label{structface_aedd4a569b889e3100409db561c33b259}
+function to compute the equation of the plane from the list of edges. \index{face@{face}!face@{face}}
+\index{face@{face}!face@{face}}
+\subsubsection[{\texorpdfstring{face(const face \&)=default}{face(const face &)=default}}]{\setlength{\rightskip}{0pt plus 5cm}face\+::face (
+\begin{DoxyParamCaption}
+\item[{const {\bf face} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{structface_aa1dc835c3d2336032538ef2576edfcc4}{}\label{structface_aa1dc835c3d2336032538ef2576edfcc4}
+
+
+\subsection{Member Function Documentation}
+\index{face@{face}!comp\+Param@{comp\+Param}}
+\index{comp\+Param@{comp\+Param}!face@{face}}
+\subsubsection[{\texorpdfstring{comp\+Param()}{compParam()}}]{\setlength{\rightskip}{0pt plus 5cm}void face\+::comp\+Param (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structface_a9824194eb850dd3b7495b959075e2e01}{}\label{structface_a9824194eb850dd3b7495b959075e2e01}
+\index{face@{face}!serialize@{serialize}}
+\index{serialize@{serialize}!face@{face}}
+\subsubsection[{\texorpdfstring{serialize(\+Archive \&ar)}{serialize(Archive &ar)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Archive $>$ void face\+::serialize (
+\begin{DoxyParamCaption}
+\item[{Archive \&}]{ar}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structface_a3ffb6e9cb1b3b04be1abd66ecace8c79}{}\label{structface_a3ffb6e9cb1b3b04be1abd66ecace8c79}
+
+
+\subsection{Member Data Documentation}
+\index{face@{face}!A@{A}}
+\index{A@{A}!face@{face}}
+\subsubsection[{\texorpdfstring{A}{A}}]{\setlength{\rightskip}{0pt plus 5cm}float face\+::A}\hypertarget{structface_a1091483a325e1f823c3723b9dad942eb}{}\label{structface_a1091483a325e1f823c3723b9dad942eb}
+\index{face@{face}!B@{B}}
+\index{B@{B}!face@{face}}
+\subsubsection[{\texorpdfstring{B}{B}}]{\setlength{\rightskip}{0pt plus 5cm}float face\+::B}\hypertarget{structface_a70317a6c8d81b4ee406025aadf7f9487}{}\label{structface_a70317a6c8d81b4ee406025aadf7f9487}
+\index{face@{face}!C@{C}}
+\index{C@{C}!face@{face}}
+\subsubsection[{\texorpdfstring{C}{C}}]{\setlength{\rightskip}{0pt plus 5cm}float face\+::C}\hypertarget{structface_af381ff59cc598f4e6d31a008dee13284}{}\label{structface_af381ff59cc598f4e6d31a008dee13284}
+\index{face@{face}!D@{D}}
+\index{D@{D}!face@{face}}
+\subsubsection[{\texorpdfstring{D}{D}}]{\setlength{\rightskip}{0pt plus 5cm}float face\+::D}\hypertarget{structface_afaa376f0d0dabf12a9832165bd5f00ab}{}\label{structface_afaa376f0d0dabf12a9832165bd5f00ab}
+\index{face@{face}!edges@{edges}}
+\index{edges@{edges}!face@{face}}
+\subsubsection[{\texorpdfstring{edges}{edges}}]{\setlength{\rightskip}{0pt plus 5cm}map$<$string, {\bf edge}$>$ face\+::edges}\hypertarget{structface_ac8a0c9860a641b73d3bbcdf18e18df14}{}\label{structface_ac8a0c9860a641b73d3bbcdf18e18df14}
+list of edges \index{face@{face}!verts@{verts}}
+\index{verts@{verts}!face@{face}}
+\subsubsection[{\texorpdfstring{verts}{verts}}]{\setlength{\rightskip}{0pt plus 5cm}map$<$string, {\bf vertex}$>$ face\+::verts}\hypertarget{structface_a44e0350b6d4ce9dc74b611944e40fbbf}{}\label{structface_a44e0350b6d4ce9dc74b611944e40fbbf}
+list of vertices 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{drawing_8h}{drawing.\+h}\item 
+src/\hyperlink{drawing_8cpp}{drawing.\+cpp}\end{DoxyCompactItemize}

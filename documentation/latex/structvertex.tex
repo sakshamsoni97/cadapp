@@ -1,0 +1,126 @@
+\hypertarget{structvertex}{}\section{vertex Struct Reference}
+\label{structvertex}\index{vertex@{vertex}}
+
+
+A 3D vertex.  
+
+
+
+
+{\ttfamily \#include $<$drawing.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structvertex_ae32be8790fc66fcc4898cf794f915da0}{vertex} ()
+\item 
+\hyperlink{structvertex_ab215a18712ffe9cab97647e6ad79aee4}{vertex} (float \+\_\+x, float \+\_\+y, float \+\_\+z)
+\item 
+\hyperlink{structvertex_a3d165d369c193e574e3dec05e269421f}{vertex} (const \hyperlink{structvertex}{vertex} \&)=default
+\item 
+bool \hyperlink{structvertex_adb0fd95b21c7807fc905a105e1f3b869}{operator==} (const \hyperlink{structvertex}{vertex} \&v)
+\item 
+\hyperlink{structvertex}{vertex} \hyperlink{structvertex_a510b7dbb1cbccb470356c03a18162de2}{operator+} (const \hyperlink{structvertex}{vertex} \&v)
+\item 
+\hyperlink{structvertex}{vertex} \hyperlink{structvertex_a8429f16b8a2b8330cb41b3db4bce72ec}{operator-\/} (const \hyperlink{structvertex}{vertex} \&v)
+\item 
+\hyperlink{structvertex}{vertex} \hyperlink{structvertex_ab6d26dba0518489732009a262c97db0e}{operator$\ast$} (const float \&f)
+\item 
+{\footnotesize template$<$class Archive $>$ }\\void \hyperlink{structvertex_a339811fa5d720f6183465d4c28248a01}{serialize} (Archive \&ar)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{structvertex_a664a5bbbbca4e1a99d85a163f6a08405}{x}
+\item 
+float \hyperlink{structvertex_aea3246afd0395032be285a49bcd4b146}{y}
+\item 
+float \hyperlink{structvertex_afe9862f7d3456ee2d352d94cbe5a84da}{z}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A 3D vertex. 
+
+Structure for a point in 3 dimension. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{vertex@{vertex}!vertex@{vertex}}
+\index{vertex@{vertex}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{vertex()}{vertex()}}]{\setlength{\rightskip}{0pt plus 5cm}vertex\+::vertex (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structvertex_ae32be8790fc66fcc4898cf794f915da0}{}\label{structvertex_ae32be8790fc66fcc4898cf794f915da0}
+\index{vertex@{vertex}!vertex@{vertex}}
+\index{vertex@{vertex}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{vertex(float \+\_\+x, float \+\_\+y, float \+\_\+z)}{vertex(float _x, float _y, float _z)}}]{\setlength{\rightskip}{0pt plus 5cm}vertex\+::vertex (
+\begin{DoxyParamCaption}
+\item[{float}]{\+\_\+x, }
+\item[{float}]{\+\_\+y, }
+\item[{float}]{\+\_\+z}
+\end{DoxyParamCaption}
+)}\hypertarget{structvertex_ab215a18712ffe9cab97647e6ad79aee4}{}\label{structvertex_ab215a18712ffe9cab97647e6ad79aee4}
+\index{vertex@{vertex}!vertex@{vertex}}
+\index{vertex@{vertex}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{vertex(const vertex \&)=default}{vertex(const vertex &)=default}}]{\setlength{\rightskip}{0pt plus 5cm}vertex\+::vertex (
+\begin{DoxyParamCaption}
+\item[{const {\bf vertex} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [default]}}\hypertarget{structvertex_a3d165d369c193e574e3dec05e269421f}{}\label{structvertex_a3d165d369c193e574e3dec05e269421f}
+
+
+\subsection{Member Function Documentation}
+\index{vertex@{vertex}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{operator$\ast$(const float \&f)}{operator*(const float &f)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vertex} vertex\+::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const float \&}]{f}
+\end{DoxyParamCaption}
+)}\hypertarget{structvertex_ab6d26dba0518489732009a262c97db0e}{}\label{structvertex_ab6d26dba0518489732009a262c97db0e}
+\index{vertex@{vertex}!operator+@{operator+}}
+\index{operator+@{operator+}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{operator+(const vertex \&v)}{operator+(const vertex &v)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vertex} vertex\+::operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf vertex} \&}]{v}
+\end{DoxyParamCaption}
+)}\hypertarget{structvertex_a510b7dbb1cbccb470356c03a18162de2}{}\label{structvertex_a510b7dbb1cbccb470356c03a18162de2}
+\index{vertex@{vertex}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{operator-\/(const vertex \&v)}{operator-(const vertex &v)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vertex} vertex\+::operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf vertex} \&}]{v}
+\end{DoxyParamCaption}
+)}\hypertarget{structvertex_a8429f16b8a2b8330cb41b3db4bce72ec}{}\label{structvertex_a8429f16b8a2b8330cb41b3db4bce72ec}
+\index{vertex@{vertex}!operator==@{operator==}}
+\index{operator==@{operator==}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{operator==(const vertex \&v)}{operator==(const vertex &v)}}]{\setlength{\rightskip}{0pt plus 5cm}bool vertex\+::operator== (
+\begin{DoxyParamCaption}
+\item[{const {\bf vertex} \&}]{v}
+\end{DoxyParamCaption}
+)}\hypertarget{structvertex_adb0fd95b21c7807fc905a105e1f3b869}{}\label{structvertex_adb0fd95b21c7807fc905a105e1f3b869}
+\index{vertex@{vertex}!serialize@{serialize}}
+\index{serialize@{serialize}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{serialize(\+Archive \&ar)}{serialize(Archive &ar)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class Archive $>$ void vertex\+::serialize (
+\begin{DoxyParamCaption}
+\item[{Archive \&}]{ar}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{structvertex_a339811fa5d720f6183465d4c28248a01}{}\label{structvertex_a339811fa5d720f6183465d4c28248a01}
+
+
+\subsection{Member Data Documentation}
+\index{vertex@{vertex}!x@{x}}
+\index{x@{x}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{x}{x}}]{\setlength{\rightskip}{0pt plus 5cm}float vertex\+::x}\hypertarget{structvertex_a664a5bbbbca4e1a99d85a163f6a08405}{}\label{structvertex_a664a5bbbbca4e1a99d85a163f6a08405}
+\index{vertex@{vertex}!y@{y}}
+\index{y@{y}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{y}{y}}]{\setlength{\rightskip}{0pt plus 5cm}float vertex\+::y}\hypertarget{structvertex_aea3246afd0395032be285a49bcd4b146}{}\label{structvertex_aea3246afd0395032be285a49bcd4b146}
+\index{vertex@{vertex}!z@{z}}
+\index{z@{z}!vertex@{vertex}}
+\subsubsection[{\texorpdfstring{z}{z}}]{\setlength{\rightskip}{0pt plus 5cm}float vertex\+::z}\hypertarget{structvertex_afe9862f7d3456ee2d352d94cbe5a84da}{}\label{structvertex_afe9862f7d3456ee2d352d94cbe5a84da}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{drawing_8h}{drawing.\+h}\item 
+src/\hyperlink{drawing_8cpp}{drawing.\+cpp}\end{DoxyCompactItemize}
